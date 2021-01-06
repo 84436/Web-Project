@@ -107,3 +107,6 @@ dist
 
 # MongoDB data file
 mongo_data/
+
+# Personal notes (hmmm)
+.note.d.ts
