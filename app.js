@@ -2,21 +2,29 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-// Database
-require('./database/mongo')
+// Waiting for database
+console.log("Waiting for database")
+require('./config/mongodb')(app)
 
-// Pipe
-require('./config/morgan')(app)
-require('./config/body-parser')(app)
-require('./config/handlebars')(app)
-require('./config/express-static')(app)
+// Once ready, configure the rest and go
+app.on('ready', () => {
 
-app.get('/', (i, o) => {
-    let str = ""
-    str += "Hello world."
-    str += `The time is ${Date().toString()}`
-    str += `Here's the Mongoose connection thingy: ${global.mongoose.connection.host}, ${global.mongoose.connection.readyState}`
-    o.send(str)
+    // A small notification
+    console.log(`Connected to ${global.mongoose.connection.host}:${global.mongoose.connection.port}`)
+
+    // Configure
+    require('./config/morgan')(app)
+    require('./config/body-parser')(app)
+    require('./config/handlebars')(app)
+    require('./config/express-static')(app)
+    require('./config/cookie-session')(app)
+
+    // Add routes
+    require('./controllers/router')(app)
+
+    // Listen
+    app.listen(port, () => {
+        console.log(`Listening on port ${port}`)
+    })
+
 })
-
-app.listen(port, () => console.log(`Listening on port ${port}`))
