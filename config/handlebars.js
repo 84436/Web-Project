@@ -7,7 +7,7 @@ function configure(app) {
         defaultLayout: 'main.hbs'
     }
     app.engine('hbs', express_handlebars(ExpressHandlebarsOptions))
-    app.set('views', path.join(__dirname, 'views'))
+    app.set('views', path.join(__dirname, '../views'))
     app.set('view engine', 'hbs')
 }
 
