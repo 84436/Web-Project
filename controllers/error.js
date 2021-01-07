@@ -1,25 +1,39 @@
 const express = require('express')
-const app = express()
+const router = express.Router()
 
-const o_invalid = (i, o) => {
+const o_invalid = (i, o, next) => {
     o.status(404)
-     .render('errors/404')
+     .render('errors/generic', {
+        status: 404,
+        content: "Not found"
+    })
 }
 
 const o_serverError = (err, i, o, next) => {
-    if (err) {
-        console.log(err)
-        o.status(500)
-         .render('errors/500', err, {
-            layout: false
-        })
+    if (!err) {
+        let err = {}
     }
+    if (!err.status) {
+        err.status = 500
+    }
+    if (!err.content) {
+        err.content = "Something's broken on our end. Sorry about that."
+    }
+
+    console.log(err)
+
+    o.status(err.status)
+     .render('errors/generic', {
+        status: err.status,
+        content: err.content
+    })
 }
 
 // 404
-app.get('*', o_invalid)
+router.get('*', o_invalid)
+router.post('*', o_invalid)
 
 // 500/5xx
-app.use(o_serverError)
+router.use(o_serverError)
 
-module.exports = app
+module.exports = router

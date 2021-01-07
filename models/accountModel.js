@@ -65,10 +65,8 @@ async function add(info, type) {
 
     let new_account_info = {
         "email": info.email,
-        "phone": info.phone,
         "password": info.password,
         "name": info.name,
-        "address": info.address,
         "avatar": info.avatar,
         "type": type
     }
@@ -112,10 +110,8 @@ async function edit(id, new_info) {
 
     let updated_fields = {
         "email": new_info.email,
-        "phone": new_info.phone,
         "password": new_info.password,
         "name": new_info.name,
-        "address": new_info.address,
         "avatar": new_info.avatar,
     }
 

@@ -1,7 +1,7 @@
 const express = require('express')
-const app = express()
+const router = express.Router()
 
-app.get('/', (i, o) => {
+router.get('/', (i, o) => {
     let str = ""
     str += "Hello world.\n"
     str += `The time is ${Date().toString()}\n`
@@ -9,4 +9,4 @@ app.get('/', (i, o) => {
     o.send(str)
 })
 
-module.exports = app
+module.exports = router
