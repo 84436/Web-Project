@@ -1,0 +1,117 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: #e4e4e4;
+}
+
+/* Navbar */
+
+#sign-in-redirect, #my-courses-redirect, #bookmark-redirect {
+  color: #ffffff;
+}
+
+
+.navbar-nav li:hover > ul.dropdown-menu {
+  display: block;
+}
+
+.dropdown-submenu {
+  position:relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top:-6px;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+  text-decoration: underline;
+  transform: rotate(-90deg);
+} 
+
+
+.redirect-btn:hover, .redirect-btn:active {
+  background-color: #e4e4e4;
+  color: black;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 4rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+  background-color: #e4e4e4;
+}
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
+}
+
+.album {
+  background-color: #e4e4e4;
+}
+
+.group-title {
+  margin: 0 0 3rem 22.25rem;
+}
+
+.each-course {
+  outline: none;
+  border: none;
+  background-color: inherit;
+}
+.each-course:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.each-course:focus {
+  outline-color: #a4a4a4 !important;
+  outline-width: 3px !important;
+}
+
+.display-course-title, .display-course-description, .display-course-author, .display-course-field {
+  text-align: left;
+  margin-bottom: .25em; 
+}
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 40em) {
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 62em) {
+  .featurette-heading {
+    margin-top: 7rem;
+  }
+}
