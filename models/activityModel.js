@@ -33,7 +33,7 @@ async function getWatchingState() {
         courseID: courseID
     }
     let projection = { __v: 0 }
-    let r = await activityModel.findOne(filter, projection)
+    let r = await activityModel.findOne(filter, projection).lean()
     if (r)
         return r.isWatching
     else
@@ -48,7 +48,8 @@ async function setWatchingState() {
     let update = {
         isWatching: state
     }
-    await activityModel.findOneAndUpdate(filter, update, (err) => {})
+    let options = { upsert: false }
+    await activityModel.findOneAndUpdate(filter, update, options, (err) => {})
 }
 
 async function getEnrollmentState(studentID, courseID) {
@@ -57,7 +58,7 @@ async function getEnrollmentState(studentID, courseID) {
         courseID: courseID
     }
     let projection = { __v: 0 }
-    let r = await activityModel.findOne(filter, projection)
+    let r = await activityModel.findOne(filter, projection).lean()
     if (r)
         return r.isEnrolled
     else
@@ -72,7 +73,8 @@ async function setEnrollmentState(studentID, courseID, state) {
     let update = {
         isEnrolled: state
     }
-    await activityModel.findOneAndUpdate(filter, update, (err) => {})
+    let options = { upsert: false }
+    await activityModel.findOneAndUpdate(filter, update, options, (err) => {})
 }
 
 async function getFeedbackByCourse(courseID) {
@@ -86,7 +88,8 @@ async function getFeedbackByCourse(courseID) {
                                .populate({
                                    path: "studentID",
                                    select: "name"
-                               })
+                                })
+                               .lean()
     return r
 }
 
@@ -98,7 +101,7 @@ async function getFeedbackByStudent(studentID, courseID) {
     let projection = { _id: 0, feedback: 1 }
     return await activityModel.findOne(filter, projection, (err) => {
         return null
-    })
+    }).lean()
 }
 
 async function setFeedback(studentID, courseID, rate, content) {
@@ -112,7 +115,8 @@ async function setFeedback(studentID, courseID, rate, content) {
             content: content
         }
     }
-    await activityModel.findOneAndUpdate(filter, update, (err) => {})
+    let options = { upsert: false }
+    await activityModel.findOneAndUpdate(filter, update, options, (err) => {})
 }
 
 /********************************************************************************/

@@ -1,4 +1,4 @@
-const mongoose = global.mongoose
+const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const { BCRYPT_WORK_FACTOR } = require('../config/bcrypt.json')
 

@@ -26,14 +26,14 @@ async function getByID(id) {
     let projection = { __v: 0 }
     return await categoryModel.findById(id, projection, (err) => {
         return null
-    })
+    }).lean()
 }
 
 async function getAll() {
     let projection = { __v: 0 }
     return await categoryModel.find({}, projection, (err) => {
         return null
-    })
+    }).lean()
 }
 
 async function add(major, minor) {
@@ -41,7 +41,7 @@ async function add(major, minor) {
         major: major,
         minor: minor
     })
-    await newCategory.save((err) => {})
+    newCategory.save((err) => {})
 }
 
 async function edit(id, newMajor, newMinor) {

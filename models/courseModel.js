@@ -1,22 +1,19 @@
-const mongoose = global.mongoose
-const bcrypt = require("bcrypt")
-const { Schema } = require("mongoose")
-const { BCRYPT_WORK_FACTOR } = require('../config/bcrypt.json')
+const mongoose = require("mongoose")
 
 var courseSchema = new mongoose.Schema({
     // course + instructor
     name: String,
     banner: String, // image path
-    category: {
-        main: String,
-        sub: String
+    categoryID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "category"
     },
     desc: {
         short: String,
         long: String
     },
     instructorID: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "account"
     },
 
@@ -33,234 +30,178 @@ var courseSchema = new mongoose.Schema({
     // content
     lastUpdated: Date,
     isFinished: Boolean,
-    toc: [{
-        type: Schema.Types.ObjectId,
+    content: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: "course_chapter"
-    }] // IDs (refs) only
+    }]
 })
 
-var courseContentChapterSchema = new mongoose.Schema({
+courseSchema.index({
+    name: "text"
+})
+
+/**
+ * Course: has Chapters
+ * Chapter: links back to Course, has Lessons
+ * Lesson: links back to Chapter, has actual content
+ */
+
+var courseChapterSchema = new mongoose.Schema({
+    courseID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "course"
+    },
     name: String,
     lessons: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "course_lesson"
-    }] // IDs (refs) only
+    }]
 })
 
-var courseContentLessonSchema = new mongoose.Schema({
+var courseLessonSchema = new mongoose.Schema({
+    chapterID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "course_chapter"
+    },
     name: String,
     video: String, // video path
     text: String // actual content goes here
 })
 
-var courseFeedbackSchema = new mongoose.Schema({
-    // no population intended here
-    courseID: Schema.Types.ObjectId,
-    studentID: Schema.Types.ObjectId,
-    rate: Number,
-    feedback: String
-})
-
 var courseModel = mongoose.model("course", courseSchema, "courses")
-var courseContentChapterModel = mongoose.model("course_chapter", courseContentChapterSchema, "course_chapters")
-var courseContentLessonModel = mongoose.model("course_lesson", courseContentLessonSchema, "course_lessons")
-var courseFeedbackModel = mongoose.model("course_feedback", courseFeedbackSchema, "course_feedbacks")
+var courseChapterModel = mongoose.model("course_chapter", courseChapterSchema, "course_chapters")
+var courseLessonModel = mongoose.model("course_lesson", courseLessonSchema, "course_lessons")
 
 /********************************************************************************/
-// Helpers: do X exist?
+// Courses
 
-async function check_courseID(courseID) {
-
+async function search_course(query) {
+    let filter = { $text: { $search: query } }
+    let projection = { __v: 0 }
+    return await courseModel.find(filter, projection, (err) => { return null })
+                            .lean()
+                            .populate({
+                                path: "instructorID",
+                                select: "name"
+                             })
 }
 
-async function check_chapterID(chapterID) {
-    
-}
-
-async function check_lessonID(lessionID) {
-
-}
-
-async function check_feedbackID(feedbackID) {
-
-}
-
-/********************************************************************************/
-// Courses (top-level routines)
-
-async function search(query) {
-
-}
-
-// update-deps: 
-async function get_course(query) {
+// Get everything about this course and also populates ToC
+async function get_course(courseID) {
+    let projection = { __v: 0 }
+    let r =  await courseModel.findById(courseID, projection, (err) => {
+                                  return null
+                               })
+                              .lean()
+                              .populate({
+                                   path: "categoryID",
+                                   select: "major minor"
+                               })
+                              .populate({
+                                   path: "instructorID",
+                                   select: "name"
+                               })
+                              .populate({
+                                  path: "content",
+                                  populate: {
+                                      path: "lessons",
+                                      select: "name"
+                                  }
+                               })
+                              
+    return r
 }
 
 async function add_course(courseInfo) {
-
+    let newCourse = new courseModel(courseInfo)
+    newCourse.save((err) => {})
 }
 
 async function update_course(courseID, courseInfo) {
-
+    let options = { upsert: false }
+    await courseModel.findByIdAndUpdate(courseID, courseInfo, options, (err) => {})
 }
 
-// remove-deps: chapters (-> lessons by default), feedbacks
 async function remove_course(courseID) {
-
+    await courseModel.findByIdAndDelete(courseID, (err) => {})
 }
 
 /********************************************************************************/
 // Chapters
 
-async function add_chapter(courseID, chapterInfo) {
-
+// MONGOOSE: GET ID AFTER SAVE
+// MONGODB: PUSH to array using update: https://stackoverflow.com/a/33049923
+function add_chapter(courseID, chapterName) {
+    let newChapter = new courseChapterModel({
+        courseID: courseID,
+        name: chapterName
+    })
+    let newChapterID
+    newChapter.save((err, doc) => {
+        newChapterID = doc.id
+    })
+    return newChapterID
 }
 
-async function update_chapter(chapterID, chapterInfo) {
-
+async function update_chapter(chapterID, chapterName) {
+    let update = {
+        name: chapterName
+    }
+    let options = { upsert: false }
+    await courseChapterModel.findByIdAndUpdate(chapterID, update, options, (err) => {})
 }
 
-// remove-deps: lessons
 async function remove_chapter(chapterID) {
-
+    await courseChapterModel.findByIdAndDelete(chapterID, (err) => {})
 }
 
 /********************************************************************************/
 // Lessons
 
-async function add_lesson(chapterID, lessonInfo) {
+async function get_lesson(lessonID) {
+    let projection = { __v: 0 }
+    return await courseLessonModel.findById(lessonID, projection, (err) => {
+        return null
+    }).lean()
+}
 
+async function add_lesson(chapterID, lessonInfo) {
+    let newLesson = new courseLessonModel({
+        chapterID: chapterID,
+        name: lessonInfo.name,
+        text: lessonInfo.text,
+        video: lessonInfo.video
+    })
+    newLesson.save((err) => {})
 }
 
 async function update_lesson(lessonID, lessonInfo) {
-
+    let update = {
+        name: lessonInfo.name,
+        text: lessonInfo.text,
+        video: lessonInfo.video
+    }
+    let options = { upsert: false }
+    await courseLessonModel.findByIdAndUpdate(lessonID, update, options, (err) => {})
 }
 
 async function remove_lesson(lessonID) {
-
-}
-
-/********************************************************************************/
-// Feedbacks
-
-async function add_feedback(feedback) {
-
-}
-
-async function update_feedback(feedbackID, feedbackInfo) {
-
-}
-
-// remove-deps: courses (feedbackCount)
-async function remove_feedback(feedbackID) {
-
-}
-
-/********************************************************************************/
-// Whatever the hell this is //
-
-async function add(info, type) {
-    let r = { _error: null }
-
-    r = {...await checkEmail(info.email)}
-    if (r._error) return r
-
-    let new_account_info = {
-        "email": info.email,
-        "phone": info.phone,
-        "password": info.password,
-        "name": info.name,
-        "address": info.address,
-        "avatar": info.avatar,
-        "type": type
-    }
-    let new_account = new courseModel(new_account_info)
-    await new_account.save((err) => {
-        if (err) { r._error = err; return r }
-    })
-
-    // WORKAROUND: GET INFO FROM THAT NEWLY CREATED ACCOUNT
-    delete(new_account_info.password)
-    new_account_info.joinDate = new_account._doc.joinDate
-    r = {
-        ...r,
-        "_id": new_account.id,
-        ...new_account_info
-    }
-    return r
-}
-
-async function remove(id) {
-    let r = { _error: null }
-
-    r = {...await checkID(id)}
-    if (r._error) return r
-
-    await courseModel.findByIdAndRemove(id, (err) => {
-        if (err) { r._error = err; return r }
-    })
-
-    return r
-}
-
-async function edit(id, new_info) {
-    let r = { _error: null }
-
-    r = {...await checkID(id)}
-    if (r._error) return r
-
-    r = {...await checkEmail(new_info.email)}
-    if (r._error) return r
-
-    let updated_fields = {
-        "email": new_info.email,
-        "phone": new_info.phone,
-        "password": new_info.password,
-        "name": new_info.name,
-        "address": new_info.address,
-        "avatar": new_info.avatar,
-    }
-
-    // remove undefined fields
-    // https://stackoverflow.com/a/38340374
-    Object.keys(updated_fields).forEach(key => {
-        (updated_fields[key] === undefined) && (delete updated_fields[key])
-    })
-
-    // if everything"s undefined, silently return
-    if (Object.keys(updated_fields).length === 0) {
-        return r
-    }
-
-    await courseModel.findByIdAndUpdate(id, updated_fields, (err) => {
-        if (err) { r._error = err; return r }
-    })
-
-    return r
-}
-
-async function getByID(id) {
-    let r = { _error: null }
-
-    r = {...await checkID(id)}
-    if (r._error) return r
-
-    let projection = {
-        __v: 0
-    }
-    let account = await courseModel.findById(id, projection, (err) => {
-        if (err) { r._error = err; return r }
-    })
-        
-    r = {...r, ...account._doc}
-    return r
+    await courseLessonModel.findByIdAndDelete(lessonID, (err) => {})
 }
 
 /********************************************************************************/
 
 module.exports = {
-    add: add,
-    remove: remove,
-    edit: edit,
-    getByID: getByID
+    search_course  : search_course,
+    get_course     : get_course,
+    add_course     : add_course,
+    update_course  : update_course,
+    remove_course  : remove_course,
+    add_chapter    : add_chapter,
+    update_chapter : update_chapter,
+    remove_chapter : remove_chapter,
+    get_lesson     : get_lesson,
+    add_lesson     : add_lesson,
+    update_lesson  : update_lesson,
+    remove_lesson  : remove_lesson
 }
