@@ -39,6 +39,7 @@ body {
 .form-label-group > input,
 .form-label-group > label {
   padding: var(--input-padding-y) var(--input-padding-x);
+  height: 50px;
 }
 
 .form-label-group > label {

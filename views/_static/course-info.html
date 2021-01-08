@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Course</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../public/css/ourdemy.css" rel="stylesheet">
+    <link href="../../public/css/course-info.css" rel="stylesheet">
+
+    <!-- Material icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div id="web">
+        <main id="content">
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a id="home-redirect" class="nav-link" href="#">Home 
+                                <span class="sr-only">
+                                    (current)
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Category 
+                                    </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                            IT
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item course-subcategory" href="#">
+                                                    Web
+                                                </a>
+                                            </li>
+                                            <li><a class="dropdown-item course-subcategory" href="#">Mobile</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                            Math
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item course-subcategory" href="#">
+                                                    Calculus
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item course-subcategory" href="#">
+                                                    Culcalus
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <form id="search-form" class="form-inline mt-2 mt-md-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                            Search
+                        </button>
+                    </form>
+                    <a id="sign-in-redirect" class="nav-link" href="#">
+                        Watch list
+                    </a>
+                    <a id="my-courses-redirect" class="nav-link" href="#">
+                        My courses
+                    </a>
+                    <a id="bookmark-redirect" class="nav-link" href="./sign-in.html">
+                        Sign in
+                    </a>
+                </div>
+            </nav>
+        <div id="course-info-content" class="container">
+            <div class="row">
+                <div id="course-img" class="col"></div>
+            </div>
+            <div class="row">
+                <div id="course-detail" class="container">
+                    <div class="row">
+                        <div id="course-intro-1" class="col-6">
+                            <div class="container">
+                                <div class="row font-weight-bold ">
+                                    <h1 id="course-detail-title" class="text-wrap text-break">
+                                        Title 
+                                    </h1>
+                                </div>
+                                <h5 class="row">
+                                    <div id="course-detail-summary" class="text-wrap text-break">
+                                        Summary
+                                    </div>
+                                </h5>
+                                <div class="row">
+                                    <div id="course-detail-description" class="text-wrap text-break">
+                                        Description
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="course-intro-2" class="col-6 w-100">
+                            <div id="choices-container" class="row w-100 justify-content-around">
+                                <button id="watchlist-btn" class="col-4 rounded-pill choice-btn">
+                                    + Watch
+                                </button>
+                                <button id="buy-btn" class="col-4 rounded-pill choice-btn">
+                                    Price
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div id="more-info" class="container">
+                                    <div class="row">
+                                        <div class="display-categories col ">
+                                            Categories
+                                        </div>
+                                        <div class="col text-wrap text-break" id="category">
+                                            Category
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="display-updated-time col">
+                                            Last updated
+                                        </div>
+                                        <div class="col text-wrap text-break" id="last-updated-time">
+                                            Updated time
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="display-course-duration col">
+                                            Duration
+                                        </div>
+                                        <div  class="col text-wrap text-break" id="course-duration">
+                                            Duration
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
