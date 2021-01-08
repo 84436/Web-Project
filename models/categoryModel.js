@@ -56,3 +56,14 @@ async function edit(id, newMajor, newMinor) {
 async function remove(id) {
     await categoryModel.findByIdAndDelete(id, (err) => {})
 }
+
+/********************************************************************************/
+
+module.exports = {
+    search  : search,
+    getByID : getByID,
+    getAll  : getAll,
+    add     : add,
+    edit    : edit,
+    remove  : remove
+}

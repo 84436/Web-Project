@@ -114,3 +114,15 @@ async function setFeedback(studentID, courseID, rate, content) {
     }
     await activityModel.findOneAndUpdate(filter, update, (err) => {})
 }
+
+/********************************************************************************/
+
+module.exports = {
+    getWatchingState     : getWatchingState,
+    setWatchingState     : setWatchingState,
+    getEnrollmentState   : getEnrollmentState,
+    setEnrollmentState   : setEnrollmentState,
+    getFeedbackByCourse  : getFeedbackByCourse,
+    getFeedbackByStudent : getFeedbackByStudent,
+    setFeedback          : setFeedback
+}
