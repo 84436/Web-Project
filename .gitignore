@@ -109,4 +109,4 @@ dist
 mongo_data/
 
 # Personal notes (hmmm)
-.note.d.ts
+.note*
