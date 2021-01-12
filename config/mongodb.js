@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 let this_app
 
 const MongoooseOptions = {
-    uri: "mongodb://localhost:27017/main",
+    uri: "mongodb+srv://root:root@ourdemy-main.iyvct.mongodb.net/main",
     config: {
         // https://mongoosejs.com/docs/deprecations.html
         "useNewUrlParser": true,
