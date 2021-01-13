@@ -324,6 +324,12 @@ module.exports = {
     add_lesson: add_lesson,
     update_lesson: update_lesson,
     remove_lesson: remove_lesson,
+    viewCount_plus: viewCount_plus,
+    viewCount_minus: viewCount_minus,
+    enrollCount_plus: enrollCount_plus,
+    enrollCount_minus: enrollCount_minus,
+    feedbackCount_plus: feedbackCount_plus,
+    feedbackCount_minus: feedbackCount_minus,
     getByCategory: getByCategory,
     topEnrollCategory: topEnrollCategory,
 };
