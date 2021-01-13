@@ -101,10 +101,10 @@ async function get_course(courseID) {
                                    path: "instructorID",
                                    select: "name"
                                })
-                              .populate({
-                                  path: "content",
-                                  populate: {
-                                      path: "lessons",
+                               .populate({
+                                   path: "content",
+                                   populate: {
+                                       path: "lessons",
                                       select: "name"
                                   }
                                })
@@ -124,6 +124,39 @@ async function update_course(courseID, courseInfo) {
 
 async function remove_course(courseID) {
     await courseModel.findByIdAndDelete(courseID, (err) => {})
+}
+
+/********************************************************************************/
+// Update view/enroll/feedbackCount
+
+async function viewCount_plus(courseID) {
+    let update = { $inc: {viewCount: 1} }
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+}
+
+async function viewCount_minus(courseID) {
+    let update = { $inc: {viewCount: -1} }
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+}
+
+async function enrollCount_plus(courseID) {
+    let update = { $inc: {enrollCount: 1} }
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+}
+
+async function viewCount_minus(courseID) {
+    let update = { $inc: {enrollCount: -1} }
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+}
+
+async function viewCount_plus(courseID) {
+    let update = { $inc: {feedbackCount: 1} }
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+}
+
+async function viewCount_minus(courseID) {
+    let update = { $inc: {feedbackCount: -1} }
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
 }
 
 /********************************************************************************/
@@ -190,6 +223,34 @@ async function remove_lesson(lessonID) {
 }
 
 /********************************************************************************/
+// Top enrolling categories
+
+// https://stackoverflow.com/a/46985745
+async function topEnrollCategory() {
+    let r1 = await courseModel.aggregate([
+        {$group: {
+            _id: "$categoryID",
+            totalEnrollCount: {$sum: "$enrollCount"},
+        }},
+        {$sort: {
+            totalEnrollCount: -1
+        }},
+        {$lookup: {
+            from: "categories",
+            localField: "_id",
+            foreignField: "_id",
+            as: "categoryName"
+        }},
+        {$limit: 4},
+        {$project: {
+            "_id": 0
+        }}
+    ])
+
+    return r1
+}
+
+/********************************************************************************/
 
 module.exports = {
     search_course  : search_course,
@@ -203,5 +264,6 @@ module.exports = {
     get_lesson     : get_lesson,
     add_lesson     : add_lesson,
     update_lesson  : update_lesson,
-    remove_lesson  : remove_lesson
+    remove_lesson  : remove_lesson,
+    topEnrollCategory : topEnrollCategory
 }
