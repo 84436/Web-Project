@@ -91,7 +91,7 @@ async function getEnrollmentTime(studentID, courseID) {
         return null
 }
 
-async function setEnrollmentState(studentID, courseID, state) {
+async function setEnrollmentTime(studentID, courseID, state) {
     let filter = {
         studentID: studentID,
         courseID: courseID
