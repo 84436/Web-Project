@@ -67,17 +67,18 @@ async function add(info, type) {
         "email": info.email,
         "password": info.password,
         "name": info.name,
-        "avatar": info.avatar,
+        "avatar": "",
+        "instructorBio": "",
         "type": type
     }
-    let new_account = new accountModel(new_account_info)
+    let new_account = new accountModel(new_account_info, projection)
     await new_account.save((err) => {
         if (err) { r._error = err; return r }
     })
 
     // WORKAROUND: GET INFO FROM THAT NEWLY CREATED ACCOUNT
     delete(new_account_info.password)
-    new_account_info.joinDate = new_account._doc.joinDate
+    // new_account_info.joinDate = new_account._doc.joinDate
     r = {
         ...r,
         "_id": new_account.id,
@@ -86,13 +87,17 @@ async function add(info, type) {
     return r
 }
 
-async function remove(id) {
+async function closeAccount(id) {
     let r = { _error: null }
 
     r = {...await checkID(id)}
     if (r._error) return r
 
-    await accountModel.findByIdAndRemove(id, (err) => {
+    let info = {
+        "email": "",
+        "password": ""
+    }
+    await accountModel.findByIdAndUpdate(id, info, (err) => {
         if (err) { r._error = err; return r }
     })
 
@@ -110,7 +115,6 @@ async function edit(id, new_info) {
 
     let updated_fields = {
         "email": new_info.email,
-        "password": new_info.password,
         "name": new_info.name,
         "avatar": new_info.avatar,
     }
@@ -134,11 +138,12 @@ async function edit(id, new_info) {
 }
 
 async function changePassword(id, oldpw, newpw, confirmpw) {
-    let oldpwHash = await accountModel.findById(id, {_id: 0, password: 1})
-    if (!oldpwHash) {
+    let account = await accountModel.findById(id, {_id: 1, password: 1})
+    if (!account) {
         return false
     }
-    oldpwHash = oldpwHash.password
+    var oldpwHash = account.password
+    console.log(oldpwHash)
     if (!bcrypt.compareSync(oldpw, oldpwHash)) {
         return false
     }
@@ -147,7 +152,8 @@ async function changePassword(id, oldpw, newpw, confirmpw) {
     if (!bcrypt.compareSync(confirmpw, newpwHash)) {
         return false
     }
-
+    account.password = newpwHash
+    account.save()
     return true
 }
 
@@ -172,21 +178,34 @@ async function getByLogin(email, password) {
     let r = { _error: null }
 
     let filter = {
-        "email": email,
-        "password": bcrypt.hashSync(password, BCRYPT_WORK_FACTOR)
+        "email":email
     }
-    let projection = {
-        __v: 0
-    }
-    let account = await accountModel.findOne(filter, projection, (err) => {
-        if (err) { r._error = err; return r }
-    })
+    let account = await accountModel.findOne(filter, {_id: 1, password: 1})
     if (!account) {
-        r._error = "No account found with given email and password"
+        r._error = "Account not exist"
         return r
     }
 
+    else {
+        if(bcrypt.compareSync(password, account.password)) {
+            r = {...r, ...account._doc}
+            return r
+        }
+        else {
+            r._error = "Wrong password"
+            return r
+        }
+    }
+
     r = {...r, ...account._doc}
+    return r
+}
+
+async function registerAccount(newAccount) {
+    let r = { _error: null }
+    let type = "student"
+    newAccount.password = bcrypt.hashSync( newAccount.password, BCRYPT_WORK_FACTOR)
+    r = {...await add(newAccount, type)}
     return r
 }
 
@@ -194,11 +213,12 @@ async function getByLogin(email, password) {
 
 module.exports = {
     add: add,
-    remove: remove,
+    closeAccount: closeAccount,
     edit: edit,
     getByID: getByID,
     getByLogin: getByLogin,
     checkID: checkID,
     checkEmail: checkEmail,
-    changePassword: changePassword
+    changePassword: changePassword,
+    registerAccount: registerAccount
 }
