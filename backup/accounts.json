@@ -4,97 +4,89 @@
   },
   "email": "ehodcroftt@narod.ru",
   "name": "Emmy Hodcroft",
-  "password": "$2y$10$LHavcbJrTMdiJOE3f6AZR.DSh7QNxQ3tp8GcLkDu6tAe5rmVaB2LC",
+  "password": "$2b$10$/pDcr4MeaaCfe6Na.5sCbeK1WVwqX2Nsbly6bMAhrzrQBItdnYerO",
   "type": "lecturer",
-  "instructorBio": "Emmy is the current president of the APICS Maine chapter.  Emmy has held many positions of increasing responsibility in X and Y. Emmy also has significant work experiences in Z tools and the T process.",
-  "avatar": ""
+  "instructorBio": "Emmy is the current president of the APICS Maine chapter.  Emmy has held many positions of increasing responsibility in X and Y. Emmy also has significant work experiences in Z tools and the T process."
 },{
   "_id": {
     "$oid": "5ffdc01aca2f15373471db51"
   },
   "email": "mruttyz@oracle.com",
   "name": "Martynne Rutty",
-  "password": "$2y$10$LHavcbJrTMdiJOE3f6AZR.DSh7QNxQ3tp8GcLkDu6tAe5rmVaB2LC",
+  "password": "$2b$10$/pDcr4MeaaCfe6Na.5sCbeK1WVwqX2Nsbly6bMAhrzrQBItdnYerO",
   "type": "lecturer",
-  "instructorBio": "Martynne is an attorney with VerrillDana in Portland, Maine, and centers her practice on the understanding that the x is ever-changing—from y's effect on z testing, to the effect of t in the workplace and b effect on c and d issues.",
-  "avatar": ""
+  "instructorBio": "Martynne is an attorney with VerrillDana in Portland, Maine, and centers her practice on the understanding that the x is ever-changing—from y's effect on z testing, to the effect of t in the workplace and b effect on c and d issues."
 },{
   "_id": {
     "$oid": "5ffdc01aca2f15373471db52"
   },
   "email": "qbinneru@printfriendly.com",
   "name": "Quill Binner",
-  "password": "$2y$10$LHavcbJrTMdiJOE3f6AZR.DSh7QNxQ3tp8GcLkDu6tAe5rmVaB2LC",
+  "password": "$2b$10$/pDcr4MeaaCfe6Na.5sCbeK1WVwqX2Nsbly6bMAhrzrQBItdnYerO",
   "type": "admin",
-  "instructorBio": "",
-  "avatar": ""
+  "instructorBio": ""
 },{
   "_id": {
     "$oid": "5ffdc01aca2f15373471db53"
   },
   "email": "mdrippsv@unblog.fr",
   "name": "Morgen Dripps",
-  "password": "$2y$10$LHavcbJrTMdiJOE3f6AZR.DSh7QNxQ3tp8GcLkDu6tAe5rmVaB2LC",
+  "password": "$2b$10$/pDcr4MeaaCfe6Na.5sCbeK1WVwqX2Nsbly6bMAhrzrQBItdnYerO",
   "type": "student",
-  "instructorBio": "",
-  "avatar": ""
+  "instructorBio": ""
 },{
   "_id": {
     "$oid": "5ffdc01aca2f15373471db54"
   },
   "email": "fbrownettw@intel.com",
   "name": "Felicio Brownett",
-  "password": "$2y$10$LHavcbJrTMdiJOE3f6AZR.DSh7QNxQ3tp8GcLkDu6tAe5rmVaB2LC",
+  "password": "$2b$10$/pDcr4MeaaCfe6Na.5sCbeK1WVwqX2Nsbly6bMAhrzrQBItdnYerO",
   "type": "admin",
-  "instructorBio": "",
-  "avatar": ""
+  "instructorBio": ""
 },{
   "_id": {
     "$oid": "5ffdeb2e6b23e01db4d30e7b"
   },
   "email": "mclerc0@state.gov",
   "name": "Milzie Clerc",
-  "password": "$2y$10$LHavcbJrTMdiJOE3f6AZR.DSh7QNxQ3tp8GcLkDu6tAe5rmVaB2LC",
+  "password": "$2b$10$/pDcr4MeaaCfe6Na.5sCbeK1WVwqX2Nsbly6bMAhrzrQBItdnYerO",
   "type": "student",
-  "instructorBio": "",
-  "avatar": ""
+  "instructorBio": ""
 },{
   "_id": {
     "$oid": "5ffdeb546b23e01db4d30e7c"
   },
   "email": "kmasterton1@nih.gov",
   "name": "Kristian Masterton",
-  "password": "$2y$10$LHavcbJrTMdiJOE3f6AZR.DSh7QNxQ3tp8GcLkDu6tAe5rmVaB2LC",
+  "password": "$2b$10$/pDcr4MeaaCfe6Na.5sCbeK1WVwqX2Nsbly6bMAhrzrQBItdnYerO",
   "type": "student",
-  "instructorBio": "",
-  "avatar": ""
+  "instructorBio": ""
 },{
   "_id": {
     "$oid": "5ffdeb6d6b23e01db4d30e7d"
   },
   "email": "fbatchan2@cam.ac.uk",
   "name": "Fallon Batchan",
-  "password": "$2y$10$LHavcbJrTMdiJOE3f6AZR.DSh7QNxQ3tp8GcLkDu6tAe5rmVaB2LC",
+  "password": "$2b$10$/pDcr4MeaaCfe6Na.5sCbeK1WVwqX2Nsbly6bMAhrzrQBItdnYerO",
   "type": "student",
-  "instructorBio": "",
-  "avatar": ""
+  "instructorBio": ""
 },{
   "_id": {
     "$oid": "5ffdeb806b23e01db4d30e7e"
   },
   "email": "asiviter3@wp.com",
   "name": "Ari Siviter",
-  "password": "$2y$10$LHavcbJrTMdiJOE3f6AZR.DSh7QNxQ3tp8GcLkDu6tAe5rmVaB2LC",
+  "password": "$2b$10$/pDcr4MeaaCfe6Na.5sCbeK1WVwqX2Nsbly6bMAhrzrQBItdnYerO",
   "type": "student",
-  "instructorBio": "",
-  "avatar": ""
+  "instructorBio": ""
 },{
   "_id": {
-    "$oid": "5ffeb172dafe5047546f6a9e"
+    "$oid": "5fff0ea9ae5b1e13b42feb12"
   },
   "type": "student",
   "email": "clmm@gmail.com",
-  "password": "$2b$10$VWphcgZZVCNkqohJgEwbKuBo8pSlGzkncH4qD0ZS8C3pYbPIkIchS",
+  "password": "$2b$10$fcfvZfTujrzRH1Pqa1AdI.EZGTk/wPuat273ZJWIAcH.KuJ3RNgbS",
   "name": "Name",
-  "avatar": ""
+  "avatar": "",
+  "instructorBio": ""
 }]
