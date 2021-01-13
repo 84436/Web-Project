@@ -1,0 +1,61 @@
+[{
+  "_id": {
+    "$oid": "5ffdc1fd66e87f7e7a55df31"
+  },
+  "major": "Development",
+  "minor": "Web Development"
+},{
+  "_id": {
+    "$oid": "5ffdc27866e87f7e7a55df32"
+  },
+  "major": "Development",
+  "minor": "Mobile Development"
+},{
+  "_id": {
+    "$oid": "5ffdc41666e87f7e7a55df34"
+  },
+  "major": "Design",
+  "minor": "Web Design"
+},{
+  "_id": {
+    "$oid": "5ffdc43c66e87f7e7a55df35"
+  },
+  "major": "Business",
+  "minor": "Management"
+},{
+  "_id": {
+    "$oid": "5ffdc46a66e87f7e7a55df36"
+  },
+  "major": "Personal Development",
+  "minor": "Other Personal Development"
+},{
+  "_id": {
+    "$oid": "5ffdc51366e87f7e7a55df38"
+  },
+  "major": "Personal Development",
+  "minor": "Stress Management"
+},{
+  "_id": {
+    "$oid": "5ffdcdeb66e87f7e7a55df3c"
+  },
+  "major": "Lifestyle",
+  "minor": "Arts & Crafts"
+},{
+  "_id": {
+    "$oid": "5ffdd1abca2f15373471db59"
+  },
+  "major": "Business",
+  "minor": "Entrepreneurship"
+},{
+  "_id": {
+    "$oid": "5ffdd430ca2f15373471db5d"
+  },
+  "major": "Health & Fitness",
+  "minor": "Yoga"
+},{
+  "_id": {
+    "$oid": "5ffdd4c1ca2f15373471db5e"
+  },
+  "major": "Photography & Video",
+  "minor": "Video Design"
+}]

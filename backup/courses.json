@@ -1,0 +1,359 @@
+[{
+  "_id": {
+    "$oid": "5ffdc57666e87f7e7a55df39"
+  },
+  "name": "Responsive Web Design with HTML5 and CSS3 - Intermediate",
+  "banner": "",
+  "categoryID": {
+    "$oid": "5ffdc1fd66e87f7e7a55df31"
+  },
+  "desc": {
+    "short": "Learn about HTML5 Forms, Image Sliders, Flexible Video, Lazy Loading, and Image Sprites",
+    "long": "This course coves advanced responsive web design topics on HTML5 forms with sprite feedback, responsive video and sliders, and using sprites for social media. Additionally, it covers two different ways to deliver different graphics based on screen width, how to use fonts for icons, and lazy loading images for a gallery. We also toss in a unit covering the Add 2 Home capabilities of Apple handheld devices.\nPrior to taking this course you should complete the introductory course in this series."
+  },
+  "instructorID": {
+    "$oid": "5ffdc01aca2f15373471db51"
+  },
+  "price": 179.99,
+  "averageRate": 4,
+  "discount": 0.23,
+  "enrollCount": 2,
+  "feedbackCount": 1,
+  "isFinished": true,
+  "lastUpdated": {
+    "$date": "2018-05-31T17:00:00Z"
+  },
+  "content": [
+    {
+      "$oid": "5ffdcf50ef3b2e98aaef78c6"
+    },
+    {
+      "$oid": "5ffdd009ef3b2e98aaef78ca"
+    },
+    {
+      "$oid": "5ffdd053ef3b2e98aaef78cb"
+    }
+  ],
+  "viewCount": 0
+},{
+  "_id": {
+    "$oid": "5ffdcfa6ca2f15373471db57"
+  },
+  "name": "Management of WSH Incidents",
+  "banner": "",
+  "categoryID": {
+    "$oid": "5ffdc46a66e87f7e7a55df36"
+  },
+  "desc": {
+    "short": "Part of WSQ - Advanced certificate in Workplace Safety in Health",
+    "long": "This is a blended course. There are 2 parts to this course- an online portion and classroom training. On completion of both components, the participants of this course will gain the knowledge and skills for fulfilling the role of a coordinator and supervisor in accordance with WSH level B Competency- based training programme.\nThis course provides learners with the skills and knowledge Coordinate and monitor the implementation of WSH management systems and programs for recognition, assessment, control and management of WSH risks.\nThe course fee reflected is only for the online segment."
+  },
+  "instructorID": {
+    "$oid": "5ffdc01aca2f15373471db50"
+  },
+  "price": 129.99,
+  "averageRate": 0,
+  "discount": 0.5,
+  "enrollCount": 0,
+  "feedbackCount": 0,
+  "isFinished": true,
+  "lastUpdated": {
+    "$date": "2015-07-31T17:00:00Z"
+  },
+  "content": [
+    {
+      "$oid": "5ffddbfc6b23e01db4d30e75"
+    },
+    {
+      "$oid": "5ffddd9b6b23e01db4d30e77"
+    },
+    {
+      "$oid": "5ffdde026b23e01db4d30e79"
+    }
+  ],
+  "viewCount": 0
+},{
+  "_id": {
+    "$oid": "5ffdd060ca2f15373471db58"
+  },
+  "name": "Code Mobile first websites Rapidly with Emmet & Bootstrap 4",
+  "banner": "",
+  "categoryID": {
+    "$oid": "5ffdc1fd66e87f7e7a55df31"
+  },
+  "desc": {
+    "short": "Emmet is a plugin for text editors that helps you to write HTML and CSS code quickly and easily. Save time work more..",
+    "long": "In this video course you will learn how to write HTML and CSS code quickly and easily with Emmet and Code responsive websites rapidly with Emmet and Bootstrap 4.\nBootstrap 4 is a free CSS framework to create mobile-first websites and web applications. You will learn to use Bootstrap 4 framework as well.\nEmmet is a free plugin for Text Editors that allows you to write short abbreviation and convert these abbreviation into complete HTML and CSS code.\nYou will also learn how to use Emmet and twitter bootstrap to create websites very quickly.\nWrite HTML & CSS Crazy Fast with Emmet\nEmmet for sublime text 2 & sublime text 3\nEmmet cheat sheet\nEmmet Wrap with Abbreviation feature\nEmmet for brackets\nEmmet bootstrap snippets (Emmet bootstrap 4 snippets)\nYou can watch all lectures on your smart phones & Tablets & other small screen devices as well."
+  },
+  "instructorID": {
+    "$oid": "5ffdc01aca2f15373471db50"
+  },
+  "price": 169.99,
+  "averageRate": 0,
+  "discount": 0.75,
+  "enrollCount": 0,
+  "feedbackCount": 0,
+  "viewCount": 0,
+  "isFinished": true,
+  "lastUpdated": {
+    "$date": "2019-02-21T17:00:00Z"
+  },
+  "content": [
+    {
+      "$oid": "5ffdea4db3682c1a9ccdf51c"
+    },
+    {
+      "$oid": "5ffdeb4cb3682c1a9ccdf521"
+    },
+    {
+      "$oid": "5ffdebb5b3682c1a9ccdf526"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffdd1c5ca2f15373471db5a"
+  },
+  "name": "The 6 Death Factors, that can BURY your Business",
+  "banner": "",
+  "categoryID": {
+    "$oid": "5ffdd1abca2f15373471db59"
+  },
+  "desc": {
+    "short": "Identify, understand, and tackle the 6 \"death factors\" that may bury your business to the ground, if left unattended",
+    "long": "As an Entrepreneur or Business Unit Manager, you are probably feeling too enthusiastic about your vision for the future, for the potential that your products have, or for the opportunities that will be unleashed once your business is up and running. You are living in a dream world, which is full of catch-phrases like \"future capabilities\" and \"if you can imagine it, you can do it\". That's good news, people like you are necessary in order for society to chart new paths forward. \n\nHowever, once you've set your train off, you soon realize that the real world is not all \"roses and sunshine\". Real problems start raising their ugly heads and demand your attention or your resources. This is such an awkward time: you don't like to become involved in this day-to-day nitty gritty, you only like the \"vision thing\", you were probably expecting things to run \"according to the manual\", you feel frustrated or helpless. Very soon, you find yourself locked into a corner, with the \"Mike Tyson\" of a problem hitting you hard and fast from all possible angles. \n\nDON'T GIVE UP! People have been in that situation before. I have personally been there many times before, over the course of my rocky 27 years in Marketing and Entrepreneurship. And I managed to nail  down the 6 \"death factors\" which, if left unattended, will bury your business to the ground. And I'm offering all that vital knowledge to you, for FREE! You need to:\n\ngrasp those factors\nappreciate how they work\nkeep them always in mind, and \nhave a plan of action for each one of them\nBEFORE they become a menace for your business.\n\nHere's to your success!"
+  },
+  "instructorID": {
+    "$oid": "5ffdc01aca2f15373471db50"
+  },
+  "price": 69.99,
+  "averageRate": 0,
+  "discount": 0.15,
+  "enrollCount": 0,
+  "feedbackCount": 0,
+  "viewCount": 0,
+  "isFinished": true,
+  "lastUpdated": {
+    "$date": "2014-01-19T17:00:00Z"
+  },
+  "content": [
+    {
+      "$oid": "5ffde7f3b3682c1a9ccdf510"
+    },
+    {
+      "$oid": "5ffde82bb3682c1a9ccdf512"
+    },
+    {
+      "$oid": "5ffde986b3682c1a9ccdf51a"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffdd2e7ca2f15373471db5b"
+  },
+  "name": "Deploying Android Apps to Different App Stores - Correctly!",
+  "banner": "",
+  "categoryID": {
+    "$oid": "5ffdc27866e87f7e7a55df32"
+  },
+  "desc": {
+    "short": "Use 30 minutes to learn how to deploy your mobile app to Google Play the RIGHT way and explore other alternatives.",
+    "long": "[Let's put your apps (\"eggs\") into different mobile app stores (\"baskets\")]\n\nLearning long hours is not always the right approach when you want to apply your knowledge in your life. This is why this course is produced short enough (about 30 minutes in the time of writing) for everyone. No one like to take their valuable time sitting in front of the screen.\n\nThis is a step-by-step course about how to upload your binary file to available mobile app stores out there.\n\nThese steps are considered the very last steps of Android development. Hence, it is better to do it RIGHT on your last steps.\n\n[Note: You have to MODIFY your apk file when you plan to upload your app to Samsung GALAXY Apps Store]\n\nWhat does it mean? The apk uploaded to Google Play Store CANNOT be uploaded to Samsung GALAXY Apps Store. You need to make some modifications on your apk file. You can sign up to our course to know about it. We will tell you where to put this code inside Eclipse (i.e., an Android Integrated Development Environment). Whether it is Android KitKat or Lollipop, it is just a single line of code, tough.\n\nOur videos are in HD mode. Just make sure you press the HD button when playing the video.\n\nThis course is designed to help you get the skills you need so you will have more exposure on different mobile app stores.\n\nThere are properties that you may be uncertain - whether to uncheck or check the box. No worry, we provided you a solution!\n\n[What the course focusing on?]\n\nThere are bunch of Android App Stores out there, but we focus on a few, notably:\n\nGoogle Play Store\nAmazon App Store\nOpera Mobile Store\nSamsung GALAXY Apps Store\nYou’ll come away with a solid knowledge of how to upload and make some modifications on your binary file so that your Android apps can be successfully uploaded to the stores.\n\nNo headache anymore. The contents will added from time to time if we discover something new. So, stay tune!"
+  },
+  "instructorID": {
+    "$oid": "5ffdc01aca2f15373471db50"
+  },
+  "price": 99.99,
+  "averageRate": 0,
+  "discount": 0.45,
+  "enrollCount": 0,
+  "feedbackCount": 0,
+  "isFinished": true,
+  "lastUpdated": {
+    "$date": "1970-01-01T00:00:00Z"
+  },
+  "content": [
+    {
+      "$oid": "5ffde65ab3682c1a9ccdf508"
+    },
+    {
+      "$oid": "5ffde711b3682c1a9ccdf50a"
+    },
+    {
+      "$oid": "5ffde748b3682c1a9ccdf50c"
+    },
+    {
+      "$oid": "5ffde78ab3682c1a9ccdf50e"
+    }
+  ],
+  "viewCount": 0
+},{
+  "_id": {
+    "$oid": "5ffdd3ddca2f15373471db5c"
+  },
+  "name": "10 Minute Yoga! Happy Mind, Body & Spirit in Just 10 Mins :)",
+  "banner": "",
+  "categoryID": {
+    "$oid": "5ffdd430ca2f15373471db5d"
+  },
+  "desc": {
+    "short": "3 FREE Hatha Yoga Practices to get you feeling zen in 10!",
+    "long": "Do you want to practice yoga but sometimes feel that you just don't have enough time?\n\nThen this free course is for you!\n\nIt contains 3x  simple, easy to follow routines that can be used when you don't have enough time for a full practice.\n\nClick Enrol for your free sessions :) \n\n  Namaste!\n\n     :) Sacha\n\n\n\nSequence 1: Dream- Set your intention and gently warm up your body for an amazing day ahead\n\nSequence  2: Feel Free: Stretches- Twists and Standing poses to help you feel great\n\nSequence  3: Heart open- Back bends and forward bends to help you feel the love!\n\n\n\n  These videos are made with love- It is my greatest hope that you enjoy them,\n\n     Namaste!\n\n         :) Sacha"
+  },
+  "instructorID": {
+    "$oid": "5ffdc01aca2f15373471db50"
+  },
+  "price": 36.59,
+  "averageRate": 0,
+  "discount": 0.36,
+  "enrollCount": 0,
+  "feedbackCount": 0,
+  "isFinished": true,
+  "lastUpdated": {
+    "$date": "2019-08-01T17:00:00Z"
+  },
+  "content": [
+    {
+      "$oid": "5ffde5e2b3682c1a9ccdf504"
+    }
+  ],
+  "viewCount": 0
+},{
+  "_id": {
+    "$oid": "5ffdd4d9ca2f15373471db5f"
+  },
+  "name": "How to Edit Videos [Free and Paid Options]",
+  "banner": "",
+  "categoryID": {
+    "$oid": "5ffdd4c1ca2f15373471db5e"
+  },
+  "desc": {
+    "short": "How to Edit Videos on either Adobe Premiere Pro or Shotuct [The Best Free and Paid Video Editing Software Out There]",
+    "long": "How to Edit Videos [Free and Paid Options] - How to Edit Videos on either Adobe Premiere Pro or Shotuct\n\nWhether you want to learn video editing to start a YouTube Channel, create Online Courses, create better videos for social media, etc...\n\n\n\nThat's exactly what this Course will teach you how to do. Here's a summary of what you'll learn: \n\n\n\nHow to Edit Videos with Shotcut (the best free video editing software out there currently)\n\nDifferent Editing Software and Why I Recommend Shotcut for Beginners\n\nWhy Editing Software is Important\n\nThe Best Way to Start\n\nHow to Add Files and Order Files in Shotcut\n\nHow to Cut Video Content in an Editor\n\nHow to Layer Different Video and Audio Tracks\n\nHow to Render and Export Your Video Properly\n\nand many other things!\n\n\n\nHow to Edit Videos with Adobe Premiere Pro\n\nWhy Editing Software is Important\n\nHow to Add Files and Order Files in Adobe Premiere Pro\n\nHow to Sync Audio and Video Files if You Upload them Separately\n\nHow to Cut Video Content in an Editor\n\nHow to Layer Different Video and Audio Tracks\n\nHow to Render and Export Your Video Properly\n\nand many other things!"
+  },
+  "instructorID": {
+    "$oid": "5ffdc01aca2f15373471db50"
+  },
+  "price": 85.99,
+  "averageRate": 0,
+  "discount": 0.69,
+  "enrollCount": 0,
+  "feedbackCount": 0,
+  "isFinished": true,
+  "lastUpdated": {
+    "$date": "2018-12-31T17:00:00Z"
+  },
+  "content": [
+    {
+      "$oid": "5ffde409b3682c1a9ccdf4fc"
+    },
+    {
+      "$oid": "5ffde4a3b3682c1a9ccdf500"
+    }
+  ],
+  "viewCount": 0
+},{
+  "_id": {
+    "$oid": "5ffdd79fca2f15373471db60"
+  },
+  "name": "Learn to say 'NO'",
+  "banner": "",
+  "categoryID": {
+    "$oid": "5ffdc51366e87f7e7a55df38"
+  },
+  "desc": {
+    "short": "The art of saying No",
+    "long": "This course deals in basic learning of the  art of saying No. We teach children to be good persons and in this process, children don't learn to say No. Always saying yes to everyone and everything makes life disaster! This basic course deals in clearing some misconceptions as well as teaches some ways to be able to say No decently."
+  },
+  "instructorID": {
+    "$oid": "5ffdc01aca2f15373471db50"
+  },
+  "price": 85.99,
+  "averageRate": 0,
+  "discount": 0.69,
+  "enrollCount": 0,
+  "feedbackCount": 0,
+  "isFinished": true,
+  "lastUpdated": {
+    "$date": "2021-01-12T17:00:00Z"
+  },
+  "content": [
+    {
+      "$oid": "5ffde120b3682c1a9ccdf4ee"
+    },
+    {
+      "$oid": "5ffde192b3682c1a9ccdf4f1"
+    },
+    {
+      "$oid": "5ffde315b3682c1a9ccdf4f9"
+    }
+  ],
+  "viewCount": 0
+},{
+  "_id": {
+    "$oid": "5ffdd87fca2f15373471db61"
+  },
+  "name": "Create Your First Website Super Easily",
+  "banner": "",
+  "categoryID": {
+    "$oid": "5ffdc41666e87f7e7a55df34"
+  },
+  "desc": {
+    "short": "The Only Course You Will Ever Need to Learn How to Create Your First Professional Website Easily Without Coding.",
+    "long": "  Create Your First Website Using Wordpress is a course for people who want to learn how to create their own website from scratch. My approach is designed for people who never created a website in the past.  \n\nYou will learn how to select your domain name\n\nYou will register your discounted hostgator coupon code (udemyleaders)\n\nYou will effortlessly install Wordpress\n\nYou will learn how to write posts, format, add pictures, links and access an unlimited amount of free template\n\n              Whether you want to create a personal blog or a professional website, this course will teach you how to create your own website so you don't have to be dependent on web designers and programmers. \n\n              By following the step by step videos, you will be able to complete your website in no time. \n\n              You can follow at your own paced but the faster you go the faster you'll have a website in your hands. Become a website owner by the end of this course by following a simple 3 step process. \n\nDomain Name\n\nHosting\n\nWebsite Creation\n\nCustomization Module\n\n              Take this course if you are serious about learning and taking actions to reach your goal. I'm offering you value and actionable action steps that you can follow at your own pace. You do not need to know how to do programming, design or anything like that. \n\n              In Create Your First Website Using Wordpress, we focus on teaching you everything that you need to know to get started online and create your first website. Action is this key phrase and if you are willing to take action you will have an amazing time with our community and together we are going to create some amazing websites in this lifetime. \n\n  Disclaimer\n              We cannot guarantee results because they are based on your actions but I can guaranteed that if you take no actions, you will see no results. I do also guaranteed that this information is accurate, valuable and professional at the time of publishing. By the end of the course you should have the basic knowledge needed to create your first website using Wordpress.\n \n           There is no risk to you since the course is free. Go ahead and give it a try. "
+  },
+  "instructorID": {
+    "$oid": "5ffdc01aca2f15373471db50"
+  },
+  "price": 0,
+  "averageRate": 0,
+  "discount": 0,
+  "enrollCount": 0,
+  "feedbackCount": 0,
+  "isFinished": true,
+  "lastUpdated": {
+    "$date": "2021-01-03T17:00:00Z"
+  },
+  "content": [
+    {
+      "$oid": "5ffddf75b3682c1a9ccdf4e7"
+    },
+    {
+      "$oid": "5ffddfecb3682c1a9ccdf4ea"
+    }
+  ],
+  "viewCount": 0
+},{
+  "_id": {
+    "$oid": "5ffdd92dca2f15373471db62"
+  },
+  "name": "The Serial Entrepreneur's Guide To Setting Up A Startup",
+  "banner": "",
+  "categoryID": {
+    "$oid": "5ffdd1abca2f15373471db59"
+  },
+  "desc": {
+    "short": "Learn how a successful serial entrepreneur sets his startups up at the start for rapid growth and success.",
+    "long": "Here are some of the questions covered:\n\nWhat hardware, software, and browser plugins does a successful entrepreneur use and why?\nHow does a successful entrepreneur find ideas, filter them and save them for future use?\nHow does a successful entrepreneur setup his/her file structure for optimal performance?\nHow does a successful entrepreneur setup his/her email, calendar, notes, and reminders for success?\nHow do you pick a good web host, and setup the foundation of your corporate website?\nHow do you effectively communicate with your team?\nDo you need a cofounder?\nWhat are some common pitfalls with cofounder?\nIs a team necessary to launch a company?\nWhat does a new Founder need to know about the law to launch a successful startup?\nHow do you pick a law firm to work with? What is the process of setting up a company?\nHow much do you need to know about the law?\nWhat agreements do you need to run a company?\nWhat are common legal mistakes?\nHow do you handle intellectual property, including confidentiality, copyrights, trademarks and patents?\nHow much does the law actually matter?\nWhat about offices and co-working spaces?\nHere are some of the topics covered:\n\n101 Questions a Professional Entrepreneur Must Be Able To Answer\nThe Startup Checklist – How to quick start your startup and look professional.\nDevice, Software, & Browser Setup\nMy Research Process & Setup\nFile Structure SetupGoogle Apps Setup\nEmail, Calendar, Reminders, Notes Setup\nWebsite Setup\nPhone Number & Team Communications\nFounders & Team\nLegal Overview\nOffices, Co-Working, Mailing Address\n33 Lessons & 4 Downloads\nTotal: 4h 11m 41s : Min: 2m 55s : Max: 29m 52s : Avg: 7m 25s\n\nWhy This Course Is So Unique\n\nI actual TEACH it. Most instructors write up content and use a teleprompter to deliver it, I don't. All my lessons are taught with only notes for my review. I believe the best instructors SHOULD be able to talk about their topics without a script. Because I do not follow a vetted script my lessons take you on a journey. I talk about the real-world success and more importantly the mistakes I made in my companies. I teach each topic off the top of my head because I know the content inside and out. After building 20 companies and hundreds of products I know all the mistakes you can make and will teach you how to avoid them. All my courses also use real-world examples that I ACTUALLY did vs pointing to someones else's success and teaching to it.\n\nAdditionally all my courses feature numerous downloads of the ACTUAL files I use to build my companies. I walk you through each one and demonstrate how I use them to rapidly grow my ideas into companies.\n\nAnd finally I ACTUALLY am the one in the forum answering questions, not some intern or outsourced partner. My responses are sometimes pithy, sometimes funny, sometimes insightful, and always genuine.\n\nMoney Back Guarantee\n\nAll my courses come with an unconditional, Udemy backed, 30 day money-back guarantee."
+  },
+  "instructorID": {
+    "$oid": "5ffdc01aca2f15373471db50"
+  },
+  "price": 11.99,
+  "averageRate": 0,
+  "discount": 0,
+  "enrollCount": 0,
+  "feedbackCount": 0,
+  "isFinished": true,
+  "lastUpdated": {
+    "$date": "2014-09-23T17:00:00Z"
+  },
+  "content": [
+    {
+      "$oid": "5ffddcb0e942717c7d53f26b"
+    },
+    {
+      "$oid": "5ffddd9cb3682c1a9ccdf4e2"
+    }
+  ],
+  "viewCount": 0
+}]

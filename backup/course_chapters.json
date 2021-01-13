@@ -1,0 +1,504 @@
+[{
+  "_id": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "courseID": {
+    "$oid": "5ffdc57666e87f7e7a55df39"
+  },
+  "name": "HTML5 Forms",
+  "lessons": [
+    {
+      "$oid": "5ffdd1e5ef3b2e98aaef78cf"
+    },
+    {
+      "$oid": "5ffdd31d6b23e01db4d30e55"
+    },
+    {
+      "$oid": "5ffdd3356b23e01db4d30e56"
+    },
+    {
+      "$oid": "5ffdd34a6b23e01db4d30e57"
+    },
+    {
+      "$oid": "5ffdd3936b23e01db4d30e58"
+    },
+    {
+      "$oid": "5ffdd3a26b23e01db4d30e59"
+    },
+    {
+      "$oid": "5ffdd3b36b23e01db4d30e5a"
+    },
+    {
+      "$oid": "5ffdd3d26b23e01db4d30e5b"
+    },
+    {
+      "$oid": "5ffdd3e66b23e01db4d30e5c"
+    },
+    {
+      "$oid": "5ffdd3fb6b23e01db4d30e5d"
+    },
+    {
+      "$oid": "5ffdd4146b23e01db4d30e5e"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "courseID": {
+    "$oid": "5ffdc57666e87f7e7a55df39"
+  },
+  "name": "Sliders and Video",
+  "lessons": [
+    {
+      "$oid": "5ffdd64a6b23e01db4d30e5f"
+    },
+    {
+      "$oid": "5ffdd6756b23e01db4d30e60"
+    },
+    {
+      "$oid": "5ffdd6846b23e01db4d30e61"
+    },
+    {
+      "$oid": "5ffdd6986b23e01db4d30e62"
+    },
+    {
+      "$oid": "5ffdd6a76b23e01db4d30e63"
+    },
+    {
+      "$oid": "5ffdd6d06b23e01db4d30e64"
+    },
+    {
+      "$oid": "5ffdd6de6b23e01db4d30e65"
+    },
+    {
+      "$oid": "5ffdd6ec6b23e01db4d30e66"
+    },
+    {
+      "$oid": "5ffdd6fc6b23e01db4d30e67"
+    },
+    {
+      "$oid": "5ffdd7086b23e01db4d30e68"
+    },
+    {
+      "$oid": "5ffdd71e6b23e01db4d30e69"
+    },
+    {
+      "$oid": "5ffdd7316b23e01db4d30e6a"
+    },
+    {
+      "$oid": "5ffdd7436b23e01db4d30e6b"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffdd053ef3b2e98aaef78cb"
+  },
+  "courseID": {
+    "$oid": "5ffdc57666e87f7e7a55df39"
+  },
+  "name": "Images and Font Graphics",
+  "lessons": [
+    {
+      "$oid": "5ffdd9946b23e01db4d30e6f"
+    },
+    {
+      "$oid": "5ffdd9a46b23e01db4d30e70"
+    },
+    {
+      "$oid": "5ffdd9b26b23e01db4d30e71"
+    },
+    {
+      "$oid": "5ffdd9c06b23e01db4d30e72"
+    },
+    {
+      "$oid": "5ffdd9cd6b23e01db4d30e73"
+    },
+    {
+      "$oid": "5ffdd9e16b23e01db4d30e74"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffddbfc6b23e01db4d30e75"
+  },
+  "courseID": {
+    "$oid": "5ffdcfa6ca2f15373471db57"
+  },
+  "name": "Introduction",
+  "lessons": [
+    {
+      "$oid": "5ffddd2b6b23e01db4d30e76"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffddcb0e942717c7d53f26b"
+  },
+  "courseID": {
+    "$oid": "5ffdd92dca2f15373471db62"
+  },
+  "name": "Startup Questions Overview",
+  "lessons": [
+    {
+      "$oid": "5ffddd18e942717c7d53f26f"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffddd9b6b23e01db4d30e77"
+  },
+  "courseID": {
+    "$oid": "5ffdcfa6ca2f15373471db57"
+  },
+  "name": "Investigate cause of accident",
+  "lessons": [
+    {
+      "$oid": "5ffdddc36b23e01db4d30e78"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffddd9cb3682c1a9ccdf4e2"
+  },
+  "courseID": {
+    "$oid": "5ffdd92dca2f15373471db62"
+  },
+  "name": "Startup Checklist Overview",
+  "lessons": [
+    {
+      "$oid": "5ffdddcdb3682c1a9ccdf4e3"
+    },
+    {
+      "$oid": "5ffdddfdb3682c1a9ccdf4e4"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffdde026b23e01db4d30e79"
+  },
+  "courseID": {
+    "$oid": "5ffdcfa6ca2f15373471db57"
+  },
+  "name": "Common construction incidents & occurrences",
+  "lessons": [
+    {
+      "$oid": "5ffdde246b23e01db4d30e7a"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffddf75b3682c1a9ccdf4e7"
+  },
+  "courseID": {
+    "$oid": "5ffdd87fca2f15373471db61"
+  },
+  "name": "Domain Name",
+  "lessons": [
+    {
+      "$oid": "5ffddf90b3682c1a9ccdf4e8"
+    },
+    {
+      "$oid": "5ffddfd0b3682c1a9ccdf4e9"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffddfecb3682c1a9ccdf4ea"
+  },
+  "courseID": {
+    "$oid": "5ffdd87fca2f15373471db61"
+  },
+  "name": "Hosting Your Website",
+  "lessons": [
+    {
+      "$oid": "5ffde009b3682c1a9ccdf4eb"
+    },
+    {
+      "$oid": "5ffde061b3682c1a9ccdf4ec"
+    },
+    {
+      "$oid": "5ffde06ab3682c1a9ccdf4ed"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde120b3682c1a9ccdf4ee"
+  },
+  "courseID": {
+    "$oid": "5ffdd79fca2f15373471db60"
+  },
+  "name": "Introduction",
+  "lessons": [
+    {
+      "$oid": "5ffde149b3682c1a9ccdf4ef"
+    },
+    {
+      "$oid": "5ffde15db3682c1a9ccdf4f0"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde192b3682c1a9ccdf4f1"
+  },
+  "courseID": {
+    "$oid": "5ffdd79fca2f15373471db60"
+  },
+  "name": "Learn to say No",
+  "lessons": [
+    {
+      "$oid": "5ffde1afb3682c1a9ccdf4f2"
+    },
+    {
+      "$oid": "5ffde1ddb3682c1a9ccdf4f4"
+    },
+    {
+      "$oid": "5ffde1edb3682c1a9ccdf4f5"
+    },
+    {
+      "$oid": "5ffde1fab3682c1a9ccdf4f6"
+    },
+    {
+      "$oid": "5ffde1fab3682c1a9ccdf4f7"
+    },
+    {
+      "$oid": "5ffde203b3682c1a9ccdf4f8"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde315b3682c1a9ccdf4f9"
+  },
+  "courseID": {
+    "$oid": "5ffdd79fca2f15373471db60"
+  },
+  "name": "Conclusion",
+  "lessons": [
+    {
+      "$oid": "5ffde325b3682c1a9ccdf4fa"
+    },
+    {
+      "$oid": "5ffde37eb3682c1a9ccdf4fb"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde409b3682c1a9ccdf4fc"
+  },
+  "courseID": {
+    "$oid": "5ffdd4d9ca2f15373471db5f"
+  },
+  "name": "How to Edit with Adobe Premiere Pro [The Best Paid Editing Software Out there]",
+  "lessons": [
+    {
+      "$oid": "5ffde422b3682c1a9ccdf4fd"
+    },
+    {
+      "$oid": "5ffde442b3682c1a9ccdf4fe"
+    },
+    {
+      "$oid": "5ffde479b3682c1a9ccdf4ff"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde4a3b3682c1a9ccdf500"
+  },
+  "courseID": {
+    "$oid": "5ffdd4d9ca2f15373471db5f"
+  },
+  "name": "How to Edit with Shotcut [The Best Free Editing Software Out There]",
+  "lessons": [
+    {
+      "$oid": "5ffde4fcb3682c1a9ccdf501"
+    },
+    {
+      "$oid": "5ffde523b3682c1a9ccdf502"
+    },
+    {
+      "$oid": "5ffde535b3682c1a9ccdf503"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde5e2b3682c1a9ccdf504"
+  },
+  "courseID": {
+    "$oid": "5ffdd3ddca2f15373471db5c"
+  },
+  "name": "Introduction",
+  "lessons": [
+    {
+      "$oid": "5ffde5f7b3682c1a9ccdf505"
+    },
+    {
+      "$oid": "5ffde61ab3682c1a9ccdf506"
+    },
+    {
+      "$oid": "5ffde535b3682c1a9ccdf507"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde65ab3682c1a9ccdf508"
+  },
+  "courseID": {
+    "$oid": "5ffdd2e7ca2f15373471db5b"
+  },
+  "name": "Google Play Developer Console Registration",
+  "lessons": [
+    {
+      "$oid": "5ffde6ddb3682c1a9ccdf509"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde711b3682c1a9ccdf50a"
+  },
+  "courseID": {
+    "$oid": "5ffdd2e7ca2f15373471db5b"
+  },
+  "name": "Uploading the Binary file",
+  "lessons": [
+    {
+      "$oid": "5ffde729b3682c1a9ccdf50b"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde748b3682c1a9ccdf50c"
+  },
+  "courseID": {
+    "$oid": "5ffdd2e7ca2f15373471db5b"
+  },
+  "name": "Store Listing",
+  "lessons": [
+    {
+      "$oid": "5ffde76eb3682c1a9ccdf50d"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde78ab3682c1a9ccdf50e"
+  },
+  "courseID": {
+    "$oid": "5ffdd2e7ca2f15373471db5b"
+  },
+  "name": "Pricing and Distribution",
+  "lessons": [
+    {
+      "$oid": "5ffde794b3682c1a9ccdf50f"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde7f3b3682c1a9ccdf510"
+  },
+  "courseID": {
+    "$oid": "5ffdd1c5ca2f15373471db5a"
+  },
+  "name": "Introduction",
+  "lessons": [
+    {
+      "$oid": "5ffde802b3682c1a9ccdf511"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde82bb3682c1a9ccdf512"
+  },
+  "courseID": {
+    "$oid": "5ffdd1c5ca2f15373471db5a"
+  },
+  "name": "The 6 Death Factors, explained",
+  "lessons": [
+    {
+      "$oid": "5ffde802b3682c1a9ccdf513"
+    },
+    {
+      "$oid": "5ffde867b3682c1a9ccdf514"
+    },
+    {
+      "$oid": "5ffde894b3682c1a9ccdf515"
+    },
+    {
+      "$oid": "5ffde8adb3682c1a9ccdf516"
+    },
+    {
+      "$oid": "5ffde8f2b3682c1a9ccdf517"
+    },
+    {
+      "$oid": "5ffde91ab3682c1a9ccdf518"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffde986b3682c1a9ccdf51a"
+  },
+  "courseID": {
+    "$oid": "5ffdd1c5ca2f15373471db5a"
+  },
+  "name": "Conclusion and Further work",
+  "lessons": [
+    {
+      "$oid": "5ffde99ab3682c1a9ccdf51b"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffdea4db3682c1a9ccdf51c"
+  },
+  "courseID": {
+    "$oid": "5ffdd060ca2f15373471db58"
+  },
+  "name": "Emmet basics",
+  "lessons": [
+    {
+      "$oid": "5ffdea88b3682c1a9ccdf51d"
+    },
+    {
+      "$oid": "5ffdeaaab3682c1a9ccdf51e"
+    },
+    {
+      "$oid": "5ffdeac5b3682c1a9ccdf51f"
+    },
+    {
+      "$oid": "5ffdeaf2b3682c1a9ccdf520"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffdeb4cb3682c1a9ccdf521"
+  },
+  "courseID": {
+    "$oid": "5ffdd060ca2f15373471db58"
+  },
+  "name": "Bootstrap 4 tutorials for beginners",
+  "lessons": [
+    {
+      "$oid": "5ffdeb64b3682c1a9ccdf522"
+    },
+    {
+      "$oid": "5ffdeb7db3682c1a9ccdf523"
+    },
+    {
+      "$oid": "5ffdeb7db3682c1a9ccdf524"
+    },
+    {
+      "$oid": "5ffdeb7db3682c1a9ccdf525"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffdebb5b3682c1a9ccdf526"
+  },
+  "courseID": {
+    "$oid": "5ffdd060ca2f15373471db58"
+  },
+  "name": "Bootstrap 4 tutorials for beginners",
+  "lessons": [
+    {
+      "$oid": "5ffdeb64b3682c1a9ccdf522"
+    }
+  ]
+}]

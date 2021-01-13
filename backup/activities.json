@@ -1,0 +1,35 @@
+[{
+  "_id": {
+    "$oid": "5ffde70aef3b2e98aaef78df"
+  },
+  "courseID": {
+    "$oid": "5ffdc57666e87f7e7a55df39"
+  },
+  "studentID": {
+    "$oid": "5ffdc01aca2f15373471db53"
+  },
+  "isWatching": "false",
+  "isEntrolled": "true",
+  "feedback": {
+    "rate": 4,
+    "content": "This is a good course."
+  },
+  "progress": [
+    {
+      "$oid": "5ffdd1e5ef3b2e98aaef78cf"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ffdf61a6b23e01db4d30e80"
+  },
+  "courseID": {
+    "$oid": "5ffdc57666e87f7e7a55df39"
+  },
+  "studentID": {
+    "$oid": "5ffdeb6d6b23e01db4d30e7d"
+  },
+  "isWatching": "false",
+  "isEntrolled": "true",
+  "progress": null
+}]
