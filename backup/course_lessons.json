@@ -1,0 +1,801 @@
+[{
+  "_id": {
+    "$oid": "5ffdd1e5ef3b2e98aaef78cf"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Introduction to Forms part 1",
+  "video": "",
+  "text": " In this video I setup the problems with forms and prepare you for a form walkthrough. "
+},{
+  "_id": {
+    "$oid": "5ffdd31d6b23e01db4d30e55"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Introduction to Forms part 2",
+  "video": "",
+  "text": " In this video we take a look at some forms and problems they can cause. "
+},{
+  "_id": {
+    "$oid": "5ffdd3356b23e01db4d30e56"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Overview of the Completed Page",
+  "video": "",
+  "text": " In this video, you will see the completed form on desktop, tablet and smart phone. you will see how the keyboards are affected by the input type in some browsers. "
+},{
+  "_id": {
+    "$oid": "5ffdd34a6b23e01db4d30e57"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Progress Bar",
+  "video": "",
+  "text": " In this video, you will see how to implement the new progress bar. "
+},{
+  "_id": {
+    "$oid": "5ffdd3936b23e01db4d30e58"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Build a Form Part 1",
+  "video": "",
+  "text": " In this video, you will see how to get started bulding an HTML5 form "
+},{
+  "_id": {
+    "$oid": "5ffdd3a26b23e01db4d30e59"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Build a Form Part 2",
+  "video": "",
+  "text": " In this video, you will see how to finishing coding the HTML5 form. "
+},{
+  "_id": {
+    "$oid": "5ffdd3b36b23e01db4d30e5a"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Style the Form",
+  "video": "",
+  "text": " In this video, you will see how to use CSS to style the presentation of a form. "
+},{
+  "_id": {
+    "$oid": "5ffdd3d26b23e01db4d30e5b"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Building a Sprite in Photoshop",
+  "video": "",
+  "text": " In this video, you will see the sprite I built on Photoshop and how it was built. "
+},{
+  "_id": {
+    "$oid": "5ffdd3e66b23e01db4d30e5c"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Implementing Pseudo Classes for Form Inputs",
+  "video": "",
+  "text": " In this video, you will see the new psudo classes for forms being used with the sprite graphic. "
+},{
+  "_id": {
+    "$oid": "5ffdd3fb6b23e01db4d30e5d"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Hooking up the FormToEmail.php File",
+  "video": "",
+  "text": " In this video, you will see how to download, configure and implement a php file that send you an email from your website. "
+},{
+  "_id": {
+    "$oid": "5ffdd4146b23e01db4d30e5e"
+  },
+  "chapterID": {
+    "$oid": "5ffdcf50ef3b2e98aaef78c6"
+  },
+  "name": "Giving Feedback with the Title Tag on Inputs",
+  "video": "",
+  "text": " In this video, you will see a future development in providing feedback for required fields. "
+},{
+  "_id": {
+    "$oid": "5ffdd64a6b23e01db4d30e5f"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Introduction to Sliders",
+  "video": "",
+  "text": " In this video you will see the completed version of the sliders page. "
+},{
+  "_id": {
+    "$oid": "5ffdd6756b23e01db4d30e60"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Setup the File",
+  "video": "",
+  "text": " In this video you will see how access and setup the code for a basic slider. A link to the woo themes FlexSlider2 used in this course in located on the Spartan Design University website under section 7 "
+},{
+  "_id": {
+    "$oid": "5ffdd6846b23e01db4d30e61"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Add a Caption to the Sliders",
+  "video": "",
+  "text": " In this video you will see how to add captions to your sliders. "
+},{
+  "_id": {
+    "$oid": "5ffdd6986b23e01db4d30e62"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Customize the Sliders",
+  "video": "",
+  "text": " In this video you will see how to customize the slider timing, direction and speed. "
+},{
+  "_id": {
+    "$oid": "5ffdd6a76b23e01db4d30e63"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Overview of a Slider with Thumbnails",
+  "video": "",
+  "text": " In this video you will see the completed thumbnail slider "
+},{
+  "_id": {
+    "$oid": "5ffdd6d06b23e01db4d30e64"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Build a Slider with Thumbnails",
+  "video": "",
+  "text": " In this video you will see how to build a thumbnail slider. A link to the woo themes FlexSlider2 used in this course in located on the Spartan Design University website under section 7 "
+},{
+  "_id": {
+    "$oid": "5ffdd6de6b23e01db4d30e65"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Overview of Flexible Video",
+  "video": "",
+  "text": " In this video you will see the completed page for flexible videos "
+},{
+  "_id": {
+    "$oid": "5ffdd6ec6b23e01db4d30e66"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Build a Page with Flexible Video",
+  "video": "",
+  "text": " In this video you will see how to build a flexible video page for youtube, vimeo and bliptv. A link to the FitVids.js used in this section in located on the Spartan Design University website under section 7 "
+},{
+  "_id": {
+    "$oid": "5ffdd6fc6b23e01db4d30e67"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Overview of Sprites",
+  "video": "",
+  "text": " In this video you will see a completed sprite used for social icons. "
+},{
+  "_id": {
+    "$oid": "5ffdd7086b23e01db4d30e68"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Creating a Sprite in Photoshop",
+  "video": "",
+  "text": " In this video you will see how to build a sprite in Photoshop. "
+},{
+  "_id": {
+    "$oid": "5ffdd71e6b23e01db4d30e69"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Coding a Sprite",
+  "video": "",
+  "text": " In this video you will see how to code a social icons unordered list. "
+},{
+  "_id": {
+    "$oid": "5ffdd7316b23e01db4d30e6a"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Styling a Sprite",
+  "video": "",
+  "text": " In this video you will see how to style a sprite as a CSS background image. "
+},{
+  "_id": {
+    "$oid": "5ffdd7436b23e01db4d30e6b"
+  },
+  "chapterID": {
+    "$oid": "5ffdd009ef3b2e98aaef78ca"
+  },
+  "name": "Additional Options for Styling a Sprite",
+  "video": "",
+  "text": " In this video you will see two additional options for presenting sprites. "
+},{
+  "_id": {
+    "$oid": "5ffdd9946b23e01db4d30e6f"
+  },
+  "chapterID": {
+    "$oid": "5ffdd053ef3b2e98aaef78cb"
+  },
+  "name": "Overview of Images and Font Graphics",
+  "video": "",
+  "text": " In this video you will see an overview of this lesson on responsive images, twitter and font based icons. "
+},{
+  "_id": {
+    "$oid": "5ffdd9a46b23e01db4d30e70"
+  },
+  "chapterID": {
+    "$oid": "5ffdd053ef3b2e98aaef78cb"
+  },
+  "name": "Responsive Images using CSS and background-image",
+  "video": "",
+  "text": " In this video you will see how to load different background images through CSS for phone, tablet, and desktop. This method has some advantages. "
+},{
+  "_id": {
+    "$oid": "5ffdd9b26b23e01db4d30e71"
+  },
+  "chapterID": {
+    "$oid": "5ffdd053ef3b2e98aaef78cb"
+  },
+  "name": "Responsive Images Using JavaScript",
+  "video": "",
+  "text": " In this video you will use javascript to swam images based on the end users screen size. A link to the picturefill used in this tutorial in located on the Spartan Design University website under section 8 "
+},{
+  "_id": {
+    "$oid": "5ffdd9c06b23e01db4d30e72"
+  },
+  "chapterID": {
+    "$oid": "5ffdd053ef3b2e98aaef78cb"
+  },
+  "name": "Embedding a Twitter Feed into a Responsive Column",
+  "video": "",
+  "text": " In this video you will create a twitter feed from your account and then use a widget to display your feed into your own website. "
+},{
+  "_id": {
+    "$oid": "5ffdd9cd6b23e01db4d30e73"
+  },
+  "chapterID": {
+    "$oid": "5ffdd053ef3b2e98aaef78cb"
+  },
+  "name": "Using Fonts for Social Media Icons",
+  "video": "",
+  "text": " In this video you will use a font instead of graphics to insert social media icons onto your page. A link to the FontAwsome used in this tutorial in located on the Spartan Design University website under section 8 "
+},{
+  "_id": {
+    "$oid": "5ffdd9e16b23e01db4d30e74"
+  },
+  "chapterID": {
+    "$oid": "5ffdd053ef3b2e98aaef78cb"
+  },
+  "name": "Using Structured Data for your Address and Contact Information",
+  "video": "",
+  "text": " In this video you will learn to structure your contact and address information so it can be read by the Google Structured Data Test. "
+},{
+  "_id": {
+    "$oid": "5ffddd2b6b23e01db4d30e76"
+  },
+  "chapterID": {
+    "$oid": "5ffddbfc6b23e01db4d30e75"
+  },
+  "name": "Introduction",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffddd18e942717c7d53f26f"
+  },
+  "chapterID": {
+    "$oid": "5ffddcb0e942717c7d53f26b"
+  },
+  "name": "101 Questions a Professional Entrepreneur Must Be Able To Answer",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdddc36b23e01db4d30e78"
+  },
+  "chapterID": {
+    "$oid": "5ffddd9b6b23e01db4d30e77"
+  },
+  "name": "Investigate cause of accident",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdddcdb3682c1a9ccdf4e3"
+  },
+  "chapterID": {
+    "$oid": "5ffddd9cb3682c1a9ccdf4e2"
+  },
+  "name": "The Startup Checklist – How to quick start your startup and look professional.",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdddfdb3682c1a9ccdf4e4"
+  },
+  "chapterID": {
+    "$oid": "5ffddd9cb3682c1a9ccdf4e2"
+  },
+  "name": "The Startup Checklist - Addendum",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdde246b23e01db4d30e7a"
+  },
+  "chapterID": {
+    "$oid": "5ffdde026b23e01db4d30e79"
+  },
+  "name": "Common construction incidents & occurrences",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffddf90b3682c1a9ccdf4e8"
+  },
+  "chapterID": {
+    "$oid": "5ffddf75b3682c1a9ccdf4e7"
+  },
+  "name": "Why Are We Here",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffddfd0b3682c1a9ccdf4e9"
+  },
+  "chapterID": {
+    "$oid": "5ffddf75b3682c1a9ccdf4e7"
+  },
+  "name": "Register Your Domain Name",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde009b3682c1a9ccdf4eb"
+  },
+  "chapterID": {
+    "$oid": "5ffddfecb3682c1a9ccdf4ea"
+  },
+  "name": "Hosting",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde061b3682c1a9ccdf4ec"
+  },
+  "chapterID": {
+    "$oid": "5ffddfecb3682c1a9ccdf4ea"
+  },
+  "name": "Establishing the Communication",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde06ab3682c1a9ccdf4ed"
+  },
+  "chapterID": {
+    "$oid": "5ffddfecb3682c1a9ccdf4ea"
+  },
+  "name": "Adding Domains",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde149b3682c1a9ccdf4ef"
+  },
+  "chapterID": {
+    "$oid": "5ffde120b3682c1a9ccdf4ee"
+  },
+  "name": "Introduction",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde15db3682c1a9ccdf4f0"
+  },
+  "chapterID": {
+    "$oid": "5ffde120b3682c1a9ccdf4ee"
+  },
+  "name": "Goodness: Curse or boon?",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde1afb3682c1a9ccdf4f2"
+  },
+  "chapterID": {
+    "$oid": "5ffde192b3682c1a9ccdf4f1"
+  },
+  "name": "Initial Formular",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde1ddb3682c1a9ccdf4f4"
+  },
+  "chapterID": {
+    "$oid": "5ffde192b3682c1a9ccdf4f1"
+  },
+  "name": "Are you a better person than you should be?",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde1edb3682c1a9ccdf4f5"
+  },
+  "chapterID": {
+    "$oid": "5ffde192b3682c1a9ccdf4f1"
+  },
+  "name": "You are not born with goodness",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde1fab3682c1a9ccdf4f6"
+  },
+  "chapterID": {
+    "$oid": "5ffde192b3682c1a9ccdf4f1"
+  },
+  "name": "Behavior can be changed",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde203b3682c1a9ccdf4f7"
+  },
+  "chapterID": {
+    "$oid": "5ffde192b3682c1a9ccdf4f1"
+  },
+  "name": "Live with your will: Learn to say NO",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde20db3682c1a9ccdf4f8"
+  },
+  "chapterID": {
+    "$oid": "5ffde192b3682c1a9ccdf4f1"
+  },
+  "name": "Five ways to say No",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde325b3682c1a9ccdf4fa"
+  },
+  "chapterID": {
+    "$oid": "5ffde315b3682c1a9ccdf4f9"
+  },
+  "name": "Positive affirmations to say NO",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde37eb3682c1a9ccdf4fb"
+  },
+  "chapterID": {
+    "$oid": "5ffde315b3682c1a9ccdf4f9"
+  },
+  "name": "Conclusion",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde422b3682c1a9ccdf4fd"
+  },
+  "chapterID": {
+    "$oid": "5ffde409b3682c1a9ccdf4fc"
+  },
+  "name": "Why Editing Software is Important",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde442b3682c1a9ccdf4fe"
+  },
+  "chapterID": {
+    "$oid": "5ffde409b3682c1a9ccdf4fc"
+  },
+  "name": "How to Slow a Lecture Down on Udemy",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde479b3682c1a9ccdf4ff"
+  },
+  "chapterID": {
+    "$oid": "5ffde409b3682c1a9ccdf4fc"
+  },
+  "name": "Adding Files & Order Files for Your Workflow",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde4fcb3682c1a9ccdf501"
+  },
+  "chapterID": {
+    "$oid": "5ffde4a3b3682c1a9ccdf500"
+  },
+  "name": "Different Editing Software & Why I Recommend Shotcut for Beginners",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde523b3682c1a9ccdf502"
+  },
+  "chapterID": {
+    "$oid": "5ffde4a3b3682c1a9ccdf500"
+  },
+  "name": "Why Editing Software is Important",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde535b3682c1a9ccdf503"
+  },
+  "chapterID": {
+    "$oid": "5ffde4a3b3682c1a9ccdf500"
+  },
+  "name": "Best Way to Start",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde5f7b3682c1a9ccdf505"
+  },
+  "chapterID": {
+    "$oid": "5ffde5e2b3682c1a9ccdf504"
+  },
+  "name": "Morning Ten: Day 1",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde61ab3682c1a9ccdf506"
+  },
+  "chapterID": {
+    "$oid": "5ffde5e2b3682c1a9ccdf504"
+  },
+  "name": "Morning Ten: Day 2",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde62fb3682c1a9ccdf507"
+  },
+  "chapterID": {
+    "$oid": "5ffde5e2b3682c1a9ccdf504"
+  },
+  "name": "Morning Ten: Day 3",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde6ddb3682c1a9ccdf509"
+  },
+  "chapterID": {
+    "$oid": "5ffde65ab3682c1a9ccdf508"
+  },
+  "name": "What are the criteria you need to know?",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde729b3682c1a9ccdf50b"
+  },
+  "chapterID": {
+    "$oid": "5ffde711b3682c1a9ccdf50a"
+  },
+  "name": "What you need to do before uploading your binary file?",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde76eb3682c1a9ccdf50d"
+  },
+  "chapterID": {
+    "$oid": "5ffde748b3682c1a9ccdf50c"
+  },
+  "name": "What are the properties needed for Store Listing?",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde794b3682c1a9ccdf50f"
+  },
+  "chapterID": {
+    "$oid": "5ffde78ab3682c1a9ccdf50e"
+  },
+  "name": "The Price, Distribution and Consent Properties",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde802b3682c1a9ccdf511"
+  },
+  "chapterID": {
+    "$oid": "5ffde7f3b3682c1a9ccdf510"
+  },
+  "name": "The 6 critical factors that may bury your Business",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde83cb3682c1a9ccdf513"
+  },
+  "chapterID": {
+    "$oid": "5ffde82bb3682c1a9ccdf512"
+  },
+  "name": "Demand for your Products is NOT high enough",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde867b3682c1a9ccdf514"
+  },
+  "chapterID": {
+    "$oid": "5ffde82bb3682c1a9ccdf512"
+  },
+  "name": "Your Customers are a PAIN in the neck",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde894b3682c1a9ccdf515"
+  },
+  "chapterID": {
+    "$oid": "5ffde82bb3682c1a9ccdf512"
+  },
+  "name": "Customers DEFAULT on Payments, resulting in Negative cash flow",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde8adb3682c1a9ccdf516"
+  },
+  "chapterID": {
+    "$oid": "5ffde82bb3682c1a9ccdf512"
+  },
+  "name": "Competitors are NOT playing by the book",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde8f2b3682c1a9ccdf517"
+  },
+  "chapterID": {
+    "$oid": "5ffde82bb3682c1a9ccdf512"
+  },
+  "name": "Your Employees DON'T give a damn about your Vision",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde91ab3682c1a9ccdf518"
+  },
+  "chapterID": {
+    "$oid": "5ffde82bb3682c1a9ccdf512"
+  },
+  "name": "YOU are probably NOT cut out for the job",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffde99ab3682c1a9ccdf51b"
+  },
+  "chapterID": {
+    "$oid": "5ffde986b3682c1a9ccdf51a"
+  },
+  "name": "Your THREE imperative Qualities as an Entrepreneur",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdea88b3682c1a9ccdf51d"
+  },
+  "chapterID": {
+    "$oid": "5ffdea4db3682c1a9ccdf51c"
+  },
+  "name": "Emmet Course Intro",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdeaaab3682c1a9ccdf51e"
+  },
+  "chapterID": {
+    "$oid": "5ffdea4db3682c1a9ccdf51c"
+  },
+  "name": "What is Emmet",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdeac5b3682c1a9ccdf51f"
+  },
+  "chapterID": {
+    "$oid": "5ffdea4db3682c1a9ccdf51c"
+  },
+  "name": "How to install Emmet in brackets Text Editor",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdeaf2b3682c1a9ccdf520"
+  },
+  "chapterID": {
+    "$oid": "5ffdea4db3682c1a9ccdf51c"
+  },
+  "name": "How to install Emmet in brackets Text Editor",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdeb64b3682c1a9ccdf522"
+  },
+  "chapterID": {
+    "$oid": "5ffdeb4cb3682c1a9ccdf521"
+  },
+  "name": "Bootstrap 4 intro",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdeb7db3682c1a9ccdf523"
+  },
+  "chapterID": {
+    "$oid": "5ffdeb4cb3682c1a9ccdf521"
+  },
+  "name": "How to use bootstrap the CDN way",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdeb9eb3682c1a9ccdf524"
+  },
+  "chapterID": {
+    "$oid": "5ffdeb4cb3682c1a9ccdf521"
+  },
+  "name": "How to download and use Bootstrap Locally",
+  "video": "",
+  "text": ""
+},{
+  "_id": {
+    "$oid": "5ffdebaab3682c1a9ccdf525"
+  },
+  "chapterID": {
+    "$oid": "5ffdeb4cb3682c1a9ccdf521"
+  },
+  "name": "How To Use Bootstrap 4 Grid System",
+  "video": "",
+  "text": ""
+}]
