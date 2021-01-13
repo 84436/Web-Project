@@ -133,6 +133,24 @@ async function edit(id, new_info) {
     return r
 }
 
+async function changePassword(id, oldpw, newpw, confirmpw) {
+    let oldpwHash = await accountModel.findById(id, {_id: 0, password: 1})
+    if (!oldpwHash) {
+        return false
+    }
+    oldpwHash = oldpwHash.password
+    if (!bcrypt.compareSync(oldpw, oldpwHash)) {
+        return false
+    }
+
+    let newpwHash = bcrypt.hashSync(newpw, BCRYPT_WORK_FACTOR)
+    if (!bcrypt.compareSync(confirmpw, newpwHash)) {
+        return false
+    }
+
+    return true
+}
+
 async function getByID(id) {
     let r = { _error: null }
 
@@ -181,5 +199,6 @@ module.exports = {
     getByID: getByID,
     getByLogin: getByLogin,
     checkID: checkID,
-    checkEmail: checkEmail
+    checkEmail: checkEmail,
+    changePassword: changePassword
 }
