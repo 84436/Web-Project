@@ -169,33 +169,33 @@ async function remove_course(courseID) {
 // Update view/enroll/feedbackCount
 
 async function viewCount_plus(courseID) {
-    let update = { $inc: {viewCount: 1} }
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+    let update = { $inc: { viewCount: 1 } };
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
 async function viewCount_minus(courseID) {
-    let update = { $inc: {viewCount: -1} }
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+    let update = { $inc: { viewCount: -1 } };
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
 async function enrollCount_plus(courseID) {
-    let update = { $inc: {enrollCount: 1} }
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+    let update = { $inc: { enrollCount: 1 } };
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function viewCount_minus(courseID) {
-    let update = { $inc: {enrollCount: -1} }
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+async function enrollCount_minus(courseID) {
+    let update = { $inc: { enrollCount: -1 } };
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function viewCount_plus(courseID) {
-    let update = { $inc: {feedbackCount: 1} }
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+async function feedbackCount_plus(courseID) {
+    let update = { $inc: { feedbackCount: 1 } };
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function viewCount_minus(courseID) {
-    let update = { $inc: {feedbackCount: -1} }
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {})
+async function feedbackCount_minus(courseID) {
+    let update = { $inc: { feedbackCount: -1 } };
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
 /********************************************************************************/
@@ -279,26 +279,34 @@ async function remove_lesson(lessonID) {
 // https://stackoverflow.com/a/46985745
 async function topEnrollCategory() {
     let r1 = await courseModel.aggregate([
-        {$group: {
-            _id: "$categoryID",
-            totalEnrollCount: {$sum: "$enrollCount"},
-        }},
-        {$sort: {
-            totalEnrollCount: -1
-        }},
-        {$lookup: {
-            from: "categories",
-            localField: "_id",
-            foreignField: "_id",
-            as: "categoryName"
-        }},
-        {$limit: 4},
-        {$project: {
-            "_id": 0
-        }}
-    ])
+        {
+            $group: {
+                _id: "$categoryID",
+                totalEnrollCount: { $sum: "$enrollCount" },
+            },
+        },
+        {
+            $sort: {
+                totalEnrollCount: -1,
+            },
+        },
+        {
+            $lookup: {
+                from: "categories",
+                localField: "_id",
+                foreignField: "_id",
+                as: "categoryName",
+            },
+        },
+        { $limit: 4 },
+        {
+            $project: {
+                _id: 0,
+            },
+        },
+    ]);
 
-    return r1
+    return r1;
 }
 
 /********************************************************************************/
@@ -317,5 +325,5 @@ module.exports = {
     update_lesson: update_lesson,
     remove_lesson: remove_lesson,
     getByCategory: getByCategory,
-    topEnrollCategory : topEnrollCategory
+    topEnrollCategory: topEnrollCategory,
 };

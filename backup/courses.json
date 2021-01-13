@@ -34,7 +34,10 @@
       "$oid": "5ffdd053ef3b2e98aaef78cb"
     }
   ],
-  "viewCount": 0
+  "viewCount": 0,
+  "publishDate": {
+    "$date": "2017-02-19T17:00:00Z"
+  }
 },{
   "_id": {
     "$oid": "5ffdcfa6ca2f15373471db57"
@@ -71,7 +74,10 @@
       "$oid": "5ffdde026b23e01db4d30e79"
     }
   ],
-  "viewCount": 0
+  "viewCount": 0,
+  "publishDate": {
+    "$date": "2015-01-30T17:00:00Z"
+  }
 },{
   "_id": {
     "$oid": "5ffdd060ca2f15373471db58"
@@ -108,7 +114,10 @@
     {
       "$oid": "5ffdebb5b3682c1a9ccdf526"
     }
-  ]
+  ],
+  "publishDate": {
+    "$date": "2015-12-30T17:00:00Z"
+  }
 },{
   "_id": {
     "$oid": "5ffdd1c5ca2f15373471db5a"
@@ -145,7 +154,10 @@
     {
       "$oid": "5ffde986b3682c1a9ccdf51a"
     }
-  ]
+  ],
+  "publishDate": {
+    "$date": "2009-12-31T17:00:00Z"
+  }
 },{
   "_id": {
     "$oid": "5ffdd2e7ca2f15373471db5b"
@@ -185,7 +197,12 @@
       "$oid": "5ffde78ab3682c1a9ccdf50e"
     }
   ],
-  "viewCount": 0
+  "viewCount": 0,
+  "publishDate": {
+    "$date": {
+      "$numberLong": "-115200000"
+    }
+  }
 },{
   "_id": {
     "$oid": "5ffdd3ddca2f15373471db5c"
@@ -216,7 +233,10 @@
       "$oid": "5ffde5e2b3682c1a9ccdf504"
     }
   ],
-  "viewCount": 0
+  "viewCount": 0,
+  "publishDate": {
+    "$date": "2018-05-23T17:00:00Z"
+  }
 },{
   "_id": {
     "$oid": "5ffdd4d9ca2f15373471db5f"
@@ -250,7 +270,10 @@
       "$oid": "5ffde4a3b3682c1a9ccdf500"
     }
   ],
-  "viewCount": 0
+  "viewCount": 0,
+  "publishDate": {
+    "$date": "2018-09-30T17:00:00Z"
+  }
 },{
   "_id": {
     "$oid": "5ffdd79fca2f15373471db60"
@@ -287,7 +310,10 @@
       "$oid": "5ffde315b3682c1a9ccdf4f9"
     }
   ],
-  "viewCount": 0
+  "viewCount": 0,
+  "publishDate": {
+    "$date": "2010-04-11T17:00:00Z"
+  }
 },{
   "_id": {
     "$oid": "5ffdd87fca2f15373471db61"
@@ -321,7 +347,10 @@
       "$oid": "5ffddfecb3682c1a9ccdf4ea"
     }
   ],
-  "viewCount": 0
+  "viewCount": 0,
+  "publishDate": {
+    "$date": "2020-07-29T17:00:00Z"
+  }
 },{
   "_id": {
     "$oid": "5ffdd92dca2f15373471db62"
@@ -355,5 +384,8 @@
       "$oid": "5ffddd9cb3682c1a9ccdf4e2"
     }
   ],
-  "viewCount": 0
+  "viewCount": 0,
+  "publishDate": {
+    "$date": "2013-09-11T17:00:00Z"
+  }
 }]

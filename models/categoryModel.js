@@ -86,6 +86,5 @@ module.exports = {
     getAll: getAll,
     add: add,
     edit: edit,
-    remove: remove,
-    removeIfEmpty: removeIfEmpty,
+    remove: removeIfEmpty,
 };
