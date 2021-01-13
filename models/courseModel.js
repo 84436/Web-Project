@@ -23,7 +23,9 @@ var courseSchema = new mongoose.Schema({
 
     // metrics
     averageRate: Number,
-    viewCount: Number,
+    views: [{
+        type: Date
+    }],
     enrollCount: Number,
     feedbackCount: Number,
 
