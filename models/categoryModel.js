@@ -35,11 +35,37 @@ async function getByID(id) {
 
 async function getAll() {
     let projection = { __v: 0 };
-    return await categoryModel
+    let res = await categoryModel
         .find({}, projection, (err) => {
             return null;
         })
         .lean();
+
+    var categoryObj = [];
+    var set = false;
+
+    for (var r in res) {
+        var major = res[r].major;
+        for (var c in categoryObj) {
+            if (categoryObj[c].major === major) {
+                categoryObj[c].minor.push({
+                    _id: res[r]._id,
+                    name: res[r].minor,
+                });
+                set = true;
+                break;
+            }
+        }
+        if (set === false) {
+            categoryObj.push({
+                major: major,
+                minor: [{ _id: res[r]._id, name: res[r].minor }],
+            });
+        }
+        set = false;
+    }
+
+    return categoryObj;
 }
 
 async function add(major, minor) {

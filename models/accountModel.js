@@ -71,7 +71,7 @@ async function add(info, type) {
         "instructorBio": "",
         "type": type
     }
-    let new_account = new accountModel(new_account_info, projection)
+    let new_account = new accountModel(new_account_info)
     await new_account.save((err) => {
         if (err) { r._error = err; return r }
     })
@@ -196,9 +196,6 @@ async function getByLogin(email, password) {
             return r
         }
     }
-
-    r = {...r, ...account._doc}
-    return r
 }
 
 async function registerAccount(newAccount) {

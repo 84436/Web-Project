@@ -29,6 +29,7 @@ var courseSchema = new mongoose.Schema({
 
     // content
     lastUpdated: Date,
+    publishDate: Date,
     isFinished: Boolean,
     content: [
         {
@@ -87,20 +88,6 @@ var courseLessonModel = mongoose.model(
 /********************************************************************************/
 // Courses
 
-async function search_course(query) {
-    let filter = { $text: { $search: query } };
-    let projection = { __v: 0 };
-    return await courseModel
-        .find(filter, projection, (err) => {
-            return null;
-        })
-        .lean()
-        .populate({
-            path: "instructorID",
-            select: "name",
-        });
-}
-
 // Get everything about this course and also populates ToC
 async function get_course(courseID) {
     let projection = { __v: 0 };
@@ -128,24 +115,6 @@ async function get_course(courseID) {
     return r;
 }
 
-async function getByCategory(categoryID) {
-    let filter = {
-        categoryID: categoryID,
-    };
-
-    let r = await courseModel
-        .find(filter, (err) => {
-            return null;
-        })
-        .lean()
-        .populate({
-            path: "instructorID",
-            select: "name",
-        });
-
-    return r;
-}
-
 async function add_course(courseInfo) {
     let newCourse = new courseModel(courseInfo);
     newCourse.save((err) => {});
@@ -163,6 +132,16 @@ async function update_course(courseID, courseInfo) {
 
 async function remove_course(courseID) {
     await courseModel.findByIdAndDelete(courseID, (err) => {});
+}
+
+async function setFinished(courseID) {
+    let update = {
+        $set: {
+            isFinished: true,
+        },
+    };
+
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
 /********************************************************************************/
@@ -277,7 +256,7 @@ async function remove_lesson(lessonID) {
 // Top enrolling categories
 
 // https://stackoverflow.com/a/46985745
-async function topEnrollCategory() {
+async function topEnrollCategories() {
     let r1 = await courseModel.aggregate([
         {
             $group: {
@@ -309,6 +288,123 @@ async function topEnrollCategory() {
     return r1;
 }
 
+// Top view courses
+async function topViewCourses() {
+    let r = await courseModel
+        .find({}, (err) => {
+            if (err) return null;
+        })
+        .sort({ viewCount: -1 })
+        .limit(10)
+        .lean();
+    return r;
+}
+
+// Top new courses
+async function newestCourses() {
+    let r = await courseModel
+        .find({}, (err) => {
+            if (err) return null;
+        })
+        .sort({ publishDate: -1 })
+        .limit(10)
+        .lean();
+    return r;
+}
+
+async function topEnrollByCategory(categoryID, courseID) {
+    let filter = {
+        categoryID: categoryID,
+        _id: { $ne: courseID },
+    };
+
+    return await courseModel
+        .find(filter, (err) => {
+            return null;
+        })
+        .populate({
+            path: "instructorID",
+            select: "name",
+        })
+        .sort({ enrollCount: -1 })
+        .limit(5)
+        .lean();
+}
+
+/********************************************************************************/
+//PAGINATION NEEDDING
+async function getByCategory(categoryID) {
+    let filter = {
+        categoryID: categoryID,
+    };
+
+    let r = await courseModel
+        .find(filter, (err) => {
+            return null;
+        })
+        .lean()
+        .populate({
+            path: "instructorID",
+            select: "name",
+        });
+
+    return r;
+}
+
+async function getByCategoryList(categories) {
+    // use slide (dirty) to pageinate
+    let res = [];
+    let catList = categories.minor;
+    for (var i in catList) {
+        res.push(await getByCategory(catList[i]._id.toString()));
+    }
+    return res.flat();
+}
+
+async function search_course(query) {
+    // check this and add option sort
+    let filter = { $text: { $search: query } };
+    let projection = { __v: 0 };
+    return await courseModel
+        .find(filter, projection, (err) => {
+            return null;
+        })
+        .lean()
+        .populate({
+            path: "instructorID",
+            select: "name",
+        });
+}
+
+/********************************************************************************/
+//Helpers
+
+async function getMaxEnroll() {
+    let r = courseModel
+        .findOne({}, { enrollCount: 1 }, (err) => {
+            return 0;
+        })
+        .sort({ enrollCount: -1 })
+        .lean();
+    return r;
+}
+
+function setBestSeller(currentEnroll, maxEnroll) {
+    if (currentEnroll >= 0.8 * maxEnroll) {
+        return true;
+    }
+    return false;
+}
+
+function setNew(publishDate) {
+    var today = new Date();
+    var diff = Math.floor((today - publishDate) / (1000 * 60 * 60 * 24));
+    if (diff < 14) {
+        return true;
+    }
+    return false;
+}
+
 /********************************************************************************/
 
 module.exports = {
@@ -324,6 +420,18 @@ module.exports = {
     add_lesson: add_lesson,
     update_lesson: update_lesson,
     remove_lesson: remove_lesson,
+    viewCount_plus: viewCount_plus,
+    viewCount_minus: viewCount_minus,
+    enrollCount_plus: enrollCount_plus,
+    enrollCount_minus: enrollCount_minus,
+    feedbackCount_plus: feedbackCount_plus,
+    feedbackCount_minus: feedbackCount_minus,
     getByCategory: getByCategory,
-    topEnrollCategory: topEnrollCategory,
+    topEnrollCategories: topEnrollCategories,
+    getByCategoryList: getByCategoryList,
+    topViewCourses: topViewCourses,
+    newestCourses: newestCourses,
+    topEnrollByCategory: topEnrollByCategory,
+    getMaxEnroll: getMaxEnroll,
+    setFinished: setFinished,
 };
