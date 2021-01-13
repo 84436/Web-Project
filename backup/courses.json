@@ -34,7 +34,7 @@
       "$oid": "5ffdd053ef3b2e98aaef78cb"
     }
   ],
-  "viewCount": 0,
+  "viewCount": 213,
   "publishDate": {
     "$date": "2017-02-19T17:00:00Z"
   }
@@ -74,7 +74,7 @@
       "$oid": "5ffdde026b23e01db4d30e79"
     }
   ],
-  "viewCount": 0,
+  "viewCount": 253,
   "publishDate": {
     "$date": "2015-01-30T17:00:00Z"
   }
@@ -99,7 +99,7 @@
   "discount": 0.75,
   "enrollCount": 0,
   "feedbackCount": 0,
-  "viewCount": 0,
+  "viewCount": 456,
   "isFinished": true,
   "lastUpdated": {
     "$date": "2019-02-21T17:00:00Z"
@@ -139,7 +139,7 @@
   "discount": 0.15,
   "enrollCount": 0,
   "feedbackCount": 0,
-  "viewCount": 0,
+  "viewCount": 23,
   "isFinished": true,
   "lastUpdated": {
     "$date": "2014-01-19T17:00:00Z"
@@ -197,7 +197,7 @@
       "$oid": "5ffde78ab3682c1a9ccdf50e"
     }
   ],
-  "viewCount": 0,
+  "viewCount": 12,
   "publishDate": {
     "$date": {
       "$numberLong": "-115200000"
@@ -233,7 +233,7 @@
       "$oid": "5ffde5e2b3682c1a9ccdf504"
     }
   ],
-  "viewCount": 0,
+  "viewCount": 534,
   "publishDate": {
     "$date": "2018-05-23T17:00:00Z"
   }
@@ -270,7 +270,7 @@
       "$oid": "5ffde4a3b3682c1a9ccdf500"
     }
   ],
-  "viewCount": 0,
+  "viewCount": 857,
   "publishDate": {
     "$date": "2018-09-30T17:00:00Z"
   }
@@ -310,7 +310,7 @@
       "$oid": "5ffde315b3682c1a9ccdf4f9"
     }
   ],
-  "viewCount": 0,
+  "viewCount": 121,
   "publishDate": {
     "$date": "2010-04-11T17:00:00Z"
   }
@@ -347,7 +347,7 @@
       "$oid": "5ffddfecb3682c1a9ccdf4ea"
     }
   ],
-  "viewCount": 0,
+  "viewCount": 1235,
   "publishDate": {
     "$date": "2020-07-29T17:00:00Z"
   }
@@ -384,7 +384,7 @@
       "$oid": "5ffddd9cb3682c1a9ccdf4e2"
     }
   ],
-  "viewCount": 0,
+  "viewCount": 12,
   "publishDate": {
     "$date": "2013-09-11T17:00:00Z"
   }
