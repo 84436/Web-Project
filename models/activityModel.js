@@ -78,6 +78,31 @@ async function setEnrollmentState(studentID, courseID, state) {
     await activityModel.findOneAndUpdate(filter, update, options, (err) => {})
 }
 
+async function getEnrollmentTime(studentID, courseID) {
+    let filter = {
+        studentID: studentID,
+        courseID: courseID
+    }
+    let projection = { __v: 0 }
+    let r = await activityModel.findOne(filter, projection).lean()
+    if (r)
+        return r.enrollTime
+    else
+        return null
+}
+
+async function setEnrollmentState(studentID, courseID, state) {
+    let filter = {
+        studentID: studentID,
+        courseID: courseID
+    }
+    let update = {
+        enrollTime: new Date("<YYYY-mm-ddTHH:MM:ssZ>")
+    }
+    let options = { upsert: false }
+    await activityModel.findOneAndUpdate(filter, update, options, (err) => {})
+}
+
 async function getFeedbackByCourse(courseID) {
     let filter = {
         courseID: courseID
@@ -208,6 +233,8 @@ module.exports = {
     setWatchingState     : setWatchingState,
     getEnrollmentState   : getEnrollmentState,
     setEnrollmentState   : setEnrollmentState,
+    getEnrollmentTime    : getEnrollmentTime,
+    setEnrollmentTime    : setEnrollmentTime,
     getFeedbackByCourse  : getFeedbackByCourse,
     getFeedbackByStudent : getFeedbackByStudent,
     setFeedback          : setFeedback,
