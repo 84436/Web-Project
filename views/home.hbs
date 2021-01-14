@@ -8,13 +8,14 @@
                 <div class="main-banner-wrapper">
                     <div class="banner-style-one owl-theme owl-carousel">
                         <!-- TEMPLATEME! -->
+                        {{#each hotCourses}}
                         <div class="slide slide-one" style="background-image: url(images/courses/8.jpg); height: 75vh;">
                             <div class="container">
                                 <div class="row home-content">
                                     <div class="col-lg-12 text-center p0">
                                         <h4 style="font-style: italic; color: white">FEATURED THIS WEEK</h4>
-                                        <h3 class="banner-title">Course Name 1</h3>
-                                        <p>Course short description</p>
+                                        <h3 class="banner-title">{{this.name}}</h3>
+                                        <p>{{this.desc.short}}</p>
                                         <div class="btn-block"><a href="#" class="banner-btn">
                                             Take A Look
                                             <i class="fa fa-arrow-circle-right"></i>
@@ -23,36 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="slide slide-one" style="background-image: url(images/courses/8.jpg); height: 75vh;">
-                            <div class="container">
-                                <div class="row home-content">
-                                    <div class="col-lg-12 text-center p0">
-                                        <h4 style="font-style: italic; color: white">FEATURED THIS WEEK</h4>
-                                        <h3 class="banner-title">Course Name 2</h3>
-                                        <p>Course short description</p>
-                                        <div class="btn-block"><a href="#" class="banner-btn">
-                                            Take A Look
-                                            <i class="fa fa-arrow-circle-right"></i>
-                                        </a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide slide-one" style="background-image: url(images/courses/8.jpg); height: 75vh;">
-                            <div class="container">
-                                <div class="row home-content">
-                                    <div class="col-lg-12 text-center p0">
-                                        <h4 style="font-style: italic; color: white">FEATURED THIS WEEK</h4>
-                                        <h3 class="banner-title">Course Name 3</h3>
-                                        <p>Course short description</p>
-                                        <div class="btn-block"><a href="#" class="banner-btn">
-                                            Take A Look
-                                            <i class="fa fa-arrow-circle-right"></i>
-                                        </a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{/each}}
                     </div>
                     <div class="carousel-btn-block banner-carousel-btn">
                         <span class="carousel-btn left-btn"><i class="flaticon-left-arrow left"></i> <span
@@ -82,6 +54,7 @@
                 <div class="emply-text-sec">
                     <!-- TEMPLATEME! -->
                     <div class="row row-cols-5" id="masonry_abc">
+                        {{#each mostViewCourses}}
                         <div class="col">
                             <div class="top_courses">
                                 <div class="thumb">
@@ -92,18 +65,19 @@
                                 </div>
                                 <div class="details">
                                     <div class="tc_content">
-                                        <p>Instructor</p>
-                                        <h5>Course name</h5>
+                                        <p>{{this.instructorID.name}}</p>
+                                        <h5>{{this.name}}</h5>
                                         <ul class="tc_review">
-                                            <span><i class="fa fa-star"></i> 4.8 (60)</span>
+                                            <span><i class="fa fa-star"></i> {{this.averageRate}} ({{this.feedbackCount}})</span>
                                         </ul>
                                     </div>
                                     <div class="tc_footer">
-                                        <div class="tc_price float-right">$Price</div>
+                                        <div class="tc_price float-right">${{this.price}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {{/each}}
                     </div>
                 </div>
             </div>
@@ -127,6 +101,7 @@
                 <div class="emply-text-sec">
                     <!-- TEMPLATEME! -->
                     <div class="row row-cols-5" id="masonry_abc">
+                        {{#each newestCourses}}
                         <div class="col">
                             <div class="top_courses">
                                 <div class="thumb">
@@ -137,18 +112,19 @@
                                 </div>
                                 <div class="details">
                                     <div class="tc_content">
-                                        <p>Instructor</p>
-                                        <h5>Course name</h5>
+                                        <p>{{this.instructorID.name}}</p>
+                                        <h5>{{this.name}}</h5>
                                         <ul class="tc_review">
-                                            <span><i class="fa fa-star"></i> 4.8 (60)</span>
+                                            <span><i class="fa fa-star"></i> {{this.averageRate}} ({{this.feedbackCount}})</span>
                                         </ul>
                                     </div>
                                     <div class="tc_footer">
-                                        <div class="tc_price float-right">$Price</div>
+                                        <div class="tc_price float-right">${{this.price}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {{/each}}
                     </div>
                 </div>
             </div>
@@ -169,15 +145,17 @@
         </div>
         <div class="row row-cols-5">
             <!-- TEMPLATEME! -->
+            {{#each topCategories}}
             <div class="col">
                 <div class="img_hvr_box" style="background-image: url(images/courses/8.jpg);">
                     <div class="overlay">
                         <div class="details">
-                            <h5 style="font-size: 1.5rem;">Category</h5>
+                            <h5 style="font-size: 1.5rem;">{{this.categoryName.minor}}</h5>
                         </div>
                     </div>
                 </div>
             </div>
+            {{/each}}
         </div>
     </div>
 </section>

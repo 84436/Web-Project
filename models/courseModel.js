@@ -283,14 +283,17 @@ async function topEnrollCategories() {
                 as: "categoryName",
             },
         },
-        { $limit: 4 },
+        {
+            $unwind: "$categoryName"
+        },
+        { $limit: 5 },
         {
             $project: {
                 _id: 0,
             },
         },
     ]);
-
+    console.log(r1[0])
     return r1;
 }
 
