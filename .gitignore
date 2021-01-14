@@ -110,3 +110,6 @@ mongo_data/
 
 # Personal notes (hmmm)
 .note*
+
+# Personal test.js
+test.js
