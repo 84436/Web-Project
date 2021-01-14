@@ -534,8 +534,6 @@ module.exports = {
     topEnrollByCategory: topEnrollByCategory,
     getMaxEnroll: getMaxEnroll,
     setFinished: setFinished,
-    searchByAveRate: searchByAveRate,
-    searchByPrice: searchByPrice,
     addChapter: addChapter,
     addLesson: addLesson,
     topEnrollCourse: topEnrollCourse,
