@@ -26,7 +26,6 @@ Tag:    academy, college, coursera, courses, education, elearning, kindergarten,
 @import url(https://fonts.googleapis.com/css?family=Nunito:400,500,600,700|Open+Sans);
 /* Table of contents */
 
-
 /*== Typography ==*/
 /* Search Overlay */
 /*== Header Top Style ==*/
@@ -2955,7 +2954,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
 .cs_row_one .cs_instructor .cs_watch_list li:first-child a{
   font-size: 20px;
 }
-.cs_row_one .cs_instructor .cs_watch_list li:last-child a,
+/* .cs_row_one .cs_instructor .cs_watch_list li:last-child a,
 .cs_row_one.csv3 .cs_watch_list li:last-child a{
   border-radius: 5px;
   background-color: rgb(36, 65, 231);
@@ -2971,7 +2970,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
   font-family: "Open Sans";
   color: rgb(255, 255, 255);
   line-height: 2.2;
-}
+} */
 .cs_row_one .cs_title{
   font-size: 26px;
   color: #0a0a0a;
@@ -2989,7 +2988,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
   color: rgb(208, 210, 60);
   line-height: 1.2;
 }
-.cs_row_one .cs_review_seller li:first-child{
+/* .cs_row_one .cs_review_seller li:first-child{
   margin-right: 15px;
 }
 .cs_row_one .cs_review_seller li:first-child a{
@@ -3006,7 +3005,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
   font-family: "Open Sans";
   color: rgb(255, 255, 255);
   line-height: 2.2;
-}
+} */
 .cs_row_one .cs_review_seller li:last-child a{
   font-size: 14px;
   font-family: "Open Sans";
