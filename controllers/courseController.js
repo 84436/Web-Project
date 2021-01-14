@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 const courseModel = require('../models/courseModel')
+const categoryModel = require("../models/categoryModel");
+
 const authGuard = require('../helpers/authGuard')
 const { route } = require('./homeController')
 
@@ -20,7 +22,8 @@ router.post('/courselist', async (i, o, next) => {
 })
 
 router.get('/category/:id', async (i, o, next) => {
-    // o.locals.courseList = courseModel.getByCategory(i.params.id)
+    o.locals.catList = await categoryModel.getAll()
+    o.locals.courseList = await courseModel.getByCategory(i.params.id)
     o.render('course/courseList')
 })
 module.exports = router
