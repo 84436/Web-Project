@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+var categoryModel = require("./categoryModel");
 var courseSchema = new mongoose.Schema({
     // course + instructor
     name: String,
@@ -117,17 +117,13 @@ async function get_course(courseID) {
 
 async function add_course(courseInfo) {
     let newCourse = new courseModel(courseInfo);
-    newCourse.save((err) => {});
-}
 
-async function update_course(courseID, courseInfo) {
-    let options = { upsert: false };
-    await courseModel.findByIdAndUpdate(
-        courseID,
-        courseInfo,
-        options,
-        (err) => {}
-    );
+    let r = newCourse.save();
+
+    let uploader = require("../config/file-upload");
+    let filename = uploader.uploadImage(courseInfo.banner, r._id);
+
+    await update_course(r._id, { banner: filename });
 }
 
 async function remove_course(courseID) {
@@ -147,34 +143,34 @@ async function setFinished(courseID) {
 /********************************************************************************/
 // Update view/enroll/feedbackCount
 
-async function viewCount_plus(courseID) {
+function viewCount_plus(courseID) {
     let update = { $inc: { viewCount: 1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function viewCount_minus(courseID) {
+function viewCount_minus(courseID) {
     let update = { $inc: { viewCount: -1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function enrollCount_plus(courseID) {
+function enrollCount_plus(courseID) {
     let update = { $inc: { enrollCount: 1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function enrollCount_minus(courseID) {
+function enrollCount_minus(courseID) {
     let update = { $inc: { enrollCount: -1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function feedbackCount_plus(courseID) {
+function feedbackCount_plus(courseID) {
     let update = { $inc: { feedbackCount: 1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function feedbackCount_minus(courseID) {
+function feedbackCount_minus(courseID) {
     let update = { $inc: { feedbackCount: -1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
 /********************************************************************************/
@@ -182,16 +178,13 @@ async function feedbackCount_minus(courseID) {
 
 // MONGOOSE: GET ID AFTER SAVE
 // MONGODB: PUSH to array using update: https://stackoverflow.com/a/33049923
-function add_chapter(courseID, chapterName) {
+async function add_chapter(courseID, chapterName) {
     let newChapter = new courseChapterModel({
         courseID: courseID,
         name: chapterName,
     });
-    let newChapterID;
-    newChapter.save((err, doc) => {
-        newChapterID = doc.id;
-    });
-    return newChapterID;
+    let r = await newChapter.save();
+    return r;
 }
 
 async function update_chapter(chapterID, chapterName) {
@@ -230,7 +223,8 @@ async function add_lesson(chapterID, lessonInfo) {
         text: lessonInfo.text,
         video: lessonInfo.video,
     });
-    newLesson.save((err) => {});
+    let r = await newLesson.save();
+    return r;
 }
 
 async function update_lesson(lessonID, lessonInfo) {
@@ -324,10 +318,23 @@ async function topEnrollByCategory(categoryID, courseID) {
         })
         .populate({
             path: "instructorID",
+        })
+        .sort({ enrollCount: -1 })
+        .limit(6)
+        .lean();
+}
+
+async function topEnrollCourse() {
+    return await courseModel
+        .find({}, (err) => {
+            if (err) return null;
+        })
+        .populate({
+            path: "instructorID",
             select: "name",
         })
         .sort({ enrollCount: -1 })
-        .limit(5)
+        .limit(3)
         .lean();
 }
 
@@ -345,7 +352,6 @@ async function getByCategory(categoryID) {
         .lean()
         .populate({
             path: "instructorID",
-            select: "name",
         });
 
     return r;
@@ -358,22 +364,116 @@ async function getByCategoryList(categories) {
     for (var i in catList) {
         res.push(await getByCategory(catList[i]._id.toString()));
     }
-    return res.flat();
+    return await res.flat();
 }
 
-async function search_course(query) {
+async function search_course(query, sortPrice, sortRate) {
     // check this and add option sort
-    let filter = { $text: { $search: query } };
-    let projection = { __v: 0 };
-    return await courseModel
-        .find(filter, projection, (err) => {
-            return null;
-        })
-        .lean()
-        .populate({
-            path: "instructorID",
-            select: "name",
-        });
+
+    //Check if query is a category
+    let categoryObj = await categoryModel.getAll();
+
+    let listCourse = null;
+    let found = false;
+
+    for (let el of categoryObj) {
+        if (el.major === query) {
+            listCourse = await getByCategoryList(el);
+            found = true;
+            break;
+        } else {
+            for (var m in el.minor) {
+                if (el.minor[m].name === query) {
+                    listCourse = await getByCategory(el.minor[m]._id);
+                    found = true;
+                    break;
+                }
+            }
+        }
+        if (found === true) {
+            break;
+        }
+    }
+
+    if (found === true) {
+        if (sortRate) {
+            listCourse.sort(function (a, b) {
+                return a.averageRate - b.averageRate;
+            });
+        } else if (sortPrice) {
+            listCourse.sort(function (a, b) {
+                return b.price - a.price;
+            });
+        }
+        return listCourse;
+    }
+
+    //If not, find
+    if (sortRate) {
+        listCourse = courseModel
+            .find({ $text: { $search: query } })
+            .populate({ path: "instructorID", select: "name" })
+            .populate({ path: "categoryID", select: "major minor" })
+            .sort({ price: 1 })
+            .lean();
+    } else if (sortPrice) {
+        listCourse = courseModel
+            .find({ $text: { $search: query } })
+            .populate({ path: "instructorID", select: "name" })
+            .populate({ path: "categoryID", select: "major minor" })
+            .sort({ averageRate: -1 })
+            .lean();
+    }
+    return listCourse;
+}
+
+/********************************************************************************/
+// edit course related
+// Update info
+async function update_course(courseID, courseInfo) {
+    let options = { upsert: false };
+    await courseModel.findByIdAndUpdate(
+        courseID,
+        courseInfo,
+        options,
+        (err) => {}
+    );
+}
+
+// Add chapter
+async function addChapter(courseID, chapterName) {
+    let r = await add_chapter(courseID, chapterName);
+    let i = await courseModel.findByIdAndUpdate(
+        courseID,
+        {
+            $addToSet: {
+                content: r._id,
+            },
+        },
+        (err) => {}
+    );
+    return i;
+}
+
+// Add lesson
+async function addLesson(chapterID, lessonInfo) {
+    let r = await add_lesson(chapterID, lessonInfo);
+
+    let uploader = require("../config/file-upload");
+    let filename = uploader.uploadVideo(lessonInfo.video, r._id);
+
+    await update_lesson(r._id, { video: filename });
+
+    let i = await courseChapterModel.findByIdAndUpdate(
+        chapterID,
+        {
+            $addToSet: {
+                lessons: r._id,
+            },
+        },
+        (err) => {}
+    );
+    return i;
 }
 
 /********************************************************************************/
@@ -434,4 +534,7 @@ module.exports = {
     topEnrollByCategory: topEnrollByCategory,
     getMaxEnroll: getMaxEnroll,
     setFinished: setFinished,
+    addChapter: addChapter,
+    addLesson: addLesson,
+    topEnrollCourse: topEnrollCourse,
 };

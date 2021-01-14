@@ -157,6 +157,32 @@ async function changePassword(id, oldpw, newpw, confirmpw) {
     return true
 }
 
+async function getAllStudent() {
+    let filter = {
+        type: "student"
+    }
+    let projection = {
+        __v: 0
+    }
+    return res = await accountModel.find(filter, projection, (err) => {
+        return null;
+    })
+    .lean();
+}
+
+async function getAllLecturer() {
+    let filter = {
+        type: "lecturer"
+    }
+    let projection = {
+        __v: 0
+    }
+    return res = await accountModel.find(filter, projection, (err) => {
+        return null;
+    })
+    .lean();
+}
+
 async function getByID(id) {
     let r = { _error: null }
 
@@ -217,5 +243,7 @@ module.exports = {
     checkID: checkID,
     checkEmail: checkEmail,
     changePassword: changePassword,
-    registerAccount: registerAccount
+    registerAccount: registerAccount,
+    getAllStudent: getAllStudent,
+    getAllLecturer: getAllLecturer
 }

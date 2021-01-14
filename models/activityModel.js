@@ -21,7 +21,7 @@ var activitySchema = new mongoose.Schema({
         rate: Number,
         content: String
     },
-    enrollTime: Date
+    enrollDate: Date
 })
 
 var activityModel = mongoose.model("activity", activitySchema, "activities")
@@ -78,7 +78,7 @@ async function setEnrollmentState(studentID, courseID, state) {
     await activityModel.findOneAndUpdate(filter, update, options, (err) => {})
 }
 
-async function getEnrollmentTime(studentID, courseID) {
+async function getEnrollmentDate(studentID, courseID) {
     let filter = {
         studentID: studentID,
         courseID: courseID
@@ -86,18 +86,18 @@ async function getEnrollmentTime(studentID, courseID) {
     let projection = { __v: 0 }
     let r = await activityModel.findOne(filter, projection).lean()
     if (r)
-        return r.enrollTime
+        return r.enrollDate
     else
         return null
 }
 
-async function setEnrollmentTime(studentID, courseID, state) {
+async function setEnrollmentDate(studentID, courseID, time) {
     let filter = {
         studentID: studentID,
         courseID: courseID
     }
     let update = {
-        enrollTime: new Date("<YYYY-mm-ddTHH:MM:ssZ>")
+        enrollDate: time
     }
     let options = { upsert: false }
     await activityModel.findOneAndUpdate(filter, update, options, (err) => {})
@@ -130,6 +130,35 @@ async function getFeedbackByStudent(studentID, courseID) {
     }).lean()
 }
 
+async function getActivityByCourse(courseID) {
+    let filter = {
+        courseID: courseID
+    }
+    let projection = { __: 0 }
+    let r = await activityModel.find(filter, projection, (err) => {
+                                    return null
+                                })
+                               .populate({
+                                   path: "studentID",
+                                   select: "name"
+                                })
+                               .lean()
+    return r
+}
+
+async function getActivityByStudent(studentID, courseID) {
+    let filter = {
+        studentID: studentID,
+        courseID: courseID
+    }
+    let projection = { __v: 0 }
+    return await activityModel.findOne(filter, projection, (err) => {
+        return null
+    }).lean()
+}
+
+
+
 async function setFeedback(studentID, courseID, rate, content) {
     let filter = {
         studentID: studentID,
@@ -143,16 +172,42 @@ async function setFeedback(studentID, courseID, rate, content) {
     }
     let projection = {_id: 1, isEnrolled: 1}
     let options = { upsert: false }
-    var is_enrolled = await activityModel.findOne(filter, projection, (err) => {
-        return
-    })
-    console.log(is_enrolled.isEnrolled)
-    if(is_enrolled.isEnrolled == false) {
-        is_enrolled.isEnrolled = true
-        is_enrolled.save()
-        await courseModel.enrollCount_plus(courseID)
-    }
     await activityModel.findOneAndUpdate(filter, updateFeedback, options, (err) => {})
+    courseModel.feedbackCount_plus(courseID)
+    rateList = await getAllSpecificCourseActivity(courseID)
+    var sum = rateList.reduce(function(a, b) {
+        return a + b
+    }, 0)
+
+    let filter2 = {
+        courseID: courseID
+    }
+    let projection2 = {
+        _id: 1,
+        feedbackCount: 1,
+        averageRate: 1
+    }
+
+    let specificCourse = await courseModel.get_course(courseID)
+    var averageRate =Math.round(sum*10 / specificCourse.feedbackCount) / 10
+    courseModel.update_course(courseID, {averageRate: averageRate})
+}
+
+
+async function getAllSpecificCourseActivity(courseID) {
+    let projection = { feedback: 1 };
+    let res = await activityModel
+        .find({"courseID": courseID}, projection, (err) => {
+            return null;
+        })
+        .lean();
+    rateList = []
+    res.forEach(element => {
+        if(element.feedback) {
+            rateList.push(element.feedback.rate)
+        }
+    });
+    return rateList
 }
 
 async function getAllWatchList(studentID) {
@@ -168,8 +223,7 @@ async function getAllWatchList(studentID) {
         return null
     })
     .populate({
-        path: "courseID",
-        select: "name"
+        path: "courseID"
     })
     .lean()
     return r
@@ -177,26 +231,46 @@ async function getAllWatchList(studentID) {
 
 async function saveToWatchList(courseID, studentID) {
     let r = {_error: null}
-
-    let newActivityInfo = {
+    let filter = {
         courseID: courseID,
-        studentID: studentID,
-        isWatching: true,
-        feedback: null,
-        progress: [],
-        isEnrolled: false
+        studentID: studentID
     }
-    let newActivity = activityModel(newActivityInfo)
-    await newActivity.save((err) => {
-        if (err) { r._error = err; return r}
+
+    let projection = {
+        _id: 1,
+        isEnrolled: 1
+    }
+
+    let activity = await activityModel.findOne(filter, projection, (err) => {
+        return null
     })
-    
-    r = {
-        ...r,
-        "_id": newActivity.id,
-        ...newActivityInfo
+    if(activity === null) {
+        let newActivityInfo = {
+            courseID: courseID,
+            studentID: studentID,
+            isWatching: true,
+            feedback: null,
+            progress: [],
+            isEnrolled: false
+        }
+        let newActivity = activityModel(newActivityInfo)
+        await newActivity.save((err) => {
+            if (err) { r._error = err; return r}
+        })
+        
+        r = {
+            ...r,
+            "_id": newActivity.id,
+            ...newActivityInfo
+        }
+        return r
     }
-    return r
+    else {
+        activity.isWatching = true
+        await activity.save()
+    }
+
+    return r = {...r, ...activity._doc}
 }
 
 async function removeFromWatchList(courseID, studentID) {
@@ -217,13 +291,85 @@ async function removeFromWatchList(courseID, studentID) {
 
     console.log(r.isEnrolled)
 
-    if(r.isEnrolled == true) {
+    if(r.isEnrolled === true) {
         r.isWatching = false
-        r.save()
+        await r.save()
     }
     else {
         let r = await activityModel.findOneAndRemove(filter, (err) => {})
     }
+}
+
+async function getAllEnrollList(studentID) {
+    let filter = {
+        studentID: studentID,
+        inEnrolled: true
+    }
+    let projection = {
+        _id: 0,
+        courseID: 1
+    }
+    let r = await activityModel.find(filter, projection, (err) => {
+        return null
+    })
+    .populate({
+        path: "courseID"
+    })
+    .lean()
+    return r
+}
+
+async function enrollCourse(studentID, courseID) {
+    let r = { _error : null }
+    
+    let filter = {
+        studentID: studentID,
+        courseID: courseID
+    }
+
+    let projection = {
+        _id: 1,
+        isWatching: 1,
+        isEnrolled: 1
+    }
+
+    specificCourse = await activityModel.findOne(filter, projection, (err) => {
+        return null
+    })
+
+    if(specificCourse === null) {
+
+        let newActivityInfo = {
+            courseID: courseID,
+            studentID: studentID,
+            isWatching: false,
+            feedback: null,
+            progress: [],
+            isEnrolled: true,
+            enrollDate: new Date()
+        }
+        let newActivity = activityModel(newActivityInfo)
+        await newActivity.save((err) => {
+            if (err) { r._error = err; return r}
+        })
+        courseModel.enrollCount_plus(courseID)
+
+        r = {
+            ...r,
+            "_id": newActivity.id,
+            ...newActivityInfo
+        }
+        return r
+    }
+    else if(specificCourse.isEnrolled === false) {
+        specificCourse.isEnrolled = true
+        await specificCourse.save()
+        courseModel.enrollCount_plus(courseID)
+        r = {...r, ...specificCourse }
+        return r                                
+    }
+    
+    else { r._error = "Course has been enrolled"; return r}
 }
 
 /********************************************************************************/
@@ -233,12 +379,17 @@ module.exports = {
     setWatchingState     : setWatchingState,
     getEnrollmentState   : getEnrollmentState,
     setEnrollmentState   : setEnrollmentState,
-    getEnrollmentTime    : getEnrollmentTime,
-    setEnrollmentTime    : setEnrollmentTime,
+    getEnrollmentDate    : getEnrollmentDate,
+    setEnrollmentDate    : setEnrollmentDate,
     getFeedbackByCourse  : getFeedbackByCourse,
     getFeedbackByStudent : getFeedbackByStudent,
     setFeedback          : setFeedback,
+    getActivityByStudent : getActivityByStudent,
+    getActivityByCourse  : getActivityByCourse,
+    getAllSpecificCourseActivity: getAllSpecificCourseActivity,
     getAllWatchList      : getAllWatchList,
     saveToWatchList      : saveToWatchList,
-    removeFromWatchList  : removeFromWatchList
+    removeFromWatchList  : removeFromWatchList,
+    getAllEnrollList     : getAllEnrollList,
+    enrollCourse         : enrollCourse
 }
