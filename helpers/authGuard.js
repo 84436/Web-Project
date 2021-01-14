@@ -1,6 +1,7 @@
-const accountModel = require('../models/accountModel')
 const express = require('express')
 const app = express()
+
+const accountModel = require('../models/accountModel')
 
 // https://stackoverflow.com/a/12737295
 
