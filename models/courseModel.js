@@ -137,34 +137,34 @@ async function setFinished(courseID) {
 /********************************************************************************/
 // Update view/enroll/feedbackCount
 
-async function viewCount_plus(courseID) {
+function viewCount_plus(courseID) {
     let update = { $inc: { viewCount: 1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function viewCount_minus(courseID) {
+function viewCount_minus(courseID) {
     let update = { $inc: { viewCount: -1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function enrollCount_plus(courseID) {
+function enrollCount_plus(courseID) {
     let update = { $inc: { enrollCount: 1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function enrollCount_minus(courseID) {
+function enrollCount_minus(courseID) {
     let update = { $inc: { enrollCount: -1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function feedbackCount_plus(courseID) {
+function feedbackCount_plus(courseID) {
     let update = { $inc: { feedbackCount: 1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
-async function feedbackCount_minus(courseID) {
+function feedbackCount_minus(courseID) {
     let update = { $inc: { feedbackCount: -1 } };
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
 }
 
 /********************************************************************************/
