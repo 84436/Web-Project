@@ -215,6 +215,18 @@ async function get_lesson(lessonID) {
         })
         .lean();
 }
+async function setUpdateTime(courseID) {
+    let update = {
+        "lastUpdated": new Date()
+    }
+    let options = { upsert: false }
+    await courseModel.findByIdAndUpdate(
+        courseID,
+        update,
+        options,
+        (err) => {}
+    )
+}
 
 async function add_lesson(chapterID, lessonInfo) {
     let newLesson = new courseLessonModel({
@@ -505,6 +517,25 @@ function setNew(publishDate) {
     return false;
 }
 
+function getCourseByLecturer(lecturerID) {
+    let filter = {
+        instructorID: lecturerID
+    }
+    let projection = { __v: 0 }
+    let r = courseModel.find(filter, projection, (err) => {
+                                    return null
+                                })
+                                .populate({
+                                   path: "instructorID",
+                                   select: "name"
+                                })
+                                .populate({
+                                    path: "categoryID",
+                                    select: "major minor"
+                                })
+                               .lean()
+    return r
+}
 /********************************************************************************/
 
 module.exports = {
@@ -518,6 +549,7 @@ module.exports = {
     remove_chapter: remove_chapter,
     get_lesson: get_lesson,
     add_lesson: add_lesson,
+    setUpdateTime: setUpdateTime,
     update_lesson: update_lesson,
     remove_lesson: remove_lesson,
     viewCount_plus: viewCount_plus,
@@ -537,4 +569,5 @@ module.exports = {
     addChapter: addChapter,
     addLesson: addLesson,
     topEnrollCourse: topEnrollCourse,
+    getCourseByLecturer: getCourseByLecturer
 };
