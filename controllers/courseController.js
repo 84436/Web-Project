@@ -24,4 +24,20 @@ router.get('/course/:id', async (i, o, next) => {
     o.render('course/courseDetails')
 })
 
+router.get('/minor/:id', async (i, o, next) => {
+    o.locals.catList = await categoryModel.getAll()
+    o.locals.courseList = await courseModel.getByCategory(i.params.id)
+    o.render('course/courseList')
+})
+
+// router.get("/major/:major", async (i, o, next) => {
+//     o.locals.catList = await categoryModel.getAll();
+//     o.locals.courseList = await courseModel.search_course(
+//         i.params.major,
+//         true,
+//         false
+//     );
+//     o.render("course/courseList");
+// })
+
 module.exports = router

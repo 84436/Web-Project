@@ -4,6 +4,8 @@ const router = express.Router()
 const accountModel = require('../models/accountModel')
 const authGuard = require('../helpers/authGuard')
 const missingKeys = require('../helpers/missingKeys')
+const courseModel = require("../models/courseModel");
+const activityModel = require("../models/activityModel")
 
 // router.get('/login', authGuard(), async (i, o, next) => {
 //     o.render('account/login')
@@ -21,5 +23,11 @@ const missingKeys = require('../helpers/missingKeys')
 //     let account = await accountModel.getByLogin(i.body.email, i.body.password)
 //     o.send(account)
 // })
+
+router.get('/account/enrolled', async (i, o, next) => {
+    let a = await activityModel.getAllEnrollList(i.session.User._id)
+    console.log(a)
+    o.render('account/myEnrolled')
+})
 
 module.exports = router

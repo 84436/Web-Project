@@ -384,13 +384,10 @@ async function getByCategoryList(categories) {
 
 async function search_course(query, sortPrice, sortRate) {
     // check this and add option sort
-
     //Check if query is a category
     let categoryObj = await categoryModel.getAll();
-
     let listCourse = null;
     let found = false;
-
     for (let el of categoryObj) {
         if (el.major === query) {
             listCourse = await getByCategoryList(el);
@@ -409,7 +406,6 @@ async function search_course(query, sortPrice, sortRate) {
             break;
         }
     }
-
     if (found === true) {
         if (sortRate) {
             listCourse.sort(function (a, b) {
@@ -422,24 +418,6 @@ async function search_course(query, sortPrice, sortRate) {
         }
         return listCourse;
     }
-
-    //If not, find
-    if (sortRate) {
-        listCourse = courseModel
-            .find({ $text: { $search: query } })
-            .populate({ path: "instructorID", select: "name" })
-            .populate({ path: "categoryID", select: "major minor" })
-            .sort({ price: 1 })
-            .lean();
-    } else if (sortPrice) {
-        listCourse = courseModel
-            .find({ $text: { $search: query } })
-            .populate({ path: "instructorID", select: "name" })
-            .populate({ path: "categoryID", select: "major minor" })
-            .sort({ averageRate: -1 })
-            .lean();
-    }
-    return listCourse;
 }
 
 /********************************************************************************/

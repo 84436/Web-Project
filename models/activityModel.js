@@ -305,11 +305,7 @@ async function getAllEnrollList(studentID) {
         studentID: studentID,
         inEnrolled: true
     }
-    let projection = {
-        _id: 0,
-        courseID: 1
-    }
-    let r = await activityModel.find(filter, projection, (err) => {
+    let r = await activityModel.find(filter, (err) => {
         return null
     })
     .populate({

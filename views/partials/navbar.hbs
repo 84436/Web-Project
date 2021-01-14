@@ -32,7 +32,7 @@
                             <a href="#">{{this.major}}</a>
                             <ul>
                                 {{#each this.minor}}
-                                    <li><a href="/category/{{this._id}}">{{this.name}}</a></li>
+                                    <li><a href="/minor/{{this._id}}">{{this.name}}</a></li>
                                 {{/each}}
                             </ul>
                         </li>
@@ -43,7 +43,7 @@
             <ul class="sign_up_btn pull-right dn-smd mt20">
                 {{#if User}}
                 <li class="list-inline-item list_s">
-                    <a href="/login" class="btn">
+                    <a href="/account/enrolled" class="btn">
                         <span class="dn-lg">{{User.name}}</span>
                     </a>
                 </li>
