@@ -130,6 +130,35 @@ async function getFeedbackByStudent(studentID, courseID) {
     }).lean()
 }
 
+async function getActivityByCourse(courseID) {
+    let filter = {
+        courseID: courseID
+    }
+    let projection = { __: 0 }
+    let r = await activityModel.find(filter, projection, (err) => {
+                                    return null
+                                })
+                               .populate({
+                                   path: "studentID",
+                                   select: "name"
+                                })
+                               .lean()
+    return r
+}
+
+async function getActivityByStudent(studentID, courseID) {
+    let filter = {
+        studentID: studentID,
+        courseID: courseID
+    }
+    let projection = { __v: 0 }
+    return await activityModel.findOne(filter, projection, (err) => {
+        return null
+    }).lean()
+}
+
+
+
 async function setFeedback(studentID, courseID, rate, content) {
     let filter = {
         studentID: studentID,
@@ -144,6 +173,7 @@ async function setFeedback(studentID, courseID, rate, content) {
     let projection = {_id: 1, isEnrolled: 1}
     let options = { upsert: false }
     await activityModel.findOneAndUpdate(filter, updateFeedback, options, (err) => {})
+    courseModel.feedbackCount_plus(courseID)
     rateList = await getAllSpecificCourseActivity(courseID)
     var sum = rateList.reduce(function(a, b) {
         return a + b
@@ -158,10 +188,9 @@ async function setFeedback(studentID, courseID, rate, content) {
         averageRate: 1
     }
 
-    let specificCourse = await courseModel.findOne(filter2, projection2, (err) => {return null})
-    specificCourse.averageRate = Math.round(sum / specificCourse.feedbackCount)
-    specificCourse.save()
-    console.log(specificCourse)
+    let specificCourse = await courseModel.get_course(courseID)
+    var averageRate =Math.round(sum*10 / specificCourse.feedbackCount) / 10
+    courseModel.update_course(courseID, {averageRate: averageRate})
 }
 
 
@@ -355,6 +384,8 @@ module.exports = {
     getFeedbackByCourse  : getFeedbackByCourse,
     getFeedbackByStudent : getFeedbackByStudent,
     setFeedback          : setFeedback,
+    getActivityByStudent : getActivityByStudent,
+    getActivityByCourse  : getActivityByCourse,
     getAllSpecificCourseActivity: getAllSpecificCourseActivity,
     getAllWatchList      : getAllWatchList,
     saveToWatchList      : saveToWatchList,
