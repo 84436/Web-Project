@@ -27,16 +27,32 @@
                 <li>
                     <a href="#"><span class="title">Categories</span></a>
                     <ul>
+                        {{#each catList}}
                         <li>
-                            <a href="#">Major</a>
+                            <a href="#">{{this.major}}</a>
                             <ul>
-                                <li><a href="#">Minor</a></li>
+                                {{#each this.minor}}
+                                    <li><a href={{this._id}}>{{this.name}}</a></li>
+                                {{/each}}
                             </ul>
                         </li>
+                        {{/each}}
                     </ul>
                 </li>
             </ul>
             <ul class="sign_up_btn pull-right dn-smd mt20">
+                {{#if account}}
+                <li class="list-inline-item list_s">
+                    <a href="/login" class="btn">
+                        <span class="dn-lg">{{account.name}}</span>
+                    </a>
+                </li>
+                <li class="list-inline-item list_s">
+                    <a href="/register" class="btn">
+                        <span class="dn-lg">Logout</span>
+                    </a>
+                </li>
+                {{else}}
                 <li class="list-inline-item list_s">
                     <a href="/login" class="btn">
                         <span class="dn-lg">Login</span>
@@ -47,6 +63,8 @@
                         <span class="dn-lg">Register</span>
                     </a>
                 </li>
+                {{/if}}
+
                 <li class="list-inline-item list_s">
                     <div class="search_overlay">
                         <a id="search-button-listener" class="mk-search-trigger mk-fullscreen-trigger"
