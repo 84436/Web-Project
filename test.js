@@ -16,8 +16,12 @@ app.on('ready', async () => {
     const categoryModel = require('./models/categoryModel')
     const courseModel = require('./models/courseModel')
     const activityModel = require('./models/activityModel')
-    // var x = await activityModel.enrollCourse("5fff19766399334438d75986", "5ffdd2e7ca2f15373471db5b")
-    // console.log(x)
-    x = await accountModel.getAllLecturer()
-    console.log(x)
+    
+    let newAccount = {
+        email: "email@email.com",
+        password:"zzz",
+        name:"Two name"
+    }
+
+    var x = await accountModel.registerAccount(newAccount)
 })
