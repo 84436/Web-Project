@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-var categoryModel = require('./categoryModel')
+var categoryModel = require("./categoryModel");
 var courseSchema = new mongoose.Schema({
     // course + instructor
     name: String,
@@ -117,7 +117,13 @@ async function get_course(courseID) {
 
 async function add_course(courseInfo) {
     let newCourse = new courseModel(courseInfo);
-    newCourse.save((err) => {});
+
+    let r = newCourse.save();
+
+    let uploader = require("../config/file-upload");
+    let filename = uploader.uploadImage(courseInfo.banner, r._id);
+
+    await update_course(r._id, { banner: filename });
 }
 
 async function remove_course(courseID) {
@@ -178,7 +184,7 @@ async function add_chapter(courseID, chapterName) {
         name: chapterName,
     });
     let r = await newChapter.save();
-    return r
+    return r;
 }
 
 async function update_chapter(chapterID, chapterName) {
@@ -314,7 +320,21 @@ async function topEnrollByCategory(categoryID, courseID) {
             path: "instructorID",
         })
         .sort({ enrollCount: -1 })
-        .limit(5)
+        .limit(6)
+        .lean();
+}
+
+async function topEnrollCourse() {
+    return await courseModel
+        .find({}, (err) => {
+            if (err) return null;
+        })
+        .populate({
+            path: "instructorID",
+            select: "name",
+        })
+        .sort({ enrollCount: -1 })
+        .limit(3)
         .lean();
 }
 
@@ -344,42 +364,67 @@ async function getByCategoryList(categories) {
     for (var i in catList) {
         res.push(await getByCategory(catList[i]._id.toString()));
     }
-    return res.flat();
+    return await res.flat();
 }
 
-async function search_course(query) {
+async function search_course(query, sortPrice, sortRate) {
     // check this and add option sort
-    
+
     //Check if query is a category
-    let categoryObj = await categoryModel.getAll()
-    categoryObj.forEach(el => {
-        if(el.major === query) {
-            let listCourse = getByCategoryList(el)
-        }
-        else {
-            for(var m in el.minor) {
-                if(el.minor[m] === query) {
-                    let filter = {
-                        minor: query
-                    }
-                    let projection = {
-                        _id: 1
-                    }
-                    res = findOne(filter, projection, (err) => {return null})
-                    let listCourse = getByCategory(res._id)
+    let categoryObj = await categoryModel.getAll();
+
+    let listCourse = null;
+    let found = false;
+
+    for (let el of categoryObj) {
+        if (el.major === query) {
+            listCourse = await getByCategoryList(el);
+            found = true;
+            break;
+        } else {
+            for (var m in el.minor) {
+                if (el.minor[m].name === query) {
+                    listCourse = await getByCategory(el.minor[m]._id);
+                    found = true;
+                    break;
                 }
             }
         }
-        return listCourse
-    });
+        if (found === true) {
+            break;
+        }
+    }
+
+    if (found === true) {
+        if (sortRate) {
+            listCourse.sort(function (a, b) {
+                return a.averageRate - b.averageRate;
+            });
+        } else if (sortPrice) {
+            listCourse.sort(function (a, b) {
+                return b.price - a.price;
+            });
+        }
+        return listCourse;
+    }
 
     //If not, find
-    listCourse = courseModel.find({$text : {$search : query}})
-    .populate({path: "instructorID", select: "name"})
-    .populate({path: "categoryID", select: "major minor"})
-    .lean()
-
-    return listCourse
+    if (sortRate) {
+        listCourse = courseModel
+            .find({ $text: { $search: query } })
+            .populate({ path: "instructorID", select: "name" })
+            .populate({ path: "categoryID", select: "major minor" })
+            .sort({ price: 1 })
+            .lean();
+    } else if (sortPrice) {
+        listCourse = courseModel
+            .find({ $text: { $search: query } })
+            .populate({ path: "instructorID", select: "name" })
+            .populate({ path: "categoryID", select: "major minor" })
+            .sort({ averageRate: -1 })
+            .lean();
+    }
+    return listCourse;
 }
 
 /********************************************************************************/
@@ -412,7 +457,13 @@ async function addChapter(courseID, chapterName) {
 
 // Add lesson
 async function addLesson(chapterID, lessonInfo) {
-    let r = await add_lesson(chapterID, lessonInfo)
+    let r = await add_lesson(chapterID, lessonInfo);
+
+    let uploader = require("../config/file-upload");
+    let filename = uploader.uploadVideo(lessonInfo.video, r._id);
+
+    await update_lesson(r._id, { video: filename });
+
     let i = await courseChapterModel.findByIdAndUpdate(
         chapterID,
         {
@@ -424,9 +475,6 @@ async function addLesson(chapterID, lessonInfo) {
     );
     return i;
 }
-
-// Update chapter
-// Update lesson
 
 /********************************************************************************/
 //Helpers
@@ -455,20 +503,6 @@ function setNew(publishDate) {
         return true;
     }
     return false;
-}
-
-async function searchByAveRate(query) {
-    let courseList = search_course(query)
-    courseModel.find({}).sort({averageRate: -1}).exec((err, courseList) => {
-        return err ? err : courseList
-    })
-}
-
-async function searchByPrice(query) {
-    let courseList = search_course(query)
-    courseModel.find({}).sort({price: 1}).exec((err, courseList) => {
-        return err ? err : courseList
-    })
 }
 
 /********************************************************************************/
@@ -503,5 +537,6 @@ module.exports = {
     searchByAveRate: searchByAveRate,
     searchByPrice: searchByPrice,
     addChapter: addChapter,
-    addLesson: addLesson
+    addLesson: addLesson,
+    topEnrollCourse: topEnrollCourse,
 };
