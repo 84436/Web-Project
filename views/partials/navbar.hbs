@@ -27,7 +27,7 @@
                 <li>
                     <a href="#"><span class="title">Categories</span></a>
                     <ul>
-                        {{#each catList}}
+                        {{#each Data.catList}}
                         <li>
                             <a href="#">{{this.major}}</a>
                             <ul>
@@ -41,10 +41,10 @@
                 </li>
             </ul>
             <ul class="sign_up_btn pull-right dn-smd mt20">
-                {{#if account}}
+                {{#if Data.account}}
                 <li class="list-inline-item list_s">
                     <a href="/login" class="btn">
-                        <span class="dn-lg">{{account.name}}</span>
+                        <span class="dn-lg">{{Data.account.name}}</span>
                     </a>
                 </li>
                 <li class="list-inline-item list_s">
