@@ -144,6 +144,41 @@ async function setFeedback(studentID, courseID, rate, content) {
     let projection = {_id: 1, isEnrolled: 1}
     let options = { upsert: false }
     await activityModel.findOneAndUpdate(filter, updateFeedback, options, (err) => {})
+    rateList = await getAllSpecificCourseActivity(courseID)
+    var sum = rateList.reduce(function(a, b) {
+        return a + b
+    }, 0)
+
+    let filter2 = {
+        courseID: courseID
+    }
+    let projection2 = {
+        _id: 1,
+        feedbackCount: 1,
+        averageRate: 1
+    }
+
+    let specificCourse = await courseModel.findOne(filter2, projection2, (err) => {return null})
+    specificCourse.averageRate = Math.round(sum / specificCourse.feedbackCount)
+    specificCourse.save()
+    console.log(specificCourse)
+}
+
+
+async function getAllSpecificCourseActivity(courseID) {
+    let projection = { feedback: 1 };
+    let res = await activityModel
+        .find({"courseID": courseID}, projection, (err) => {
+            return null;
+        })
+        .lean();
+    rateList = []
+    res.forEach(element => {
+        if(element.feedback) {
+            rateList.push(element.feedback.rate)
+        }
+    });
+    return rateList
 }
 
 async function getAllWatchList(studentID) {
@@ -320,6 +355,7 @@ module.exports = {
     getFeedbackByCourse  : getFeedbackByCourse,
     getFeedbackByStudent : getFeedbackByStudent,
     setFeedback          : setFeedback,
+    getAllSpecificCourseActivity: getAllSpecificCourseActivity,
     getAllWatchList      : getAllWatchList,
     saveToWatchList      : saveToWatchList,
     removeFromWatchList  : removeFromWatchList,
