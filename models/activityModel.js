@@ -134,7 +134,7 @@ async function getActivityByCourse(courseID) {
     let filter = {
         courseID: courseID
     }
-    let projection = { __: 0 }
+    let projection = { __v: 0 }
     let r = await activityModel.find(filter, projection, (err) => {
                                     return null
                                 })
