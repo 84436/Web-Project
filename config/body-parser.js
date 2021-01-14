@@ -5,7 +5,8 @@ function configure(app) {
     const JsonBodyOptions = {
         // none
     }
-    app.use(express.json(JsonBodyOptions))
+    app.use(express.json(JsonBodyOptions));
+    app.use(express.urlencoded({ extended: true }));
 }
 
 module.exports = configure
