@@ -505,25 +505,6 @@ function setNew(publishDate) {
     return false;
 }
 
-function getCourseByLecturer(lecturerID) {
-    let filter = {
-        instructorID: lecturerID
-    }
-    let projection = { __v: 0 }
-    let r = courseModel.find(filter, projection, (err) => {
-                                    return null
-                                })
-                                .populate({
-                                   path: "lecturerID",
-                                   select: "name"
-                                })
-                                .populate({
-                                    path: "categoryID",
-                                    select: "major minor"
-                                })
-                               .lean()
-    return r
-}
 /********************************************************************************/
 
 module.exports = {
@@ -556,5 +537,4 @@ module.exports = {
     addChapter: addChapter,
     addLesson: addLesson,
     topEnrollCourse: topEnrollCourse,
-    getCourseByLecturer: getCourseByLecturer
 };

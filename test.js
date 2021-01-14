@@ -18,6 +18,6 @@ app.on('ready', async () => {
     const activityModel = require('./models/activityModel')
     // var x = await activityModel.enrollCourse("5fff19766399334438d75986", "5ffdd2e7ca2f15373471db5b")
     // console.log(x)
-    x = await courseModel.getCourseByLecturer("5ffdc01aca2f15373471db50")
+    x = await accountModel.getAllLecturer()
     console.log(x)
 })
