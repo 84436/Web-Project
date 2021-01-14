@@ -180,7 +180,7 @@ async function saveToWatchList(courseID, studentID) {
     let activity = await activityModel.findOne(filter, projection, (err) => {
         return null
     })
-    if(activity == null) {
+    if(activity === null) {
         let newActivityInfo = {
             courseID: courseID,
             studentID: studentID,
@@ -227,7 +227,7 @@ async function removeFromWatchList(courseID, studentID) {
 
     console.log(r.isEnrolled)
 
-    if(r.isEnrolled == true) {
+    if(r.isEnrolled === true) {
         r.isWatching = false
         await r.save()
     }
@@ -273,7 +273,7 @@ async function enrollCourse(studentID, courseID) {
         return null
     })
 
-    if(specificCourse == null) {
+    if(specificCourse === null) {
 
         let newActivityInfo = {
             courseID: courseID,
@@ -297,7 +297,7 @@ async function enrollCourse(studentID, courseID) {
         }
         return r
     }
-    else if(specificCourse.isEnrolled == false) {
+    else if(specificCourse.isEnrolled === false) {
         specificCourse.isEnrolled = true
         await specificCourse.save()
         courseModel.enrollCount_plus(courseID)

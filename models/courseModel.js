@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+var categoryModel = require('./categoryModel')
 var courseSchema = new mongoose.Schema({
     // course + instructor
     name: String,
@@ -324,7 +324,6 @@ async function topEnrollByCategory(categoryID, courseID) {
         })
         .populate({
             path: "instructorID",
-            select: "name",
         })
         .sort({ enrollCount: -1 })
         .limit(5)
@@ -345,7 +344,6 @@ async function getByCategory(categoryID) {
         .lean()
         .populate({
             path: "instructorID",
-            select: "name",
         });
 
     return r;
@@ -363,17 +361,37 @@ async function getByCategoryList(categories) {
 
 async function search_course(query) {
     // check this and add option sort
-    let filter = { $text: { $search: query } };
-    let projection = { __v: 0 };
-    return await courseModel
-        .find(filter, projection, (err) => {
-            return null;
-        })
-        .lean()
-        .populate({
-            path: "instructorID",
-            select: "name",
-        });
+    
+    //Check if query is a category
+    let categoryObj = await categoryModel.getAll()
+    categoryObj.forEach(el => {
+        if(el.major === query) {
+            let listCourse = getByCategoryList(el)
+        }
+        else {
+            for(var m in el.minor) {
+                if(el.minor[m] === query) {
+                    let filter = {
+                        minor: query
+                    }
+                    let projection = {
+                        _id: 1
+                    }
+                    res = findOne(filter, projection, (err) => {return null})
+                    let listCourse = getByCategory(res._id)
+                }
+            }
+        }
+        return listCourse
+    });
+
+    //If not, find
+    listCourse = courseModel.find({$text : {$search : query}})
+    .populate({path: "instructorID", select: "name"})
+    .populate({path: "categoryID", select: "major minor"})
+    .lean()
+
+    return listCourse
 }
 
 /********************************************************************************/
@@ -405,6 +423,20 @@ function setNew(publishDate) {
     return false;
 }
 
+async function searchByAveRate(query) {
+    let courseList = search_course(query)
+    courseModel.find({}).sort({averageRate: -1}).exec((err, courseList) => {
+        return err ? err : courseList
+    })
+}
+
+async function searchByPrice(query) {
+    let courseList = search_course(query)
+    courseModel.find({}).sort({price: 1}).exec((err, courseList) => {
+        return err ? err : courseList
+    })
+}
+
 /********************************************************************************/
 
 module.exports = {
@@ -434,4 +466,6 @@ module.exports = {
     topEnrollByCategory: topEnrollByCategory,
     getMaxEnroll: getMaxEnroll,
     setFinished: setFinished,
+    searchByAveRate: searchByAveRate,
+    searchByPrice: searchByPrice,
 };
