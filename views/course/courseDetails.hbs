@@ -77,18 +77,7 @@
                                         <div class="cs_row_two csv2">
                                             <div class="cs_overview">
                                                 <h4 class="title">Overview</h4>
-                                                <h4 class="subtitle">Course Description</h4>
-                                                <p class="mb30">Lorem Ipsum is simply dummy text of the printing
-                                                    and typesetting industry. Lorem Ipsum has been the
-                                                    industry's standard dummy text ever since the 1500s, when an
-                                                    unknown printer took a galley of type and scrambled it to
-                                                    make a type specimen book. It has survived not only five
-                                                    centuries, but also the leap into electronic typesetting,
-                                                    remaining essentially unchanged. </p>
-                                                <p class="mb20">It was popularised in the 1960s with the release
-                                                    of Letraset sheets containing Lorem Ipsum passages, and more
-                                                    recently with desktop publishing software like Aldus
-                                                    PageMaker including versions of Lorem Ipsum.</p>
+                                                <h4 class="subtitle">{{specificCourse.desc.short}}</h4>
                                                 <h4 class="subtitle">What you'll learn</h4>
                                                 <ul class="cs_course_syslebus">
                                                     <li><i class="fa fa-check"></i>
@@ -148,6 +137,7 @@
                                                 </div>
                                                 <br>
                                                 <div class="details">
+                                                    {{#each specificCourse.content }}
                                                     <div id="accordion" class="panel-group cc_tab">
                                                         <div class="panel">
                                                             <div class="panel-heading">
@@ -155,244 +145,29 @@
                                                                     <a href="#panelBodyCourseStart"
                                                                         class="accordion-toggle link"
                                                                         data-toggle="collapse"
-                                                                        data-parent="#accordion">Getting
-                                                                        Started</a>
+                                                                        data-parent="#accordion">{{this.name}}</a>
                                                                 </h4>
                                                             </div>
                                                             <div id="panelBodyCourseStart"
                                                                 class="panel-collapse collapse show">
                                                                 <div class="panel-body">
                                                                     <ul class="cs_list mb0">
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.1 Introduction to the
-                                                                                User Experience Course <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.2 Exercise: Your first
-                                                                                design challenge <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.3 How to solve the
-                                                                                previous exercise <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.4 Find out why smart
-                                                                                objects are amazing <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.5 How to use text
-                                                                                layers effectively <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
+                                                                        <li>
+                                                                            {{#each this.lessons}}
+                                                                            <a href="#">
+                                                                                <span class="flaticon-play-button-1 icon"></span>
+                                                                                {{this.name}}
+                                                                                <span class="cs_time">02:53</span>
+                                                                                <span class="cs_preiew">{{this.text}}</span>
+                                                                            </a>
+                                                                            {{/each}}
                                                                         </li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="details">
-                                                    <div id="accordion" class="panel-group cc_tab">
-                                                        <div class="panel">
-                                                            <div class="panel-heading">
-                                                                <h4 class="panel-title">
-                                                                    <a href="#panelBodyCourseBrief"
-                                                                        class="accordion-toggle link"
-                                                                        data-toggle="collapse"
-                                                                        data-parent="#accordion">The Brief</a>
-                                                                </h4>
-                                                            </div>
-                                                            <div id="panelBodyCourseBrief"
-                                                                class="panel-collapse collapse">
-                                                                <div class="panel-body">
-                                                                    <ul class="cs_list mb0">
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.1 Introduction to the
-                                                                                User Experience Course <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.2 Exercise: Your first
-                                                                                design challenge <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.3 How to solve the
-                                                                                previous exercise <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.4 Find out why smart
-                                                                                objects are amazing <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.5 How to use text
-                                                                                layers effectively <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="details">
-                                                    <div id="accordion" class="panel-group cc_tab">
-                                                        <div class="panel">
-                                                            <div class="panel-heading">
-                                                                <h4 class="panel-title">
-                                                                    <a href="#panelBodyCourseLow"
-                                                                        class="accordion-toggle link"
-                                                                        data-toggle="collapse"
-                                                                        data-parent="#accordion">Wireframing Low
-                                                                        Fidelity</a>
-                                                                </h4>
-                                                            </div>
-                                                            <div id="panelBodyCourseLow"
-                                                                class="panel-collapse collapse">
-                                                                <div class="panel-body">
-                                                                    <ul class="cs_list mb0">
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.1 Introduction to the
-                                                                                User Experience Course <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.2 Exercise: Your first
-                                                                                design challenge <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.3 How to solve the
-                                                                                previous exercise <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.4 Find out why smart
-                                                                                objects are amazing <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.5 How to use text
-                                                                                layers effectively <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="details">
-                                                    <div id="accordion" class="panel-group cc_tab">
-                                                        <div class="panel">
-                                                            <div class="panel-heading">
-                                                                <h4 class="panel-title">
-                                                                    <a href="#panelBodyCourseType"
-                                                                        class="accordion-toggle link"
-                                                                        data-toggle="collapse"
-                                                                        data-parent="#accordion">Type, Color &
-                                                                        Icon Introduction</a>
-                                                                </h4>
-                                                            </div>
-                                                            <div id="panelBodyCourseType"
-                                                                class="panel-collapse collapse">
-                                                                <div class="panel-body">
-                                                                    <ul class="cs_list mb0">
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.1 Introduction to the
-                                                                                User Experience Course <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.2 Exercise: Your first
-                                                                                design challenge <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.3 How to solve the
-                                                                                previous exercise <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.4 Find out why smart
-                                                                                objects are amazing <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><span
-                                                                                    class="flaticon-play-button-1 icon"></span>
-                                                                                Lecture1.5 How to use text
-                                                                                layers effectively <span
-                                                                                    class="cs_time">02:53</span>
-                                                                                <span
-                                                                                    class="cs_preiew">Preview</span></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    {{/each}}
                                                 </div>
                                             </div>
                                         </div>
@@ -408,62 +183,22 @@
                                                 </div>
                                                 <div class="details">
                                                     <ul class="review_list">
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i>
-                                                        </li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i>
-                                                        </li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i>
-                                                        </li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i>
-                                                        </li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i>
-                                                        </li>
-                                                        <li class="list-inline-item">4.5 Instructor Rating</li>
-                                                    </ul>
-                                                    <ul class="about_info_list">
-                                                        <li class="list-inline-item"><span
-                                                                class="flaticon-comment"></span> 12,197 Reviews
-                                                        </li>
-                                                        <li class="list-inline-item"><span
-                                                                class="flaticon-profile"></span> 141,745
-                                                            Students </li>
-                                                        <li class="list-inline-item"><span
-                                                                class="flaticon-play-button-1"></span> 5Courses
-                                                        </li>
-                                                    </ul>
-                                                    <h4>Ali Tufan</h4>
-                                                    <p class="subtitle">UX/UI Designer</p>
-                                                    <p class="mb25">UI/UX Designer, with 7+ Years Experience.
-                                                        Guarantee of High Quality Work. </p>
-                                                    <p class="mb25">Skills: Web Design, UI Design, UX/UI Design,
-                                                        Mobile Design, User Interface Design, Sketch, Photoshop,
-                                                        GUI, Html, Css, Grid Systems, Typography, Minimal,
-                                                        Template, English, Bootstrap, Responsive Web Design,
-                                                        Pixel Perfect, Graphic Design, Corporate, Creative,
-                                                        Flat, Luxury and much more.</p>
-                                                    <ul class="about_ins_list mb0">
-                                                        <li>
-                                                            <p>Available for:</p>
-                                                        </li>
-                                                        <li><a href="#">1. Full Time Office Work</a></li>
-                                                        <li><a href="#">2. Remote Work</a></li>
-                                                        <li><a href="#">3. Freelance</a></li>
-                                                        <li><a href="#">4. Contract</a></li>
-                                                        <li><a href="#">5. Worldwide</a></li>
-                                                    </ul>
+                                                    <h4>{{specificCourse.instructorID.name}}</h4>
+                                                    <p class="mb25">{{specificCourse.instructorID.instructorBio}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                                         <div class="cs_row_six csv2">
+                                            {{#each feedbackList}}
                                             <div class="sfeedbacks">
                                                 <div class="mbp_pagination_comments">
                                                     <div class="mbp_first media csv1">
                                                         <img src="images/resource/review1.png" class="mr-3"
                                                             alt="review1.png">
                                                         <div class="media-body">
-                                                            <h4 class="sub_title mt-0">Warren Bethell
+                                                            <h4 class="sub_title mt-0"> {{this.studentID.name}}
                                                                 <span class="sspd_review float-right">
                                                                     <ul>
                                                                         <li class="list-inline-item"><a href="#"><i
@@ -485,24 +220,7 @@
                                                                     </ul>
                                                                 </span>
                                                             </h4>
-                                                            <a class="sspd_postdate fz14" href="#">6 months
-                                                                ago</a>
-                                                            <p class="fz15 mt20">This is the second Photoshop
-                                                                course I have completed with Cristian. Worth
-                                                                every penny and recommend it highly. To get the
-                                                                most out of this course, its best to to take the
-                                                                Beginner to Advanced course first.</p>
-                                                            <p class="fz15 mt25 mb25">The sound and video
-                                                                quality is of a good standard. Thank you
-                                                                Cristian.</p>
-                                                            <div class="ssp_reply float-right"><span
-                                                                    class="flaticon-consulting-message"></span><span
-                                                                    class="pl10">Reply</span></div>
-                                                            <div class="sspd_review_liked"><a href="#"><i
-                                                                        class="flaticon-like-1"></i> <span
-                                                                        class="text-thm6 pl5 pr5 fz15">15</span>
-                                                                    Thank Waren</a></div>
-                                                            <div class="mbp_sub media csv1"></div>
+                                                            <p class="fz15 mt20">{{this.feedback.content}}</p>
                                                         </div>
                                                     </div>
                                                 </div>

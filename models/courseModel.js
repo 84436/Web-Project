@@ -102,7 +102,7 @@ async function get_course(courseID) {
         })
         .populate({
             path: "instructorID",
-            select: "name",
+            select: "name instructorBio",
         })
         .populate({
             path: "content",
