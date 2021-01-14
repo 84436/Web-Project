@@ -1,12 +1,9 @@
 const express = require('express')
-// const express_handlebars = require('express-handlebars')
-// const path = require('path')
-
-const authGuard = require('./authGuard')
-const accountModel = require('../models/accountModel')
-const missingKeys = require('./missingKeys')
-
 const router = express.Router()
+
+const accountModel = require('../models/accountModel')
+const authGuard = require('../helpers/authGuard')
+const missingKeys = require('../helpers/missingKeys')
 
 // router.get('/login', authGuard(), async (i, o, next) => {
 //     o.render('account/login')

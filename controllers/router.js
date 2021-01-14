@@ -1,7 +1,12 @@
 const express = require('express')
 
+// A custom router for manually debugging hbs templates
+let debugRouter = express.Router()
+debugRouter.get('/', (i, o) => { o.render('home') })
+
 function configure(app) {
-    app.use('/',        require('./homeController'))
+    app.use('/',        debugRouter)
+    // app.use('/',        require('./homeController'))
     app.use('/',        require('./authController'))
     app.use('/account', require('./accountController'))
     // app.use('/course',  require('./courseController'))

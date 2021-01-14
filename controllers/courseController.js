@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const authGuard = require('../helpers/authGuard')
 const courseModel = require('../models/courseModel')
+const authGuard = require('../helpers/authGuard')
 
 module.exports = router
