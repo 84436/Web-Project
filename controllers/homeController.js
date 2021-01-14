@@ -4,22 +4,14 @@ const router = express.Router()
 const categoryModel = require("../models/categoryModel")
 
 router.get('/', async (i, o) => {    
-    console.log(`query: ${JSON.stringify(i.query.name, null , 4)}`)
-
-    let catList = await categoryModel.getAll();
-    let account = {
-        name: i.query.name
+    o.locals.catList = await categoryModel.getAll();
+    let a = i.session.User
+    
+    if (a) {
+        o.locals.User = a 
     }
-
-    console.log(JSON.stringify(account, null, 4));
-    o.render('home',
-                {
-                    Data: {
-                        catList: catList,
-                        account: account,
-                }
-            })
-    // o.render('home');
+    
+    o.render('home');
 })
 
 module.exports = router

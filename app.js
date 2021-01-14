@@ -17,7 +17,7 @@ app.on('ready', () => {
     require('./config/body-parser')(app)
     require('./config/handlebars')(app)
     require('./config/express-static')(app)
-    require('./config/cookie-session')(app)
+    require('./config/express-session')(app)
 
     // Add routes
     require('./controllers/router')(app)

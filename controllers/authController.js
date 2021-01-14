@@ -15,20 +15,15 @@ router.post('/login', async (i, o, next) => {
     // Cookie
     let auth = await accountModel.getByLogin(email, password);    
 
-    if (auth._error === null) {
+    if (!auth._error) {
         let account = {
             _id: auth._id,
             name: auth.name
         }
 
-        console.log(JSON.stringify(account));
+        i.session.User = account;
 
-        i.session.account = { _id: auth._id, name: auth.name };
-        o.locals.account = {_id: auth._id, name: auth.name};
-
-        // console.log(JSON.stringify(auth.account))
-        // const url = req.session.retUrl || '/';
-        o.redirect(`/?name=${auth.name}`);
+        o.redirect("/");
     }
     else {
         next(auth._err);
@@ -42,18 +37,31 @@ router.get('/register', async (i, o, next) => {
 router.post('/register', async (i, o, next) => {
     let email = i.body.email;
     let password = i.body.password;
-
-    console.log(JSON.stringify(i.body, null, 4))
+    let name = i.body.name;
 
     let auth = await accountModel.registerAccount({
         email: email,
-        password:password
+        password: password,
+        name: name
     });
 
-    // Set cookie
+    if (!auth._error) {
+        let account = {
+            _id: auth._id,
+            name: auth.name,
+        };
 
-    // const url = req.session.retUrl || '/';
-    o.redirect('/')
+        i.session.User = account;
+
+        o.redirect("/");
+    } else {
+        next(auth._err);
+    }
+})
+
+router.get('/logout', async (i, o, next) => {
+    i.session.destroy()
+    o.redirect("/")
 })
 
 module.exports = router
