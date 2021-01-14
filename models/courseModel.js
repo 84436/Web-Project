@@ -120,16 +120,6 @@ async function add_course(courseInfo) {
     newCourse.save((err) => {});
 }
 
-async function update_course(courseID, courseInfo) {
-    let options = { upsert: false };
-    await courseModel.findByIdAndUpdate(
-        courseID,
-        courseInfo,
-        options,
-        (err) => {}
-    );
-}
-
 async function remove_course(courseID) {
     await courseModel.findByIdAndDelete(courseID, (err) => {});
 }
@@ -182,16 +172,13 @@ async function feedbackCount_minus(courseID) {
 
 // MONGOOSE: GET ID AFTER SAVE
 // MONGODB: PUSH to array using update: https://stackoverflow.com/a/33049923
-function add_chapter(courseID, chapterName) {
+async function add_chapter(courseID, chapterName) {
     let newChapter = new courseChapterModel({
         courseID: courseID,
         name: chapterName,
     });
-    let newChapterID;
-    newChapter.save((err, doc) => {
-        newChapterID = doc.id;
-    });
-    return newChapterID;
+    let r = await newChapter.save();
+    return r
 }
 
 async function update_chapter(chapterID, chapterName) {
@@ -230,7 +217,8 @@ async function add_lesson(chapterID, lessonInfo) {
         text: lessonInfo.text,
         video: lessonInfo.video,
     });
-    newLesson.save((err) => {});
+    let r = await newLesson.save();
+    return r;
 }
 
 async function update_lesson(lessonID, lessonInfo) {
@@ -377,6 +365,52 @@ async function search_course(query) {
 }
 
 /********************************************************************************/
+// edit course related
+// Update info
+async function update_course(courseID, courseInfo) {
+    let options = { upsert: false };
+    await courseModel.findByIdAndUpdate(
+        courseID,
+        courseInfo,
+        options,
+        (err) => {}
+    );
+}
+
+// Add chapter
+async function addChapter(courseID, chapterName) {
+    let r = await add_chapter(courseID, chapterName);
+    let i = await courseModel.findByIdAndUpdate(
+        courseID,
+        {
+            $addToSet: {
+                content: r._id,
+            },
+        },
+        (err) => {}
+    );
+    return i;
+}
+
+// Add lesson
+async function addLesson(chapterID, lessonInfo) {
+    let r = await add_lesson(chapterID, lessonInfo)
+    let i = await courseChapterModel.findByIdAndUpdate(
+        chapterID,
+        {
+            $addToSet: {
+                lessons: r._id,
+            },
+        },
+        (err) => {}
+    );
+    return i;
+}
+
+// Update chapter
+// Update lesson
+
+/********************************************************************************/
 //Helpers
 
 async function getMaxEnroll() {
@@ -434,4 +468,6 @@ module.exports = {
     topEnrollByCategory: topEnrollByCategory,
     getMaxEnroll: getMaxEnroll,
     setFinished: setFinished,
+    addChapter: addChapter,
+    addLesson: addLesson
 };
