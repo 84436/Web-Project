@@ -1,5 +1,4 @@
 {{> navbar}}
-
 <!-- Inner Page Breadcrumb -->
 <section class="inner_page_breadcrumb">
     <div class="container">
@@ -12,29 +11,29 @@
         </div>
     </div>
 </section>
-
 <!-- Our LogIn Register -->
 <section class="our-log bgc-fa">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-6 offset-lg-3">
                 <div class="login_form inner_page">
-                    <form action="/login" method="POST">
+                    <form id="login-form">
                         <div class="heading">
-                            <h4 class="text-center">Don't have an account? <a class="text-thm"
-                                    href="/register">Sign Up!</a></h4>
+                            <h4 class="text-center">Don't have an account? <a class="text-thm" href="/register">Sign
+                                    Up!</a></h4>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" name="email"
-                                placeholder="Email Address">
+                            <input id="email" type="text" class="form-control" name="email" placeholder="Email Address"
+                                autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" name="password"
+                            <input id="password" type="password" class="form-control" name="password"
                                 placeholder="Password">
                         </div>
                         <div class="form-group custom-control">
                             <a class="tdu btn-fpswd float-right" href="#">Forgot Password?</a>
                         </div>
+                        <p id="error" class="text-center text-danger">{{error}}</p>
                         <button type="submit" class="btn btn-log btn-block btn-thm2">Login</button>
                     </form>
                 </div>
@@ -42,5 +41,41 @@
         </div>
     </div>
 </section>
-
 {{> footer}}
+{{#section "js"}}
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                e.preventDefault();
+
+                var email = $("#email").val();
+                var password = $("#password").val();
+
+                var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                var is_email = re.test(email);
+
+                var is_pass = password.length === 0 ? false : true;
+                if (!is_email) {
+                    $("#error").text("Invalid email")
+                }
+                else if (!is_pass) {
+                    $("#error").text("Invalid password")
+                }
+                else {
+                    AjaxPost();
+                }
+            });
+        });
+
+        function AjaxPost() {
+            $.post("/login", { email: $("#email").val(), password: $("#password").val() }, function (data, status) {
+                if (data) {
+                    $("#error").text(data)
+                }
+                else {
+                    location.replace("/");
+                }
+            })
+        }
+    </script>
+{{/section}}

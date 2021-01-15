@@ -2,27 +2,26 @@ const express = require('express')
 const router = express.Router()
 
 const accountModel = require('../models/accountModel')
-const authGuard = require('../helpers/authGuard')
-const missingKeys = require('../helpers/missingKeys')
-const courseModel = require("../models/courseModel");
 const activityModel = require("../models/activityModel")
 
-// router.get('/login', authGuard(), async (i, o, next) => {
-//     o.render('account/login')
-// })
+router.use(function (i, o, next) {
+    console.log(i.session.User)
+    if (i.session.User) {
+        if (i.session.User.type === "student") {
+            return next();
+        }
+        else {
+            o.redirect("/")
+        }
+    }
+    else {
+        o.redirect("/")
+    }
+})
 
-// router.post('/login', authGuard(), async (i, o, next) => {
-//     let missingKeysError = missingKeys(i.body, ['email', 'password'])
-//     if (missingKeysError) {
-//         return next({
-//             status: 401,
-//             content: `Missing keys: ${missingKeysError._missing}`
-//         })
-//     }
-
-//     let account = await accountModel.getByLogin(i.body.email, i.body.password)
-//     o.send(account)
-// })
+router.get("/info", async (i, o, next) => {
+    o.json("my info")
+})
 
 router.get('/account/enrolled', async (i, o, next) => {
     let a = await activityModel.getAllEnrollList(i.session.User._id)

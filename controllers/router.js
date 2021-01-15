@@ -8,8 +8,8 @@ function configure(app) {
     // app.use('/',        debugRouter)
     app.use('/',        require('./homeController'))
     app.use('/',        require('./authController'))
-    app.use('/', require('./accountController'))
-    app.use('/',require("./courseController"))
+    app.use('/account', require('./accountController'))
+    app.use('/', require("./courseController"))
     // app.use('/course',  require('./courseController'))
 
     // ALWAYS THE LAST ROUTES. DO NOT MOVE.

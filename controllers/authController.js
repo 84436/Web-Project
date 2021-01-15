@@ -4,6 +4,7 @@ const router = express.Router()
 const accountModel = require("../models/accountModel")
 
 router.get('/login', async (i, o, next) => {
+    o.locals.catList = 
     o.render('account/login')
 })
 
@@ -17,15 +18,16 @@ router.post('/login', async (i, o, next) => {
     if (!auth._error) {
         let account = {
             _id: auth._id,
-            name: auth.name
+            name: auth.name,
+            type: auth.type
         }
 
         i.session.User = account;
 
-        o.redirect("/");
+        o.json(null)
     }
     else {
-        next(auth._err);
+        o.json(auth._error)
     }
 })
 

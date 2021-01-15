@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-var categoryModel = require("./categoryModel");
+
 var courseSchema = new mongoose.Schema({
     // course + instructor
     name: String,
@@ -84,6 +84,9 @@ var courseLessonModel = mongoose.model(
     courseLessonSchema,
     "course_lessons"
 );
+
+// var categoryModel = require("./categoryModel");
+
 
 /********************************************************************************/
 // Courses
@@ -382,10 +385,10 @@ async function getByCategoryList(categories) {
     return await res.flat();
 }
 
-async function search_course(query, sortPrice, sortRate) {
+async function search_course(query, sortPrice, sortRate, categoryObj) {
     // check this and add option sort
     //Check if query is a category
-    let categoryObj = await categoryModel.getAll();
+    // let categoryObj = await categoryModel.getAll();
     let listCourse = null;
     let found = false;
     for (let el of categoryObj) {

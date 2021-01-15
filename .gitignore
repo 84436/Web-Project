@@ -113,3 +113,6 @@ mongo_data/
 
 # Personal test.js
 test.js
+
+# Personal VSCODE
+.vscode/settings.json

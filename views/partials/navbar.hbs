@@ -28,47 +28,45 @@
                     <a href="#"><span class="title">Categories</span></a>
                     <ul>
                         {{#each catList}}
-                        <li>
-                            <a href="#">{{this.major}}</a>
-                            <ul>
-                                {{#each this.minor}}
-                                    <li><a href="/minor/{{this._id}}">{{this.name}}</a></li>
-                                {{/each}}
-                            </ul>
-                        </li>
+                            <li>
+                                <a href="#">{{this.major}}</a>
+                                <ul>
+                                    {{#each this.minor}}
+                                        <li><a href="/minor/{{this._id}}">{{this.name}}</a></li>
+                                    {{/each}}
+                                </ul>
+                            </li>
                         {{/each}}
                     </ul>
                 </li>
             </ul>
             <ul class="sign_up_btn pull-right dn-smd mt20">
                 {{#if User}}
-                <li class="list-inline-item list_s">
-                    <a href="/account/enrolled" class="btn">
-                        <span class="dn-lg">{{User.name}}</span>
-                    </a>
-                </li>
-                <li class="list-inline-item list_s">
-                    <a href="/logout" class="btn">
-                        <span class="dn-lg">Logout</span>
-                    </a>
-                </li>
+                    <li class="list-inline-item list_s">
+                        <a href="/account/info" class="btn">
+                            <span class="dn-lg">{{User.name}}</span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item list_s">
+                        <a href="/logout" class="btn">
+                            <span class="dn-lg">Logout</span>
+                        </a>
+                    </li>
                 {{else}}
-                <li class="list-inline-item list_s">
-                    <a href="/login" class="btn">
-                        <span class="dn-lg">Login</span>
-                    </a>
-                </li>
-                <li class="list-inline-item list_s">
-                    <a href="/register" class="btn">
-                        <span class="dn-lg">Register</span>
-                    </a>
-                </li>
+                    <li class="list-inline-item list_s">
+                        <a href="/login" class="btn">
+                            <span class="dn-lg">Login</span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item list_s">
+                        <a href="/register" class="btn">
+                            <span class="dn-lg">Register</span>
+                        </a>
+                    </li>
                 {{/if}}
-
                 <li class="list-inline-item list_s">
                     <div class="search_overlay">
-                        <a id="search-button-listener" class="mk-search-trigger mk-fullscreen-trigger"
-                            href="#">
+                        <a id="search-button-listener" class="mk-search-trigger mk-fullscreen-trigger" href="#">
                             <span id="search-button"><i class="flaticon-magnifying-glass"></i></span>
                         </a>
                     </div>
@@ -80,8 +78,7 @@
 <!-- Modal Search Button Bacground Overlay -->
 <div class="search_overlay dn-992">
     <div class="mk-fullscreen-search-overlay" id="mk-search-overlay">
-        <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i
-                class="fa fa-times"></i></a>
+        <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i class="fa fa-times"></i></a>
         <div id="mk-fullscreen-search-wrapper">
             <form method="get" id="mk-fullscreen-searchform">
                 <input type="text" value="" placeholder="Search courses..." id="mk-fullscreen-search-input">
@@ -90,7 +87,6 @@
         </div>
     </div>
 </div>
-
 <!-- Main Header Nav For Mobile -->
 <div id="page" class="stylehome1 h0">
     <div class="mobile-menu">
@@ -102,8 +98,7 @@
             <ul class="menu_bar_home2">
                 <li class="list-inline-item">
                     <div class="search_overlay">
-                        <a id="search-button-listener2" class="mk-search-trigger mk-fullscreen-trigger"
-                            href="#">
+                        <a id="search-button-listener2" class="mk-search-trigger mk-fullscreen-trigger" href="#">
                             <div id="search-button2"><i class="flaticon-magnifying-glass"></i></div>
                         </a>
                         <div class="mk-fullscreen-search-overlay" id="mk-search-overlay2">

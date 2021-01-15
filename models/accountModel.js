@@ -206,7 +206,7 @@ async function getByLogin(email, password) {
     let filter = {
         email :email
     }
-    let account = await accountModel.findOne(filter, {_id: 1, password: 1, name: 1});
+    let account = await accountModel.findOne(filter, {_id: 1, password: 1, name: 1, type: 1});
     if (!account) {
         r._error = "Account not exist"
         return r
