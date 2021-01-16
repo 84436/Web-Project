@@ -1,5 +1,4 @@
 {{> navbar}}
-
 <!-- Inner Page Breadcrumb -->
 <section class="inner_page_breadcrumb">
     <div class="container">
@@ -12,7 +11,6 @@
         </div>
     </div>
 </section>
-
 <!-- Our LogIn Register -->
 <section class="our-log-reg bgc-fa">
     <div class="container">
@@ -24,18 +22,23 @@
                         </h4>
                     </div>
                     <div class="details">
-                        <form action="/register" method="POST">
+                        <form>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputName2" placeholder="Name" name="name">
+                                <input type="text" class="form-control" id="name" placeholder="Name" name="name"
+                                    autofocus>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputEmail3" name="email"
-                                    placeholder="Email">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="exampleInputPassword4" name="password"
+                                <input type="password" class="form-control" id="password" name="password"
                                     placeholder="Password">
                             </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="confirm-password"
+                                    placeholder="Confirm password">
+                            </div>
+                            <p id="error" class="text-center text-danger">{{error}}</p>
                             <button type="submit" class="btn btn-log btn-block btn-thm2">Register</button>
                         </form>
                     </div>
@@ -44,5 +47,56 @@
         </div>
     </div>
 </section>
-
 {{> footer}}
+{{#section "js"}}
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                e.preventDefault();
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var password = $("#password").val();
+                var cfpassword = $("#confirm-password").val();
+
+                var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                var is_email = re.test(email);
+
+                var is_pass = password.length === 0 ? false : true;
+                var is_confirmed = password === cfpassword ? true : false;
+
+                var is_name = name.length === 0 ? false : true;
+
+                if (!is_email) {
+                    $("#error").text("Email must be a valid email")
+                }
+                else if (!is_pass) {
+                    $("#error").text("Password cannot be empty")
+                }
+                else if (!is_confirmed) {
+                    $("#error").text("Confirm password is not match")
+                }
+                else if (!is_name) {
+                    $("#error").text("Name cannot be empty")
+                }
+                else {
+                    AjaxPost();
+                }
+            });
+        });
+
+        function AjaxPost() {
+            $.post("/register", {
+                email: $("#email").val(),
+                password: $("#password").val(),
+                name: $("#name").val()
+            }, function (data, status) {
+                if (data) {
+                    $("#error").text(data)
+                }
+                else {
+                    location.replace("/");
+                }
+            })
+        }
+    </script>
+{{/section}}

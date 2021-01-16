@@ -130,7 +130,7 @@ async function add_course(courseInfo) {
 }
 
 async function remove_course(courseID) {
-    await courseModel.findByIdAndDelete(courseID, (err) => {});
+    await courseModel.findByIdAndDelete(courseID, (err) => { });
 }
 
 async function setFinished(courseID) {
@@ -140,7 +140,7 @@ async function setFinished(courseID) {
         },
     };
 
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => { });
 }
 
 /********************************************************************************/
@@ -148,32 +148,32 @@ async function setFinished(courseID) {
 
 function viewCount_plus(courseID) {
     let update = { $inc: { viewCount: 1 } };
-    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => { });
 }
 
 function viewCount_minus(courseID) {
     let update = { $inc: { viewCount: -1 } };
-    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => { });
 }
 
 function enrollCount_plus(courseID) {
     let update = { $inc: { enrollCount: 1 } };
-    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => { });
 }
 
 function enrollCount_minus(courseID) {
     let update = { $inc: { enrollCount: -1 } };
-    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => { });
 }
 
 function feedbackCount_plus(courseID) {
     let update = { $inc: { feedbackCount: 1 } };
-    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => { });
 }
 
 function feedbackCount_minus(courseID) {
     let update = { $inc: { feedbackCount: -1 } };
-    courseModel.findByIdAndUpdate(courseID, update, (err) => {});
+    courseModel.findByIdAndUpdate(courseID, update, (err) => { });
 }
 
 /********************************************************************************/
@@ -199,12 +199,12 @@ async function update_chapter(chapterID, chapterName) {
         chapterID,
         update,
         options,
-        (err) => {}
+        (err) => { }
     );
 }
 
 async function remove_chapter(chapterID) {
-    await courseChapterModel.findByIdAndDelete(chapterID, (err) => {});
+    await courseChapterModel.findByIdAndDelete(chapterID, (err) => { });
 }
 
 /********************************************************************************/
@@ -227,7 +227,7 @@ async function setUpdateTime(courseID) {
         courseID,
         update,
         options,
-        (err) => {}
+        (err) => { }
     )
 }
 
@@ -253,12 +253,12 @@ async function update_lesson(lessonID, lessonInfo) {
         lessonID,
         update,
         options,
-        (err) => {}
+        (err) => { }
     );
 }
 
 async function remove_lesson(lessonID) {
-    await courseLessonModel.findByIdAndDelete(lessonID, (err) => {});
+    await courseLessonModel.findByIdAndDelete(lessonID, (err) => { });
 }
 
 /********************************************************************************/
@@ -296,7 +296,6 @@ async function topEnrollCategories() {
             },
         },
     ]);
-    console.log(r1[0])
     return r1;
 }
 
@@ -432,7 +431,7 @@ async function update_course(courseID, courseInfo) {
         courseID,
         courseInfo,
         options,
-        (err) => {}
+        (err) => { }
     );
 }
 
@@ -446,7 +445,7 @@ async function addChapter(courseID, chapterName) {
                 content: r._id,
             },
         },
-        (err) => {}
+        (err) => { }
     );
     return i;
 }
@@ -467,7 +466,7 @@ async function addLesson(chapterID, lessonInfo) {
                 lessons: r._id,
             },
         },
-        (err) => {}
+        (err) => { }
     );
     return i;
 }
@@ -507,17 +506,17 @@ function getCourseByLecturer(lecturerID) {
     }
     let projection = { __v: 0 }
     let r = courseModel.find(filter, projection, (err) => {
-                                    return null
-                                })
-                                .populate({
-                                   path: "instructorID",
-                                   select: "name"
-                                })
-                                .populate({
-                                    path: "categoryID",
-                                    select: "major minor"
-                                })
-                               .lean()
+        return null
+    })
+        .populate({
+            path: "instructorID",
+            select: "name"
+        })
+        .populate({
+            path: "categoryID",
+            select: "major minor"
+        })
+        .lean()
     return r
 }
 /********************************************************************************/
