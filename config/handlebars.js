@@ -1,6 +1,6 @@
 const express_handlebars = require('express-handlebars')
 const path = require('path')
-var express_handlebars_sections = require("express-handlebars-sections");
+const express_handlebars_sections = require("express-handlebars-sections");
 
 // https://github.com/ericf/express-handlebars
 // https://stackoverflow.com/a/40898191

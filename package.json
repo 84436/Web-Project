@@ -4,7 +4,8 @@
   "description": "It's like Udemy, but not quite.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "debug-layout": "nodemon app-debugLayout.js"
   },
   "keywords": [],
   "author": "The Hokage-Web Team",
