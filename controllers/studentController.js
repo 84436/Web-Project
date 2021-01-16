@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
 
-const accountModel = require('../models/accountModel')
+const accountModel = require("../models/accountModel")
+const courseModel = require("../models/courseModel")
+const categoryModel = require("../models/categoryModel")
 const activityModel = require("../models/activityModel")
 
 router.use(function (i, o, next) {
-    console.log(i.session.User)
     if (i.session.User) {
         if (i.session.User.type === "student") {
             return next();
@@ -17,16 +18,6 @@ router.use(function (i, o, next) {
     else {
         o.redirect("/")
     }
-})
-
-router.get("/info", async (i, o, next) => {
-    o.json("my info")
-})
-
-router.get('/account/enrolled', async (i, o, next) => {
-    let a = await activityModel.getAllEnrollList(i.session.User._id)
-    console.log(a)
-    o.render('account/myEnrolled')
 })
 
 module.exports = router

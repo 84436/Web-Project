@@ -4,7 +4,7 @@ const router = express.Router()
 const categoryModel = require("../models/categoryModel")
 const courseModel = require("../models/courseModel");
 
-router.get('/', async (i, o, next) => {    
+router.get('/', async (i, o, next) => {
     o.locals.catList = await categoryModel.getAll();
     o.locals.hotCourses = await courseModel.topEnrollCourse()
     o.locals.mostViewCourses = await courseModel.topViewCourses()
