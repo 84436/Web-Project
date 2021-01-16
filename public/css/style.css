@@ -1588,7 +1588,6 @@ header.header-nav.menu_style_home_four.stricky-fixed{
     -o-box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
     box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
 }
-}
 header.header-nav.menu_style_home_four.stricky-fixed a.navbar_brand span{
   color: #0a0a0a;
 }
@@ -6146,9 +6145,9 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn{
   margin-right: 5px;
   width: 100px;
 }
-.ui_kit_tooltip .btn:hover {
+/* .ui_kit_tooltip .btn:hover {
   color: 
-}
+} */
 .ui_kit_tooltip .btn:focus {
   box-shadow: none;
   border-color: #dddddd;
@@ -7375,13 +7374,13 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn{
   position: absolute;
 }
 .dashboard_main_content{
-  max-width: 100%;
-  max-height: 900px;
+  /* max-width: 100%;
+  max-height: 900px; */
   padding-left: 17%;
   padding-right: 1.5%;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll !important;
+  /* overflow-x: hidden;
+  overflow-y: scroll !important; */
 }
 .dashboard_main_content .main_content_container{
   padding: 120px 0 0;
@@ -7645,7 +7644,7 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn{
   display: none;
 }
 .header_user_notif .user_notif .simplebar-offset::-webkit-scrollbar-thumb {
-  background-color: #dfdfdf !important; // manage scrollbar thumb background color here
+  background-color: #dfdfdf !important;
   border-radius: 6px;
 }
 .simplebar-placeholder {
