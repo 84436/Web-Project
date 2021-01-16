@@ -8964,7 +8964,10 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn{
 }
 /*== Color Area ==*/
 .img-whp {
-  width: 100% !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+  min-height: 135px !important;
+  max-height: 135px !important;
 }
 .text-thm {
   color: #2441e7 !important;
