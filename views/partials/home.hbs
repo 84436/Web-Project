@@ -15,7 +15,7 @@
                                             <h4 style="font-style: italic; color: white">FEATURED THIS WEEK</h4>
                                             <h3 class="banner-title">{{this.name}}</h3>
                                             <p>{{this.desc.short}}</p>
-                                            <div class="btn-block"><a href="#" class="banner-btn">
+                                            <div class="btn-block"><a href="/courses/{{this._id}}" class="banner-btn">
                                                     Take A Look
                                                     <i class="fa fa-arrow-circle-right"></i>
                                                 </a></div>
@@ -53,29 +53,31 @@
                     <!-- TEMPLATEME! -->
                     <div class="row row-cols-5" id="masonry_abc">
                         {{#each mostViewCourses}}
-                            <div class="col">
-                                <div class="top_courses">
-                                    <div class="thumb">
-                                        <img class="img-whp" src="images/courses/8.jpg">
-                                        <div class="overlay">
-                                            <div class="tag">Best Seller</div>
+                            <a href="/courses/{{this._id}}">
+                                <div class="col">
+                                    <div class="top_courses">
+                                        <div class="thumb">
+                                            <img class="img-whp" src="images/courses/8.jpg">
+                                            <div class="overlay">
+                                                <div class="tag">Best Seller</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="details">
-                                        <div class="tc_content">
-                                            <p>{{this.instructorID.name}}</p>
-                                            <h5 style="height: 100px">{{this.name}}</h5>
-                                            <ul class="tc_review">
-                                                <span><i class="fa fa-star"></i> {{this.averageRate}}
-                                                    ({{this.feedbackCount}})</span>
-                                            </ul>
-                                        </div>
-                                        <div class="tc_footer">
-                                            <div class="tc_price float-right">${{this.price}}</div>
+                                        <div class="details">
+                                            <div class="tc_content">
+                                                <p>{{this.instructorID.name}}</p>
+                                                <h5 style="height: 100px">{{this.name}}</h5>
+                                                <ul class="tc_review">
+                                                    <span><i class="fa fa-star"></i> {{this.averageRate}}
+                                                        ({{this.feedbackCount}})</span>
+                                                </ul>
+                                            </div>
+                                            <div class="tc_footer">
+                                                <div class="tc_price float-right">${{this.price}}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         {{/each}}
                     </div>
                 </div>
@@ -100,29 +102,31 @@
                     <!-- TEMPLATEME! -->
                     <div class="row row-cols-5" id="masonry_abc">
                         {{#each newestCourses}}
-                            <div class="col">
-                                <div class="top_courses">
-                                    <div class="thumb">
-                                        <img class="img-whp" src="images/courses/8.jpg">
-                                        <div class="overlay">
-                                            <div class="tag">Best Seller</div>
+                            <a href="/courses/{{this._id}}">
+                                <div class="col">
+                                    <div class="top_courses">
+                                        <div class="thumb">
+                                            <img class="img-whp" src="images/courses/8.jpg">
+                                            <div class="overlay">
+                                                <div class="tag">Best Seller</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="details">
-                                        <div class="tc_content">
-                                            <p>{{this.instructorID.name}}</p>
-                                            <h5 style="height: 100px">{{this.name}}</h5>
-                                            <ul class="tc_review">
-                                                <span><i class="fa fa-star"></i> {{this.averageRate}}
-                                                    ({{this.feedbackCount}})</span>
-                                            </ul>
-                                        </div>
-                                        <div class="tc_footer">
-                                            <div class="tc_price float-right">${{this.price}}</div>
+                                        <div class="details">
+                                            <div class="tc_content">
+                                                <p>{{this.instructorID.name}}</p>
+                                                <h5 style="height: 100px">{{this.name}}</h5>
+                                                <ul class="tc_review">
+                                                    <span><i class="fa fa-star"></i> {{this.averageRate}}
+                                                        ({{this.feedbackCount}})</span>
+                                                </ul>
+                                            </div>
+                                            <div class="tc_footer">
+                                                <div class="tc_price float-right">${{this.price}}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         {{/each}}
                     </div>
                 </div>
@@ -144,15 +148,17 @@
         <div class="row row-cols-5">
             <!-- TEMPLATEME! -->
             {{#each topCategories}}
-                <div class="col">
-                    <div class="img_hvr_box" style="background-image: url(images/courses/8.jpg);">
-                        <div class="overlay">
-                            <div class="details">
-                                <h5 style="font-size: 1.5rem; height: 100px">{{this.categoryName.minor}}</h5>
+                <a href="">
+                    <div class="col">
+                        <div class="img_hvr_box" style="background-image: url(images/courses/8.jpg);">
+                            <div class="overlay">
+                                <div class="details">
+                                    <h5 style="font-size: 1.5rem; height: 100px">{{this.categoryName.minor}}</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             {{/each}}
         </div>
     </div>

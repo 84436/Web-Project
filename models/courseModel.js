@@ -420,6 +420,23 @@ async function search_course(query, sortPrice, sortRate, categoryObj) {
         }
         return listCourse;
     }
+    else {
+        if (sortRate) {
+            listCourse = courseModel.find({ $text: { $search: query } })
+                .populate({ path: "instructorID", select: "name" })
+                .populate({ path: "categoryID", select: "major minor" })
+                .sort({ averageRate: -1 })
+                .lean()
+        }
+        else if (sortPrice) {
+            listCourse = courseModel.find({ $text: { $search: query } })
+                .populate({ path: "instructorID", select: "name" })
+                .populate({ path: "categoryID", select: "major minor" })
+                .sort({ price: 1 })
+                .lean()
+        }
+        return listCourse
+    }
 }
 
 /********************************************************************************/
