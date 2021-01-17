@@ -14,7 +14,8 @@ router.use(function (i, o, next) {
 })
 
 router.get('/login', async (i, o, next) => {
-    o.locals.catList = categoryModel.getAll()
+    o.locals.catList = await categoryModel.getAll()
+    console.log(o.locals.catList)
     o.render('account/login')
 })
 
@@ -42,7 +43,7 @@ router.post('/login', async (i, o, next) => {
 })
 
 router.get('/register', async (i, o, next) => {
-    o.locals.catList = categoryModel.getAll()
+    o.locals.catList = await categoryModel.getAll()
     o.render('account/register')
 })
 

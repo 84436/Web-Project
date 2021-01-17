@@ -48,29 +48,16 @@
                 </li>
             </ul>
             <ul class="sign_up_btn pull-right dn-smd mt20">
-                {{#if User}}
-                    <li class="list-inline-item list_s">
-                        <a href="/account/info" class="btn">
-                            <span class="dn-lg">{{User.name}}</span>
-                        </a>
-                    </li>
-                    <li class="list-inline-item list_s">
-                        <a href="/logout" class="btn">
-                            <span class="dn-lg">Logout</span>
-                        </a>
-                    </li>
-                {{else}}
-                    <li class="list-inline-item list_s">
-                        <a href="/login" class="btn">
-                            <span class="dn-lg">Login</span>
-                        </a>
-                    </li>
-                    <li class="list-inline-item list_s">
-                        <a href="/register" class="btn">
-                            <span class="dn-lg">Register</span>
-                        </a>
-                    </li>
-                {{/if}}
+                <li class="list-inline-item list_s">
+                    <a href="/account/info" class="btn">
+                        <span class="dn-lg">{{User.name}}</span>
+                    </a>
+                </li>
+                <li class="list-inline-item list_s">
+                    <a href="/logout" class="btn">
+                        <span class="dn-lg">Logout</span>
+                    </a>
+                </li>
                 <li class="list-inline-item list_s">
                     <div class="search_overlay">
                         <a id="search-button-listener" class="mk-search-trigger mk-fullscreen-trigger" href="#">
