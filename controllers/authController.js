@@ -18,7 +18,6 @@ router.use(function (i, o, next) {
 
 router.get('/login', async (i, o, next) => {
     o.locals.catList = await categoryModel.getAll()
-    console.log(o.locals.catList)
     o.render('account/login')
 })
 

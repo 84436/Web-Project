@@ -12,7 +12,7 @@ var accountSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ["student", "lecturer", "admin"],
+        enum: ["student", "instructor", "admin"],
         default: "student"
     },
 

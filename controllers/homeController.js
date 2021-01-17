@@ -43,7 +43,7 @@ router.get("/courses/:id", async (i, o, next) => {
 })
 
 router.get("/courses/byQuery/:search", async (i, o, next) => {
-    console.log("ok");
+    o.locals.User = i.session.User
     o.locals.catList = await categoryModel.getAll()
     if (i.query.sort === "price") {
         o.locals.courseList = await courseModel.search_course(i.params.search, true, false, o.locals.catList)

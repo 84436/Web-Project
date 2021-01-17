@@ -29,10 +29,10 @@
                     <ul>
                         {{#each catList}}
                             <li>
-                                <a href="#">{{this.major}}</a>
+                                <a href="/courses/byQuery/{{this.major}}/?sort=rate">{{this.major}}</a>
                                 <ul>
                                     {{#each this.minor}}
-                                        <li><a href="/minor/{{this._id}}">{{this.name}}</a></li>
+                                        <li><a href="/courses/byQuery/{{this.name}}/?sort=rate">{{this.name}}</a></li>
                                     {{/each}}
                                 </ul>
                             </li>
@@ -202,3 +202,13 @@
         </ul>
     </nav>
 </div>
+{{#section "js"}}
+    <script>
+        jQuery("#mk-fullscreen-searchform").on("submit", function () {
+            event.preventDefault();
+            const search = jQuery("#mk-fullscreen-search-input").val();
+            const url = `/courses/byQuery/${search}/?sort=rate`;
+            location.replace(url);
+        })
+    </script>
+{{/section}}
