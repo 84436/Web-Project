@@ -23,13 +23,12 @@ module.exports = {
             //html: {
             //    path: process.cwd() + '/views/vwLogin/confirm.html'
             //}
-            html: `<p>Hello ${user.username},</p>
+            html: `<p>Hello ${user.name},</p>
                     <p>Follow this link to verify your email address.</p>
                     <p><a href='${url}'>${url}</a></p>
-                    <p>If you didn�t ask to verify this address, you can ignore this email.</p>
-                    <p>Thanks,</p>
-                    <p>Your team</p>`
-            //Please click this email to confirm your email: <a href="${url}">Confirm account</a>`
+                    <p>If you didn't ask to verify this address, you can ignore this email.</p>
+                    <p>Thanks.</p>
+                    <p>HOKAGE</p>`
         };
 
         transporter.sendMail(mailOptions, function (err, data) {
