@@ -5,7 +5,6 @@ const { BCRYPT_WORK_FACTOR } = require('../config/bcrypt.json')
 var accountSchema = new mongoose.Schema({
     email: String,
     name: String,
-    avatar: String,
 
     password: {
         type: String,
@@ -16,6 +15,9 @@ var accountSchema = new mongoose.Schema({
         enum: ["student", "lecturer", "admin"],
         default: "student"
     },
+
+    isActive: Boolean,
+    isLocked: Boolean,
     instructorBio: String
 })
 
@@ -24,7 +26,7 @@ var accountModel = mongoose.model("account", accountSchema, "accounts")
 /********************************************************************************/
 
 async function checkID(id) {
-    let r = { _error: null  }
+    let r = { _error: null }
 
     try {
         let account = await accountModel.findById(id, (err) => {
@@ -57,27 +59,31 @@ async function checkEmail(email) {
     return r
 }
 
-async function add(info, type) {
+async function add(info, type, isActive, isLocked) {
     let r = { _error: null }
 
-    r = {...await checkEmail(info.email)}
+    r = { ...await checkEmail(info.email) }
     if (r._error) return r
 
     let new_account_info = {
         "email": info.email,
         "password": info.password,
         "name": info.name,
-        "avatar": "",
         "instructorBio": "",
-        "type": type
+        "type": type,
+        "isActive": isActive,
+        "isLocked": isLocked
     }
+
+    console.log(new_account_info)
+
     let new_account = new accountModel(new_account_info)
     await new_account.save((err) => {
         if (err) { r._error = err; return r }
     })
 
     // WORKAROUND: GET INFO FROM THAT NEWLY CREATED ACCOUNT
-    delete(new_account_info.password)
+    delete (new_account_info.password)
     // new_account_info.joinDate = new_account._doc.joinDate
     r = {
         ...r,
@@ -90,7 +96,7 @@ async function add(info, type) {
 async function closeAccount(id) {
     let r = { _error: null }
 
-    r = {...await checkID(id)}
+    r = { ...await checkID(id) }
     if (r._error) return r
 
     let info = {
@@ -107,30 +113,10 @@ async function closeAccount(id) {
 async function edit(id, new_info) {
     let r = { _error: null }
 
-    r = {...await checkID(id)}
+    r = { ...await checkID(id) }
     if (r._error) return r
 
-    r = {...await checkEmail(new_info.email)}
-    if (r._error) return r
-
-    let updated_fields = {
-        "email": new_info.email,
-        "name": new_info.name,
-        "avatar": new_info.avatar,
-    }
-
-    // remove undefined fields
-    // https://stackoverflow.com/a/38340374
-    Object.keys(updated_fields).forEach(key => {
-        (updated_fields[key] === undefined) && (delete updated_fields[key])
-    })
-
-    // if everything"s undefined, silently return
-    if (Object.keys(updated_fields).length === 0) {
-        return r
-    }
-
-    await accountModel.findByIdAndUpdate(id, updated_fields, (err) => {
+    await accountModel.findByIdAndUpdate(id, new_info, (err) => {
         if (err) { r._error = err; return r }
     })
 
@@ -138,7 +124,7 @@ async function edit(id, new_info) {
 }
 
 async function changePassword(id, oldpw, newpw, confirmpw) {
-    let account = await accountModel.findById(id, {_id: 1, password: 1})
+    let account = await accountModel.findById(id, { _id: 1, password: 1 })
     if (!account) {
         return false
     }
@@ -167,7 +153,7 @@ async function getAllStudent() {
     return res = await accountModel.find(filter, projection, (err) => {
         return null;
     })
-    .lean();
+        .lean();
 }
 
 async function getAllLecturer() {
@@ -180,13 +166,13 @@ async function getAllLecturer() {
     return res = await accountModel.find(filter, projection, (err) => {
         return null;
     })
-    .lean();
+        .lean();
 }
 
 async function getByID(id) {
     let r = { _error: null }
 
-    r = {...await checkID(id)}
+    r = { ...await checkID(id) }
     if (r._error) return r
 
     let projection = {
@@ -195,8 +181,8 @@ async function getByID(id) {
     let account = await accountModel.findById(id, projection, (err) => {
         if (err) { r._error = err; return r }
     })
-        
-    r = {...r, ...account._doc}
+
+    r = { ...r, ...account._doc }
     return r
 }
 
@@ -204,18 +190,27 @@ async function getByLogin(email, password) {
     let r = { _error: null }
 
     let filter = {
-        email :email
+        email: email
     }
-    let account = await accountModel.findOne(filter, {_id: 1, password: 1, name: 1, type: 1});
+    let account = await accountModel.findOne(filter, { _id: 1, password: 1, name: 1, type: 1, isActive: 1, isLocked: 1 });
     if (!account) {
         r._error = "Account not exist"
         return r
     }
-
     else {
-        if(bcrypt.compareSync(password, account.password)) {
-            r = {...r, ...account._doc}
-            return r
+        if (bcrypt.compareSync(password, account.password)) {
+            if (!account.isActive) {
+                r._error = "Your account is not activated. Please check your email."
+                return r
+            }
+            else if (account.isLocked) {
+                r._error = "Your account is locked. Please contact our administrators."
+                return r
+            }
+            else {
+                r = { ...r, ...account._doc }
+                return r
+            }
         }
         else {
             r._error = "Wrong password"
@@ -227,8 +222,10 @@ async function getByLogin(email, password) {
 async function registerAccount(newAccount) {
     let r = { _error: null }
     let type = "student"
-    newAccount.password = bcrypt.hashSync( newAccount.password, BCRYPT_WORK_FACTOR)
-    r = {...await add(newAccount, type)}
+    let isActive = false
+    let isLocked = false
+    newAccount.password = bcrypt.hashSync(newAccount.password, BCRYPT_WORK_FACTOR)
+    r = { ...await add(newAccount, type, isActive, isLocked) }
     return r
 }
 

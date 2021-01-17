@@ -20,4 +20,26 @@ router.use(function (i, o, next) {
     }
 })
 
+router.get("/profile", async (i, o, next) => {
+
+})
+
+router.get("/courses/all", async (i, o, next) => {
+
+})
+
+router.post("/courses/add", async (i, o, next) => {
+
+})
+
+router.post("/courses/edit/:id", async (i, o, next) => {
+
+})
+
+router.post("/courses/add/:id", async (i, o, next) => {
+
+})
+
+
+
 module.exports = router

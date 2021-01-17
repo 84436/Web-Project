@@ -20,4 +20,29 @@ router.use(function (i, o, next) {
     }
 })
 
+router.get("/enroll/all", async (i, o, next) => {
+
+})
+
+router.post("/enroll/:id", async (i, o, next) => {
+
+})
+
+router.get("/profile", async (i, o, next) => {
+
+})
+
+router.get("/watchlist", async (i, o, next) => {
+
+})
+
+router.post("/watchlist/:id", async (i, o, next) => {
+
+})
+
+router.post("/feedback/:id", async (i, o, next) => {
+
+})
+
+
 module.exports = router

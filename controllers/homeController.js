@@ -33,4 +33,13 @@ router.get('/', async (i, o, next) => {
     }
 })
 
+
+router.get("/courses", async (i, o, next) => {
+
+})
+
+router.get("/course/:id", async (i, o, next) => {
+
+})
+
 module.exports = router

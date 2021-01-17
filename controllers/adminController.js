@@ -20,4 +20,48 @@ router.use(function (i, o, next) {
     }
 })
 
+router.get("/instructors", async (i, o, next) => {
+
+})
+
+router.post("/instructors/add", async (i, o, next) => {
+
+})
+
+router.post("/instructors/lock/:id", async (i, o, next) => {
+
+})
+
+router.get("/students", async (i, o, next) => {
+
+})
+
+router.post("/students/lock/:id", async (i, o, next) => {
+
+})
+
+router.get("/categories", async (i, o, next) => {
+
+})
+
+router.post("/categories/add", async (i, o, next) => {
+
+})
+
+router.post("/categories/edit/:id", async (i, o, next) => {
+
+})
+
+router.post("/categories/delete/:id", async (i, o, next) => {
+
+})
+
+router.get("/courses", async (i, o, next) => {
+
+})
+
+router.post("/courses/disable/:id", async (i, o, next) => {
+
+})
+
 module.exports = router
