@@ -69,7 +69,7 @@ router.post('/register', async (i, o, next) => {
     }
 
     if (!auth._error) {
-        const token = jwt.sign(user, "qwedhgwegfhwegf", {
+        const token = jwt.sign(user, "$2y$12$ZyMxyuXzyIEu379tFuWMwONEi/4qDguN1pmVALXfH8oWHKVGS9cli", {
             expiresIn: '10m'
         });
 
