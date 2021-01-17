@@ -29,10 +29,10 @@
                     <ul>
                         {{#each catList}}
                             <li>
-                                <a href="#">{{this.major}}</a>
+                                <a href="/courses/byQuery/{{this.major}}/?sort=rate">{{this.major}}</a>
                                 <ul>
                                     {{#each this.minor}}
-                                        <li><a href="/minor/{{this._id}}">{{this.name}}</a></li>
+                                        <li><a href="/courses/byQuery/{{this.name}}/?sort=rate">{{this.name}}</a></li>
                                     {{/each}}
                                 </ul>
                             </li>
@@ -67,9 +67,10 @@
     <div class="mk-fullscreen-search-overlay" id="mk-search-overlay">
         <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i class="fa fa-times"></i></a>
         <div id="mk-fullscreen-search-wrapper">
-            <form method="get" id="mk-fullscreen-searchform">
-                <input type="text" value="" placeholder="Search courses..." id="mk-fullscreen-search-input">
-                <i class="flaticon-magnifying-glass fullscreen-search-icon"><input value="" type="submit"></i>
+            <form id="mk-fullscreen-searchform">
+                <input name="query" type="text" value="" placeholder="Search courses..."
+                    id="mk-fullscreen-search-input">
+                <i class="flaticon-magnifying-glass fullscreen-search-icon"></i><input value="" type="submit"></i>
             </form>
         </div>
     </div>
@@ -195,3 +196,13 @@
         </ul>
     </nav>
 </div>
+{{#section "js"}}
+    <script>
+        jQuery("#mk-fullscreen-searchform").on("submit", function () {
+            event.preventDefault();
+            const search = jQuery("#mk-fullscreen-search-input").val();
+            const url = `/courses/byQuery/${search}/?sort=rate`;
+            location.replace(url);
+        })
+    </script>
+{{/section}}

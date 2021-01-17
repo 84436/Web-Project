@@ -411,11 +411,11 @@ async function search_course(query, sortPrice, sortRate, categoryObj) {
     if (found === true) {
         if (sortRate) {
             listCourse.sort(function (a, b) {
-                return a.averageRate - b.averageRate;
+                return b.averageRate - a.averageRate;
             });
         } else if (sortPrice) {
             listCourse.sort(function (a, b) {
-                return b.price - a.price;
+                return a.price - b.price;
             });
         }
         return listCourse;

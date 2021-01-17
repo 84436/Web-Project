@@ -1,5 +1,4 @@
 {{> navbar}}
-
 <!-- Inner Page Breadcrumb -->
 <section class="inner_page_breadcrumb">
     <div class="container">
@@ -8,7 +7,7 @@
                 <div class="breadcrumb_content">
                     <h4 class="breadcrumb_title">Courses</h4>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Sample subtitle for this page
+                        <li class="breadcrumb-item active" aria-current="page">Result for "{{query}}"
                         </li>
                     </ol>
                 </div>
@@ -16,7 +15,6 @@
         </div>
     </div>
 </section>
-
 <!-- Our Team Members -->
 <section class="our-team pb40">
     <div class="container">
@@ -35,7 +33,7 @@
                         <div class="candidate_revew_select style2 text-right mb25">
                             <ul>
                                 <li class="list-inline-item">
-                                    <select class="selectpicker show-tick">
+                                    <select class="selectpicker show-tick" onchange="sort(this)">
                                         <option>Average rating</option>
                                         <option>Price</option>
                                     </select>
@@ -46,53 +44,49 @@
                 </div>
                 <div class="row">
                     {{#each courseList}}
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="top_courses">
-                            <div class="thumb">
-                                <img class="img-whp" src="/images/courses/t1.jpg" alt="t1.jpg">
-                                <div class="overlay">
-                                    <div class="tag">Best Seller</div>
-                                    <div class="icon"><span class="flaticon-like"></span></div>
-                                    <a class="tc_preview_course" href="#">Preview Course</a>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="top_courses" style="width:250px">
+                                <div class="thumb">
+                                    <img class="img-whp" src="/images/courses/t1.jpg" alt="t1.jpg">
+                                    <div class="overlay">
+                                        <div class="tag">Best Seller</div>
+                                        <div class="icon"><span class="flaticon-like"></span></div>
+                                        <a class="tc_preview_course" href="#">Preview Course</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="details">
-                                <div class="tc_content">
-                                    <p>{{this.instructorID.name}}</p>
-                                    <h5>{{this.name}}</h5>
-                                    <ul class="tc_review">
-                                        <li class="list-inline-item"><a href="#"><i
-                                                    class="fa fa-star"></i></a></li>
-                                        <li class="list-inline-item"><a href="#"><i
-                                                    class="fa fa-star"></i></a></li>
-                                        <li class="list-inline-item"><a href="#"><i
-                                                    class="fa fa-star"></i></a></li>
-                                        <li class="list-inline-item"><a href="#"><i
-                                                    class="fa fa-star"></i></a></li>
-                                        <li class="list-inline-item"><a href="#"><i
-                                                    class="fa fa-star"></i></a></li>
-                                        <li class="list-inline-item"><a href="#">{{this.averageRate}} ({{this.feedbackCount}})</a></li>
-                                    </ul>
-                                </div>
-                                <div class="tc_footer">
-                                    <ul class="tc_meta float-left">
-                                        <li class="list-inline-item"><a href="#"><i
-                                                    class="flaticon-profile"></i></a></li>
-                                        <li class="list-inline-item"><a href="#">{{this.enrollCount}}</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tc_price float-right">${{this.price}}</div>
+                                <div class="details">
+                                    <div class="tc_content">
+                                        <p>{{this.instructorID.name}}</p>
+                                        <h5>{{this.name}}</h5>
+                                        <ul class="tc_review">
+                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li class="list-inline-item"><a href="#">{{this.averageRate}}
+                                                    ({{this.feedbackCount}})</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tc_footer">
+                                        <ul class="tc_meta float-left">
+                                            <li class="list-inline-item"><a href="#"><i
+                                                        class="flaticon-profile"></i></a></li>
+                                            <li class="list-inline-item"><a href="#">{{this.enrollCount}}</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tc_price float-right">${{this.price}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     {{/each}}
                     <div class="col-lg-12">
                         <div class="mbp_pagination">
                             <ul class="page_navigation">
                                 <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1"
-                                        aria-disabled="true"> <span class="flaticon-left-arrow"></span> Prev</a>
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true"> <span
+                                            class="flaticon-left-arrow"></span> Prev</a>
                                 </li>
                                 <li class="page-item active" aria-current="page">
                                     <a class="page-link" href="#">1</a>
@@ -102,8 +96,7 @@
                                     <a class="page-link" href="#">2</a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="#">Next <span
-                                            class="flaticon-right-arrow-1"></span></a>
+                                    <a class="page-link" href="#">Next <span class="flaticon-right-arrow-1"></span></a>
                                 </li>
                             </ul>
                         </div>
@@ -113,5 +106,15 @@
         </div>
     </div>
 </section>
-
 {{> footer}}
+{{#section "js"}}
+    <script>
+        function sort(optionElement) {
+            var value = $(optionElement).val()
+            if (value === "Average rating")
+                location.replace(`?sort=rate`);
+            else if (value === "Price")
+                location.replace(`?sort=price`);
+        }
+    </script>
+{{/section}}

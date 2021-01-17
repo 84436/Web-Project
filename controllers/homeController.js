@@ -38,8 +38,21 @@ router.get("/courses", async (i, o, next) => {
 
 })
 
-router.get("/course/:id", async (i, o, next) => {
+router.get("/courses/:id", async (i, o, next) => {
 
+})
+
+router.get("/courses/byQuery/:search", async (i, o, next) => {
+    console.log("ok");
+    o.locals.catList = await categoryModel.getAll()
+    if (i.query.sort === "price") {
+        o.locals.courseList = await courseModel.search_course(i.params.search, true, false, o.locals.catList)
+    }
+    else if (i.query.sort === "rate") {
+        o.locals.courseList = await courseModel.search_course(i.params.search, false, true, o.locals.catList)
+    }
+    o.locals.query = i.params.search
+    o.render("course/courseList")
 })
 
 module.exports = router
