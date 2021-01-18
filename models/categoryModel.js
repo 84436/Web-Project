@@ -101,7 +101,7 @@ async function remove(id) {
 
 async function removeIfEmpty(id) {
     let r = { _err: null };
-    let courses = await courseModel.get_course_by_category(id);
+    let courses = await courseModel.getByCategory(id);
 
     if (courses === null) {
         r._err = "Error in checking empty category.";

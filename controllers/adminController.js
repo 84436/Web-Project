@@ -73,12 +73,21 @@ router.post("/categories/add", async (i, o, next) => {
     }
 })
 
-router.post("/categories/edit/:id", async (i, o, next) => {
-
+router.post("/categories/edit", async (i, o, next) => {
+    let check = await categoryModel.checkDuplicate(i.body.major, i.body.minor);
+    if (check) {
+        o.json("Duplicate category. Check your input")
+    }
+    else {
+        await categoryModel.edit(i.body.id, i.body.major, i.body.minor);
+        o.json(null)
+    }
 })
 
-router.post("/categories/delete/:id", async (i, o, next) => {
-
+router.post("/categories/delete", async (i, o, next) => {
+    let resultSet = await categoryModel.remove(i.body.id);
+    console.log(resultSet);
+    o.json(resultSet._err);
 })
 
 router.get("/courses", async (i, o, next) => {
