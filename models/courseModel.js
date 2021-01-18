@@ -38,6 +38,7 @@ var courseSchema = new mongoose.Schema({
             ref: "course_chapter",
         },
     ],
+    isEnable: Boolean
 });
 
 courseSchema.index({
@@ -544,15 +545,27 @@ async function isCourseInstructor(courseID, instructorID) {
     else return false
 }
 
-async function lockCourse(courseID, state) {
-    let update = {
-        $set: {
-            isEnable: state,
-        },
-    };
+async function setLockCourse(courseID, newState) {
+    let filter = {
+        _id: courseID
+    }
 
-    await courseModel.findByIdAndUpdate(courseID, update, (err) => { });
+    let projection = {
+        __v: 0
+    }
+
+    let specificCourse = await courseModel.findOne(filter, projection, (err) => {
+        return null
+    })
+    if(specificCourse) {
+        specificCourse.isEnable = newState
+        await specificCourse.save()
+        console.log(specificCourse.isEnable)
+        return specificCourse
+    }
+    else return null
 }
+
 
 /********************************************************************************/
 
@@ -586,5 +599,5 @@ module.exports = {
     getCourseByLecturer: getCourseByLecturer,
     getAll: getAll,
     isCourseInstructor: isCourseInstructor,
-    lockCourse: lockCourse
+    setLockCourse: setLockCourse
 };
