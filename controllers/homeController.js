@@ -49,7 +49,9 @@ router.get("/courses", async (i, o, next) => {
 })
 
 router.get("/courses/:id", async (i, o, next) => {
-    
+    o.locals.specificCourse = await courseModel.get_course(i.params.id)
+    o.locals.relatedCourse = await courseModel.topEnrollByCategory(o.locals.specificCourse.categoryID)
+    o.render('course/courseDetails')
 })
 
 router.get("/courses/byQuery/:search", async (i, o, next) => {
