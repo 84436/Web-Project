@@ -109,10 +109,7 @@ async function get_course(courseID) {
         })
         .populate({
             path: "content",
-            populate: {
-                path: "lessons",
-                select: "name",
-            },
+            select: "name"
         });
 
     return r;
@@ -335,6 +332,7 @@ async function topEnrollByCategory(categoryID, courseID) {
         })
         .populate({
             path: "instructorID",
+            select: "name"
         })
         .sort({ enrollCount: -1 })
         .limit(6)
@@ -357,6 +355,31 @@ async function topEnrollCourse() {
 
 /********************************************************************************/
 //PAGINATION NEEDDING
+async function getAll(sortPrice, sortRate) {
+    let r;
+    if (sortPrice) {
+        r = await courseModel
+            .find({}, (err) => {
+                return null;
+            })
+            .lean()
+            .populate({
+                path: "instructorID",
+            }).sort({ averageRate: -1 })
+    }
+    else if (sortRate) {
+        r = await courseModel
+            .find({}, (err) => {
+                return null;
+            })
+            .lean()
+            .populate({
+                path: "instructorID",
+            }).sort({ price: 1 })
+    }
+
+    return r;
+}
 async function getByCategory(categoryID) {
     let filter = {
         categoryID: categoryID,
@@ -419,6 +442,23 @@ async function search_course(query, sortPrice, sortRate, categoryObj) {
             });
         }
         return listCourse;
+    }
+    else {
+        if (sortRate) {
+            listCourse = courseModel.find({ $text: { $search: query } })
+                .populate({ path: "instructorID", select: "name" })
+                .populate({ path: "categoryID", select: "major minor" })
+                .sort({ averageRate: -1 })
+                .lean()
+        }
+        else if (sortPrice) {
+            listCourse = courseModel.find({ $text: { $search: query } })
+                .populate({ path: "instructorID", select: "name" })
+                .populate({ path: "categoryID", select: "major minor" })
+                .sort({ price: 1 })
+                .lean()
+        }
+        return listCourse
     }
 }
 
@@ -552,5 +592,6 @@ module.exports = {
     addChapter: addChapter,
     addLesson: addLesson,
     topEnrollCourse: topEnrollCourse,
-    getCourseByLecturer: getCourseByLecturer
+    getCourseByLecturer: getCourseByLecturer,
+    getAll: getAll
 };

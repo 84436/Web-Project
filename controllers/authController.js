@@ -7,22 +7,31 @@ const emailService = require("../helpers/emailService")
 const accountModel = require("../models/accountModel")
 const categoryModel = require('../models/categoryModel')
 
-router.use(function (i, o, next) {
+// router.use(function (i, o, next) {
+//     if (i.session.User && i.originalUrl !== "/logout") {
+//         console.log("Bi da cmnr")
+//         o.redirect("/")
+//     }
+//     else {
+//         next()
+//     }
+// })
+
+function mdwGuardian(i, o, next) {
     if (i.session.User && i.originalUrl !== "/logout") {
         o.redirect("/")
     }
     else {
         next()
     }
-})
+}
 
-router.get('/login', async (i, o, next) => {
+router.get('/login', mdwGuardian, async (i, o, next) => {
     o.locals.catList = await categoryModel.getAll()
-    console.log(o.locals.catList)
     o.render('account/login')
 })
 
-router.post('/login', async (i, o, next) => {
+router.post('/login', mdwGuardian, async (i, o, next) => {
     let email = i.body.email
     let password = i.body.password
 
@@ -45,12 +54,12 @@ router.post('/login', async (i, o, next) => {
     }
 })
 
-router.get('/register', async (i, o, next) => {
+router.get('/register', mdwGuardian, async (i, o, next) => {
     o.locals.catList = await categoryModel.getAll()
     o.render('account/register')
 })
 
-router.post('/register', async (i, o, next) => {
+router.post('/register', mdwGuardian, async (i, o, next) => {
     let email = i.body.email;
     let password = i.body.password;
     let name = i.body.name;
@@ -85,7 +94,7 @@ router.post('/register', async (i, o, next) => {
     }
 })
 
-router.get("/confirmation/:token", async (i, o, next) => {
+router.get("/confirmation/:token", mdwGuardian, async (i, o, next) => {
     let user = jwt.verify(i.params.token, "$2y$12$ZyMxyuXzyIEu379tFuWMwONEi/4qDguN1pmVALXfH8oWHKVGS9cli")
     if (!user) {
         o.render(new Error())

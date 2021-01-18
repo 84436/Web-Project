@@ -25,14 +25,14 @@
                 </li>
                 <!-- Category List -->
                 <li>
-                    <a href="#"><span class="title">Categories</span></a>
+                    <a href="/courses/byQuery/all/?sort=rate"><span class="title">Categories</span></a>
                     <ul>
                         {{#each catList}}
                             <li>
-                                <a href="#">{{this.major}}</a>
+                                <a href="/courses/byQuery/{{this.major}}/?sort=rate">{{this.major}}</a>
                                 <ul>
                                     {{#each this.minor}}
-                                        <li><a href="/minor/{{this._id}}">{{this.name}}</a></li>
+                                        <li><a href="/courses/byQuery/{{this.name}}/?sort=rate">{{this.name}}</a></li>
                                     {{/each}}
                                 </ul>
                             </li>
@@ -41,15 +41,15 @@
                 </li>
                 <!-- Watchlist + enrolled -->
                 <li>
-                    <a href="/account/watchlist"><span class="title">Watch List</span></a>
+                    <a href="/student/watchlist"><span class="title">Watch List</span></a>
                 </li>
                 <li>
-                    <a href="/account/enrolled"><span class="title">Enrolled</span></a>
+                    <a href="/student/enroll"><span class="title">Enrolled</span></a>
                 </li>
             </ul>
             <ul class="sign_up_btn pull-right dn-smd mt20">
                 <li class="list-inline-item list_s">
-                    <a href="/account/info" class="btn">
+                    <a href="/student/profile" class="btn">
                         <span class="dn-lg">{{User.name}}</span>
                     </a>
                 </li>
@@ -202,3 +202,13 @@
         </ul>
     </nav>
 </div>
+{{#section "js"}}
+    <script>
+        jQuery("#mk-fullscreen-searchform").on("submit", function () {
+            event.preventDefault();
+            const search = jQuery("#mk-fullscreen-search-input").val();
+            const url = `/courses/byQuery/${search}/?sort=rate`;
+            location.replace(url);
+        })
+    </script>
+{{/section}}

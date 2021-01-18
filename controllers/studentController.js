@@ -20,8 +20,7 @@ router.use(function (i, o, next) {
     }
 })
 
-router.get("/enroll/all", async (i, o, next) => {
-
+router.get("/enroll", async (i, o, next) => {
 })
 
 router.post("/enroll/:id", async (i, o, next) => {
@@ -29,7 +28,14 @@ router.post("/enroll/:id", async (i, o, next) => {
 })
 
 router.get("/profile", async (i, o, next) => {
-
+    let r = await accountModel.getByID(i.session.User._id)
+    let account = {
+        email: r.email,
+        name: r.name
+    }
+    o.locals.User = account
+    o.locals.catList = await categoryModel.getAll()
+    o.render("student/myProfile")
 })
 
 router.get("/watchlist", async (i, o, next) => {

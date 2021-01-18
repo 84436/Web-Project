@@ -1,4 +1,17 @@
-{{> navbar}}
+<!-- Nav barrrrrr -->
+{{#if User}}
+    {{#if (eq User.type 'student')}}
+        {{> navbar-student}}
+    {{/if}}
+    {{#if (eq User.type 'instructor')}}
+        {{> navbar-instructor}}
+    {{/if}}
+    {{#if (eq User.type 'admin')}}
+        {{> navbar-admin}}
+    {{/if}}
+{{else}}
+    {{> navbar}}
+{{/if}}
 
 <!-- Inner Page Breadcrumb -->
 <section class="inner_page_breadcrumb">
@@ -103,14 +116,14 @@
 
 {{> footer}}
 
-{{#section "js"}}
-<script>
-    function sort(optionElement) {
-        var value = $(optionElement).val()
-        if (value === "Average rating")
-            location.replace(`?sort=rate`);
-        else if (value === "Price")
-            location.replace(`?sort=price`);
-    }
-</script>
+{{#section "js2"}}
+    <script>
+        function sort(optionElement) {
+            var value = $(optionElement).val()
+            if (value === "Average rating")
+                location.replace(`?sort=rate`);
+            else if (value === "Price")
+                location.replace(`?sort=price`);
+        }
+    </script>
 {{/section}}
