@@ -6968,6 +6968,7 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn{
   font-family: "Open Sans";
   color: rgb(126, 126, 126);
   line-height: 2.667;
+  text-align: center;
 }
 .feature_course_widget ul li:last-child{
   border-bottom: none;

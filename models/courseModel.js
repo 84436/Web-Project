@@ -109,10 +109,7 @@ async function get_course(courseID) {
         })
         .populate({
             path: "content",
-            populate: {
-                path: "lessons",
-                select: "name",
-            },
+            select: "name"
         });
 
     return r;
@@ -335,6 +332,7 @@ async function topEnrollByCategory(categoryID, courseID) {
         })
         .populate({
             path: "instructorID",
+            select: "name"
         })
         .sort({ enrollCount: -1 })
         .limit(6)
