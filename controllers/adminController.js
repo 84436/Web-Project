@@ -21,27 +21,31 @@ router.use(function (i, o, next) {
 })
 
 router.get("/instructors", async (i, o, next) => {
-
+    o.locals.listInstructors = await accountModel.getAllLecturer();
+    o.render("admin/instructorList");
 })
 
 router.post("/instructors/add", async (i, o, next) => {
 
 })
 
-router.post("/instructors/lock/:id", async (i, o, next) => {
-
+router.post("/instructors/setActive", async (i, o, next) => {
+    const resultSet = await accountModel.setLockAccount(i.body.id, i.body.active === 'false');
+    o.json(resultSet !== null ? null : "Something wrong!");
 })
 
 router.get("/students", async (i, o, next) => {
-
+    o.locals.listStudents = await accountModel.getAllStudent();
+    o.render("admin/studentList");
 })
 
-router.post("/students/lock/:id", async (i, o, next) => {
-
+router.post("/students/setActive", async (i, o, next) => {
+    const resultSet = await accountModel.setLockAccount(i.body.id, i.body.active === 'false' );
+    o.json(resultSet !== null ? null : "Something wrong!");
 })
 
 router.get("/categories", async (i, o, next) => {
-
+    
 })
 
 router.post("/categories/add", async (i, o, next) => {

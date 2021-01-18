@@ -2,7 +2,7 @@ const express = require('express');
 const activityModel = require('../models/activityModel');
 const router = express.Router()
 
-const categoryModel = require("../models/categoryModel")
+const categoryModel = require("../models/categoryModel");
 const courseModel = require("../models/courseModel");
 
 router.get('/', async (i, o, next) => {

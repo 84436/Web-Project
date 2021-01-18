@@ -33,21 +33,34 @@
                             <div class="my_course_content_container">
                                 <div class="my_course_content mb30" style="padding-top: 0">
                                     <div class="my_course_content_list">
+                                        {{#each listInstructors}}
                                         <!-- TEMPLATEME! -->
                                         <div class="mc_content_list" style="padding: 8px;">
                                             <div class="details" style="width: 100%;">
                                                 <div class="mc_content" style="display: grid; grid-auto-columns: 1fr auto;">
-                                                    <h5 class="title" style="grid-row: 1">Instructor Name</h5>
+                                                    <h5 class="title" style="grid-row: 1">{{this.name}}</h5>
                                                     <ul class="view_edit_delete_list float-right" style="grid-row: 1">
                                                         <li class="list-inline-item" style="display: none;"></li>
                                                         {{!-- <li class="list-inline-item"><a href="#" data-toggle="tooltip" data-placement="top" title="Edit account"><i class="fa fa-pencil" style="color: white"></i></a></li>
                                                          --}}
                                                         <li class="list-inline-item" style="display: none;"></li>
-                                                        <li class="list-inline-item"><a href="#" data-toggle="tooltip" data-placement="top" title="Lock account"><i class="fa fa-lock" style="color: white"></i></a></li>
+                                                        {{#if this.isLock}}
+                                                        <li class="list-inline-item"
+                                                            style="background-color:dodgerblue;" data-id="{{this._id}}" onclick="UnlockAccount(this)">
+                                                            <a data-toggle="tooltip" data-placement="top"
+                                                                title="Unlock account"><i class="fa fa-unlock"
+                                                                    style="color: white"></i></a></li>
+                                                        {{else}}
+                                                        <li class="list-inline-item" style="background-color: crimson;" data-id="{{this._id}}" onclick="LockAccount(this)">
+                                                            <a data-toggle="tooltip" data-placement="top"
+                                                                title="Lock account"><i class="fa fa-lock"
+                                                                    style="color: white"></i></a></li>
+                                                        {{/if}}
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
+                                        {{/each}}
                                     </div>
                                 </div>
                             </div>
@@ -60,3 +73,70 @@
 </div>
 
 {{> footer}}
+
+{{#section "js2"}}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+<script>
+    function LockAccount(element){
+        Warning("Lock this instructor?",()=>{
+            const id = jQuery(element).data("id");
+            const newData = {
+                id: id,
+                active: false
+            }
+            $.post("/admin/instructors/setActive", newData, function(err,status){
+                if(err){
+                    DisplayError(err);
+                }else{
+                    swal("Lock account successfully!", {
+                        icon: "success",
+                    }).then((value) => {
+                        location.reload();
+                    });
+                }
+            })
+        })
+    }
+    function UnlockAccount(element){
+        Warning("Unlock this instructor?",()=>{
+            const id = jQuery(element).data("id");
+            const newData = {
+                id: id,
+                active: true
+            }
+            $.post("/admin/instructors/setActive", newData, function(err,status){
+                if(err){
+                    DisplayError(err);
+                }else{
+                    swal("Unlock account successfully!", {
+                        icon: "success",
+                    }).then((value) => {
+                        location.reload();
+                    });
+                }
+            })
+        })
+    }
+    function DisplayError(message) {
+        swal({
+            title: "Something is wrong",
+            text: message,
+            icon: "error",
+            button: "Ok",
+        });
+    }
+    function Warning(message, callback) {
+        swal({
+            title: "Are you sure?",
+            text: message,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                callback();
+            }
+        });
+    }
+</script>
+{{/section}}

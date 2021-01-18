@@ -17,7 +17,7 @@ var accountSchema = new mongoose.Schema({
     },
 
     isActive: Boolean,
-    isLocked: Boolean,
+    isLock: Boolean,
     instructorBio: String
 })
 
@@ -59,7 +59,7 @@ async function checkEmail(email) {
     return r
 }
 
-async function add(info, type, isActive, isLocked) {
+async function add(info, type, isActive, isLock) {
     let r = { _error: null }
 
     r = { ...await checkEmail(info.email) }
@@ -72,7 +72,7 @@ async function add(info, type, isActive, isLocked) {
         "instructorBio": "",
         "type": type,
         "isActive": isActive,
-        "isLocked": isLocked
+        "isLock": isLock
     }
 
     console.log(new_account_info)
@@ -155,7 +155,7 @@ async function getAllStudent() {
 
 async function getAllLecturer() {
     let filter = {
-        "type": "lecturer"
+        type: "instructor"
     }
     let projection = {
         __v: 0
@@ -189,7 +189,7 @@ async function getByLogin(email, password) {
     let filter = {
         email: email
     }
-    let account = await accountModel.findOne(filter, { _id: 1, password: 1, name: 1, type: 1, isActive: 1, isLocked: 1 });
+    let account = await accountModel.findOne(filter, { _id: 1, password: 1, name: 1, type: 1, isActive: 1, isLock: 1 });
     if (!account) {
         r._error = "Account not exist"
         return r
@@ -200,7 +200,7 @@ async function getByLogin(email, password) {
                 r._error = "Your account is not activated. Please check your email."
                 return r
             }
-            else if (account.isLocked) {
+            else if (account.isLock) {
                 r._error = "Your account is locked. Please contact our administrators."
                 return r
             }
@@ -220,9 +220,9 @@ async function registerAccount(newAccount) {
     let r = { _error: null }
     let type = "student"
     let isActive = false
-    let isLocked = false
+    let isLock = false
     newAccount.password = bcrypt.hashSync(newAccount.password, BCRYPT_WORK_FACTOR)
-    r = { ...await add(newAccount, type, isActive, isLocked) }
+    r = { ...await add(newAccount, type, isActive, isLock) }
     return r
 }
 
@@ -231,11 +231,14 @@ async function setLockAccount(accountID, newState) {
         _id: accountID
     }
 
+    console.log(accountID)
+    console.log(newState)
+
     let projection = {
         __v: 0
     }
 
-    let specificAccount = accountModel.findOne(filter, projection, (err) => {
+    let specificAccount = await accountModel.findOne(filter, projection, (err) => {
         return null
     })
     if(specificAccount) {
