@@ -68,12 +68,22 @@ async function getAll() {
     return categoryObj;
 }
 
+async function getRaw() {
+    let projection = { __v: 0 };
+    let res = await categoryModel
+        .find({}, projection, (err) => {
+            return null;
+        })
+        .lean();
+    return res;
+}
+
 async function add(major, minor) {
     let newCategory = new categoryModel({
         major: major,
         minor: minor,
     });
-    newCategory.save((err) => {});
+    newCategory.save((err) => { });
 }
 
 async function edit(id, newMajor, newMinor) {
@@ -82,11 +92,11 @@ async function edit(id, newMajor, newMinor) {
         minor: newMinor,
     };
     let options = { upsert: false };
-    await categoryModel.findByIdAndUpdate(id, update, options, (err) => {});
+    await categoryModel.findByIdAndUpdate(id, update, options, (err) => { });
 }
 
 async function remove(id) {
-    await categoryModel.findByIdAndDelete(id, (err) => {});
+    await categoryModel.findByIdAndDelete(id, (err) => { });
 }
 
 async function removeIfEmpty(id) {
@@ -104,6 +114,18 @@ async function removeIfEmpty(id) {
     return r;
 }
 
+async function checkDuplicate(major, minor) {
+    let cat = await categoryModel.findOne({ major: major, minor: minor }, (err) => {
+        return true
+    })
+    if (cat) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
 /********************************************************************************/
 
 module.exports = {
@@ -113,4 +135,6 @@ module.exports = {
     add: add,
     edit: edit,
     remove: removeIfEmpty,
+    getRaw: getRaw,
+    checkDuplicate: checkDuplicate
 };
