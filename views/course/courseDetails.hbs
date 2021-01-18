@@ -224,11 +224,11 @@
                     </div>
                     {{#if User}}
                         {{#if (eq User.type 'student')}}
-                            <a href="#" class="cart_btnss">
+                            <a onclick="Enroll(this)" class="cart_btnss">
                                 <i class="fa fa-plus"></i>
                                 Enroll Now
                             </a>
-                            <a href="#" class="cart_btnss_white">
+                            <a onclick="AddToWatchList(this)" class="cart_btnss_white">
                                 <i class="fa fa-heart"></i>
                                 Add to Watchlist
                             </a>
@@ -276,3 +276,52 @@
     </div>
 </section>
 {{> footer}}
+
+{{#section "js2"}}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function Enroll(element){
+        const courseId = "{{specificCourse._id}}";
+        
+        const newData = {
+            id: courseId
+        }
+        $.post("/student/enroll",newData,function(err,status){
+            if(err){
+                DisplayError(err);
+            }else{
+                swal("Enroll successfully!", {
+                    icon: "success",
+                }).then((value) => {
+                    location.reload();
+                });
+            }
+        })
+    }
+    function AddToWatchList(element){
+        const courseId = "{{specificCourse._id}}";
+        const newData = {
+            id: courseId
+        }
+        $.post("/student/watchlist",newData,function(err,status){
+            if(err){
+                DisplayError(err);
+            }else{
+                swal("Add to watch list successfully!", {
+                    icon: "success",
+                }).then((value) => {
+                    location.reload();
+                });
+            }
+        })
+    }
+    function DisplayError(message) {
+        swal({
+            title: "Something is wrong",
+            text: message,
+            icon: "error",
+            button: "Ok",
+        });
+    }
+</script>
+{{/section}}

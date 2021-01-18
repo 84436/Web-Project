@@ -24,8 +24,9 @@ router.get("/enroll", async (i, o, next) => {
 
 })
 
-router.post("/enroll/:id", async (i, o, next) => {
-
+router.post("/enroll", async (i, o, next) => {
+    const resultSet = await activityModel.enrollCourse(i.body.id,i.session.User._id);
+    o.json(resultSet._error);
 })
 
 router.get("/profile", async (i, o, next) => {
@@ -77,8 +78,9 @@ router.get("/watchlist", async (i, o, next) => {
 
 })
 
-router.post("/watchlist/:id", async (i, o, next) => {
-
+router.post("/watchlist", async (i, o, next) => {
+    const resultSet = await activityModel.saveToWatchList(i.body.id,i.session.User._id);
+    o.json(resultSet._error);
 })
 
 router.post("/feedback/:id", async (i, o, next) => {
