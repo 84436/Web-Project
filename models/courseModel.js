@@ -357,6 +357,31 @@ async function topEnrollCourse() {
 
 /********************************************************************************/
 //PAGINATION NEEDDING
+async function getAll(sortPrice, sortRate) {
+    let r;
+    if (sortPrice) {
+        r = await courseModel
+            .find({}, (err) => {
+                return null;
+            })
+            .lean()
+            .populate({
+                path: "instructorID",
+            }).sort({ averageRate: -1 })
+    }
+    else if (sortRate) {
+        r = await courseModel
+            .find({}, (err) => {
+                return null;
+            })
+            .lean()
+            .populate({
+                path: "instructorID",
+            }).sort({ price: 1 })
+    }
+
+    return r;
+}
 async function getByCategory(categoryID) {
     let filter = {
         categoryID: categoryID,
@@ -569,5 +594,6 @@ module.exports = {
     addChapter: addChapter,
     addLesson: addLesson,
     topEnrollCourse: topEnrollCourse,
-    getCourseByLecturer: getCourseByLecturer
+    getCourseByLecturer: getCourseByLecturer,
+    getAll: getAll
 };
