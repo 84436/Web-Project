@@ -142,7 +142,7 @@ async function changePassword(id, oldpw, newpw) {
 
 async function getAllStudent() {
     let filter = {
-        type: "student"
+        "type": "student"
     }
     let projection = {
         __v: 0
@@ -155,7 +155,7 @@ async function getAllStudent() {
 
 async function getAllLecturer() {
     let filter = {
-        type: "lecturer"
+        "type": "lecturer"
     }
     let projection = {
         __v: 0
@@ -226,6 +226,26 @@ async function registerAccount(newAccount) {
     return r
 }
 
+async function setLockAccount(accountID, newState) {
+    let filter = {
+        _id: accountID
+    }
+
+    let projection = {
+        __v: 0
+    }
+
+    let specificAccount = accountModel.findOne(filter, projection, (err) => {
+        return null
+    })
+    if(specificAccount) {
+        specificAccount.isActive = newState
+        specificAccount.save()
+    }
+    return specificAccount
+}
+
+
 /********************************************************************************/
 
 module.exports = {
@@ -239,5 +259,6 @@ module.exports = {
     changePassword: changePassword,
     registerAccount: registerAccount,
     getAllStudent: getAllStudent,
-    getAllLecturer: getAllLecturer
+    getAllLecturer: getAllLecturer,
+    setLockAccount: setLockAccount
 }

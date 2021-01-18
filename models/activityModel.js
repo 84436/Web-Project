@@ -306,14 +306,17 @@ async function removeFromWatchList(courseID, studentID) {
 
 async function getAllEnrollList(studentID) {
     let filter = {
-        studentID: studentID,
-        inEnrolled: true
+        studentID: studentID
     }
-    let r = await activityModel.find(filter, (err) => {
+    let projection = {
+        _v : 0
+    }
+    let r = await activityModel.find(filter, projection, (err) => {
         return null
     })
     .populate({
-        path: "courseID"
+        path: "courseID",
+        select: "name"
     })
     .lean()
     return r
