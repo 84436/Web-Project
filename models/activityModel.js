@@ -265,9 +265,13 @@ async function saveToWatchList(courseID, studentID) {
         }
         return r
     }
-    else {
+    else if(activity.isWatching === false) {
         activity.isWatching = true
         await activity.save()
+    }
+    else {
+        r._error = "Course has been added to watcht list."
+        return r
     }
 
     return r = {...r, ...activity._doc}
