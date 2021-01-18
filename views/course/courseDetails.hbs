@@ -235,7 +235,7 @@
             <div class="col-lg-4 col-xl-3">
                 <div class="instructor_pricing_widget csv2">
                     <div class="price">
-                        ${{specificCourse.price}}
+                        ${{calSaleOff specificCourse.price specificCourse.discount}}
                         <small style="text-decoration: line-through;">${{specificCourse.price}}</small>
                     </div>
                     <a href="#" class="cart_btnss">
@@ -257,7 +257,7 @@
                             Completed <span class="float-right">{{specificCourse.isFinished}}</span>
                         </li>
                         <li class="d-flex justify-content-between align-items-center">
-                            Last updated <span class="float-right">{{specificCourse.lastUpdated}}</span>
+                            Last updated <span class="float-right">{{dateFormat specificCourse.lastUpdated}}</span>
                         </li>
                         <li class="d-flex justify-content-between align-items-center">
                             # of Enrollees <span class="float-right">{{specificCourse.enrollCount}}</span>
