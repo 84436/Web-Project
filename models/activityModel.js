@@ -105,7 +105,8 @@ async function setEnrollmentDate(studentID, courseID, time) {
 
 async function getFeedbackByCourse(courseID) {
     let filter = {
-        courseID: courseID
+        courseID: courseID,
+        feedback: { $ne: null }
     }
     let projection = { _id: 0, studentID: 1, feedback: 1 }
     let r = await activityModel.find(filter, projection, (err) => {
@@ -240,12 +241,7 @@ async function saveToWatchList(courseID, studentID) {
         studentID: studentID
     }
 
-    let projection = {
-        _id: 1,
-        isEnrolled: 1
-    }
-
-    let activity = await activityModel.findOne(filter, projection, (err) => {
+    let activity = await activityModel.findOne(filter, (err) => {
         return null
     })
     if (activity === null) {
@@ -274,7 +270,7 @@ async function saveToWatchList(courseID, studentID) {
         await activity.save()
     }
     else {
-        r._error = "Course has been added to watcht list."
+        r._error = "Course has been added to watch list."
         return r
     }
 
@@ -337,13 +333,7 @@ async function enrollCourse(studentID, courseID) {
         courseID: courseID
     }
 
-    let projection = {
-        _id: 1,
-        isWatching: 1,
-        isEnrolled: 1
-    }
-
-    specificCourse = await activityModel.findOne(filter, projection, (err) => {
+    let specificCourse = await activityModel.findOne(filter, (err) => {
         return null
     })
 

@@ -28,7 +28,7 @@ router.get("/enroll", async (i, o, next) => {
 })
 
 router.post("/enroll", async (i, o, next) => {
-    const resultSet = await activityModel.enrollCourse(i.body.id,i.session.User._id);
+    const resultSet = await activityModel.enrollCourse(i.session.User._id, i.body.id);
     o.json(resultSet._error);
 })
 
@@ -52,7 +52,6 @@ router.post("/profile/edit", async (i, o, next) => {
 
     if (!r._error) {
         let account = await accountModel.getByID(i.session.User._id);
-        console.log(account)
         i.session.User = {
             _id: account._id,
             name: account.name,
@@ -84,8 +83,16 @@ router.get("/watchlist", async (i, o, next) => {
     o.render("student/myWatchList")
 })
 
+router.get("/watchlist/remove/:id", async (i, o, next) => {
+    o.locals.catList = await categoryModel.getAll()
+    o.locals.User = i.session.User
+    await activityModel.removeFromWatchList(i.params.id, i.session.User._id)
+    o.locals.courseList = await activityModel.getAllWatchList(i.session.User._id)
+    o.redirect("/student/watchlist")
+})
+
 router.post("/watchlist", async (i, o, next) => {
-    const resultSet = await activityModel.saveToWatchList(i.body.id,i.session.User._id);
+    const resultSet = await activityModel.saveToWatchList(i.body.id, i.session.User._id);
     o.json(resultSet._error);
 })
 
