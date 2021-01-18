@@ -1,4 +1,17 @@
-{{> navbar}}
+<!-- Nav barrrrrr -->
+{{#if User}}
+    {{#if (eq User.type 'student')}}
+        {{> navbar-student}}
+    {{/if}}
+    {{#if (eq User.type 'instructor')}}
+        {{> navbar-instructor}}
+    {{/if}}
+    {{#if (eq User.type 'admin')}}
+        {{> navbar-admin}}
+    {{/if}}
+{{else}}
+    {{> navbar}}
+{{/if}}
 <!-- Inner Page Breadcrumb -->
 <section class="inner_page_breadcrumb">
     <div class="container">
