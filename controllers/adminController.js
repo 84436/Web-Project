@@ -26,7 +26,7 @@ router.get("/instructors", async (i, o, next) => {
 })
 
 router.post("/instructors/add", async (i, o, next) => {
-
+    
 })
 
 router.post("/instructors/setActive", async (i, o, next) => {

@@ -96,8 +96,9 @@ router.post("/watchlist", async (i, o, next) => {
     o.json(resultSet._error);
 })
 
-router.post("/feedback/:id", async (i, o, next) => {
-
+router.post("/feedback", async (i, o, next) => {
+    const resultSet = await activityModel.setFeedback(i.session.User._id, i.body.id,parseInt(i.body.rating), i.body.feedback);
+    o.json(null);
 })
 
 

@@ -375,22 +375,18 @@ async function enrollCourse(studentID, courseID) {
 // Return true if enrolled, false otherwise
 async function isCourseEnrolled(studentID, courseID) {
     let r = { _error: null }
-
+    console.log(studentID)
+    console.log(courseID)
     let filter = {
         studentID: studentID,
         courseID: courseID
     }
 
-    let projection = {
-        _id: 1,
-        isEnrolled: 1
-    }
 
-    var specificCourse = await activityModel.findOne(filter, projection, (err) => {
+    var specificCourse = await activityModel.findOne(filter, (err) => {
         return null
     })
-
-    if(specificCourse.isEnrolled === true) return true
+    if(specificCourse != null && specificCourse.isEnrolled === true) return true
     else return false
     
 }
