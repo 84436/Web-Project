@@ -34,26 +34,11 @@ router.get('/', async (i, o, next) => {
     }
 })
 
-
-router.get("/courses", async (i, o, next) => {
-    o.locals.User = i.session.User
-    o.locals.catList = await categoryModel.getAll()
-    if (i.query.sort === "price") {
-        o.locals.courseList = await courseModel.getAll()
-    }
-    else if (i.query.sort === "rate") {
-        o.locals.courseList = await courseModel.getAll()
-    }
-    o.locals.query = "All courses"
-    o.render("course/courseList")
-
-})
-
 router.get("/courses/:id", async (i, o, next) => {
     o.locals.User = i.session.User
     o.locals.catList = await categoryModel.getAll()
     o.locals.specificCourse = await courseModel.get_course(i.params.id)
-    o.locals.relatedCourse = await courseModel.topEnrollByCategory(o.locals.specificCourse.categoryID)
+    o.locals.relatedCourse = await courseModel.topEnrollByCategory(o.locals.specificCourse.categoryID, o.locals.specificCourse._id)
     o.locals.feedbackList = await activityModel.getFeedbackByCourse(i.params.id)
     o.render('course/courseDetails')
 })

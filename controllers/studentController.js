@@ -52,7 +52,6 @@ router.post("/profile/edit", async (i, o, next) => {
 
     if (!r._error) {
         let account = await accountModel.getByID(i.session.User._id);
-        console.log(account)
         i.session.User = {
             _id: account._id,
             name: account.name,

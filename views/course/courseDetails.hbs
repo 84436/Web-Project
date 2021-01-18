@@ -169,7 +169,7 @@
                     </div>
                     {{#each relatedCourse }}
                         <div class="col-lg-6 col-xl-4">
-                            <div class="top_courses">
+                            <div class="top_courses" onclick="getCourse(this)" data-courseid="{{this._id}}">
                                 <div class="thumb">
                                     <img class="img-whp" src="/images/courses/t1.jpg" alt="t1.jpg">
                                     <div class="overlay">
@@ -322,5 +322,10 @@
                 button: "Ok",
             });
         }
+        function getCourse(element) {
+            var value = $(element).data("courseid")
+            location.replace("/courses/" + value)
+        }
+
     </script>
 {{/section}}

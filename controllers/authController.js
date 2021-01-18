@@ -7,16 +7,6 @@ const emailService = require("../helpers/emailService")
 const accountModel = require("../models/accountModel")
 const categoryModel = require('../models/categoryModel')
 
-// router.use(function (i, o, next) {
-//     if (i.session.User && i.originalUrl !== "/logout") {
-//         console.log("Bi da cmnr")
-//         o.redirect("/")
-//     }
-//     else {
-//         next()
-//     }
-// })
-
 function mdwGuardian(i, o, next) {
     if (i.session.User && i.originalUrl !== "/logout") {
         o.redirect("/")
