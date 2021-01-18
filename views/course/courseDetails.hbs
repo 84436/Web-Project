@@ -193,7 +193,7 @@
                                             </li>
                                             <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
                                             </li>
-                                            <li class="list-inline-item"><a href="#">({{this.averageRate}})
+                                            <li class=""><a href="#">({{this.averageRate}})
                                                     {{this.feedbackCount}} students</a></li>
                                         </ul>
                                     </div>
@@ -224,11 +224,11 @@
                     </div>
                     {{#if User}}
                         {{#if (eq User.type 'student')}}
-                            <a onclick="Enroll(this)" class="cart_btnss">
+                            <a onclick="Enroll(this)" class="cart_btnss" style="cursor: pointer;">
                                 <i class="fa fa-plus"></i>
                                 Enroll Now
                             </a>
-                            <a onclick="AddToWatchList(this)" class="cart_btnss_white">
+                            <a onclick="AddToWatchList(this)" class="cart_btnss_white" style="cursor: pointer;">
                                 <i class="fa fa-heart"></i>
                                 Add to Watchlist
                             </a>
@@ -276,52 +276,51 @@
     </div>
 </section>
 {{> footer}}
-
 {{#section "js2"}}
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-    function Enroll(element){
-        const courseId = "{{specificCourse._id}}";
-        
-        const newData = {
-            id: courseId
-        }
-        $.post("/student/enroll",newData,function(err,status){
-            if(err){
-                DisplayError(err);
-            }else{
-                swal("Enroll successfully!", {
-                    icon: "success",
-                }).then((value) => {
-                    location.reload();
-                });
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        function Enroll(element) {
+            const courseId = "{{specificCourse._id}}";
+
+            const newData = {
+                id: courseId
             }
-        })
-    }
-    function AddToWatchList(element){
-        const courseId = "{{specificCourse._id}}";
-        const newData = {
-            id: courseId
+            $.post("/student/enroll", newData, function (err, status) {
+                if (err) {
+                    DisplayError(err);
+                } else {
+                    swal("Enroll successfully!", {
+                        icon: "success",
+                    }).then((value) => {
+                        location.reload();
+                    });
+                }
+            })
         }
-        $.post("/student/watchlist",newData,function(err,status){
-            if(err){
-                DisplayError(err);
-            }else{
-                swal("Add to watch list successfully!", {
-                    icon: "success",
-                }).then((value) => {
-                    location.reload();
-                });
+        function AddToWatchList(element) {
+            const courseId = "{{specificCourse._id}}";
+            const newData = {
+                id: courseId
             }
-        })
-    }
-    function DisplayError(message) {
-        swal({
-            title: "Something is wrong",
-            text: message,
-            icon: "error",
-            button: "Ok",
-        });
-    }
-</script>
+            $.post("/student/watchlist", newData, function (err, status) {
+                if (err) {
+                    DisplayError(err);
+                } else {
+                    swal("Add to watch list successfully!", {
+                        icon: "success",
+                    }).then((value) => {
+                        location.reload();
+                    });
+                }
+            })
+        }
+        function DisplayError(message) {
+            swal({
+                title: "Something is wrong",
+                text: message,
+                icon: "error",
+                button: "Ok",
+            });
+        }
+    </script>
 {{/section}}
