@@ -123,21 +123,18 @@ async function edit(id, new_info) {
     return r
 }
 
-async function changePassword(id, oldpw, newpw, confirmpw) {
+async function changePassword(id, oldpw, newpw) {
     let account = await accountModel.findById(id, { _id: 1, password: 1 })
     if (!account) {
         return false
     }
     var oldpwHash = account.password
-    console.log(oldpwHash)
     if (!bcrypt.compareSync(oldpw, oldpwHash)) {
         return false
     }
 
     let newpwHash = bcrypt.hashSync(newpw, BCRYPT_WORK_FACTOR)
-    if (!bcrypt.compareSync(confirmpw, newpwHash)) {
-        return false
-    }
+
     account.password = newpwHash
     account.save()
     return true

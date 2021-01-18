@@ -31,11 +31,36 @@ router.get("/profile", async (i, o, next) => {
     let r = await accountModel.getByID(i.session.User._id)
     let account = {
         email: r.email,
-        name: r.name
+        name: r.name,
     }
     o.locals.User = account
     o.locals.catList = await categoryModel.getAll()
     o.render("student/myProfile")
+})
+
+router.post("/profile/edit", async (i, o, next) => {
+    let email = i.body.email
+    let name = i.body.name
+
+    // Cookie
+    let r = await accountModel.edit(i.session.User._id, { email: email, name: name });
+
+    if (!r._error) {
+        let account = await accountModel.getByID(i.session.User._id);
+        console.log(account)
+        i.session.User = {
+            _id: account._id,
+            name: account.name,
+            email: account.email,
+            type: account.type
+        }
+        o.locals.User = i.session.User
+
+        o.json(null)
+    }
+    else {
+        o.json(r)
+    }
 })
 
 router.get("/watchlist", async (i, o, next) => {

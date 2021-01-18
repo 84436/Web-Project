@@ -199,3 +199,13 @@
         </ul>
     </nav>
 </div>
+{{#section "js"}}
+    <script>
+        jQuery("#mk-fullscreen-searchform").on("submit", function () {
+            event.preventDefault();
+            const search = jQuery("#mk-fullscreen-search-input").val();
+            const url = `/courses/byQuery/${search}/?sort=rate`;
+            location.replace(url);
+        })
+    </script>
+{{/section}}
