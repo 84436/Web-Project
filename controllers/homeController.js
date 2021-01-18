@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const activityModel = require('../models/activityModel');
 const router = express.Router()
 
 const categoryModel = require("../models/categoryModel")
@@ -49,8 +50,11 @@ router.get("/courses", async (i, o, next) => {
 })
 
 router.get("/courses/:id", async (i, o, next) => {
+    o.locals.User = i.session.User
+    o.locals.catList = await categoryModel.getAll()
     o.locals.specificCourse = await courseModel.get_course(i.params.id)
     o.locals.relatedCourse = await courseModel.topEnrollByCategory(o.locals.specificCourse.categoryID)
+    o.locals.feedbackList = await activityModel.getFeedbackByCourse(i.params.id)
     o.render('course/courseDetails')
 })
 
