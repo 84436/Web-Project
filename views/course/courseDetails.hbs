@@ -1,5 +1,16 @@
-{{> navbar}}
-
+{{#if User}}
+    {{#if (eq User.type 'student')}}
+        {{> navbar-student}}
+    {{/if}}
+    {{#if (eq User.type 'instructor')}}
+        {{> navbar-instructor}}
+    {{/if}}
+    {{#if (eq User.type 'admin')}}
+        {{> navbar-admin}}
+    {{/if}}
+{{else}}
+    {{> navbar}}
+{{/if}}
 <!-- Inner Page Breadcrumb -->
 <section class="inner_page_breadcrumb csv2">
     <div class="container">
@@ -23,7 +34,8 @@
                                 <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
                                 <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li class="list-inline-item"><a class="color-white" href="#">{{specificCourse.averageRate}} ({{specificCourse.feedbackCount}}
+                                <li class="list-inline-item"><a class="color-white"
+                                        href="#">{{specificCourse.averageRate}} ({{specificCourse.feedbackCount}}
                                         Ratings)</a></li>
                             </ul>
                         </div>
@@ -33,7 +45,6 @@
         </div>
     </div>
 </section>
-
 <!-- Our Team Members -->
 <section class="course-single2 pb40">
     <div class="container">
@@ -46,7 +57,8 @@
                                 <div class="cs_ins_container">
                                     <div class="courses_big_thumb">
                                         <div class="thumb">
-                                            <img alt="Course banner" style="background-size: cover;" src="/images/background/3.jpg" />
+                                            <img alt="Course banner" style="background-size: cover;"
+                                                src="/images/background/3.jpg" />
                                         </div>
                                     </div>
                                 </div>
@@ -54,8 +66,8 @@
                             <div class="cs_rwo_tabs csv2">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link" id="course-tab" data-toggle="tab" href="#course" role="tab"
-                                            aria-controls="course" aria-selected="false">Content</a>
+                                        <a class="nav-link active" id="course-tab" data-toggle="tab" href="#course"
+                                            role="tab" aria-controls="course" aria-selected="false">Content</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="instructor-tab" data-toggle="tab" href="#instructor"
@@ -67,7 +79,8 @@
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade" id="course" role="tabpanel" aria-labelledby="review-tab">
+                                    <div class="tab-pane fade active show" id="course" role="tabpanel"
+                                        aria-labelledby="review-tab">
                                         <div class="cs_row_three csv2">
                                             <div class="course_content">
                                                 <div class="cc_headers">
@@ -76,35 +89,15 @@
                                                 <br>
                                                 <div class="details">
                                                     {{#each specificCourse.content }}
-                                                    <div id="accordion" class="panel-group cc_tab">
-                                                        <div class="panel">
-                                                            <div class="panel-heading">
-                                                                <h4 class="panel-title">
-                                                                    <a href="#panelBodyCourseStart"
-                                                                        class="accordion-toggle link"
-                                                                        data-toggle="collapse"
-                                                                        data-parent="#accordion">{{this.name}}</a>
-                                                                </h4>
-                                                            </div>
-                                                            <div id="panelBodyCourseStart"
-                                                                class="panel-collapse collapse show">
-                                                                <div class="panel-body">
-                                                                    <ul class="cs_list mb0">
-                                                                        <li>
-                                                                            {{#each this.lessons}}
-                                                                            <a href="#">
-                                                                                <span class="flaticon-play-button-1 icon"></span>
-                                                                                {{this.name}}
-                                                                                <span class="cs_time">02:53</span>
-                                                                                <span class="cs_preiew">{{this.text}}</span>
-                                                                            </a>
-                                                                            {{/each}}
-                                                                        </li>
-                                                                    </ul>
+                                                        <div id="accordion" class="panel-group cc_tab">
+                                                            <div class="panel">
+                                                                <div class="panel-heading">
+                                                                    <h4 class="panel-title">
+                                                                        <a href="#">{{this.name}}</a>
+                                                                    </h4>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                     {{/each}}
                                                 </div>
                                             </div>
@@ -115,50 +108,38 @@
                                         <div class="cs_row_four csv2">
                                             <div class="about_ins_container">
                                                 <h4 class="aii_title">About the instructor</h4>
-                                                <div class="details">
-                                                    <ul class="review_list">
+                                                <ul class="review_list">
                                                     <h4>{{specificCourse.instructorID.name}}</h4>
                                                     <p class="mb25">{{specificCourse.instructorID.instructorBio}}</p>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                                         <div class="cs_row_six csv2">
                                             {{#each feedbackList}}
-                                            <div class="sfeedbacks">
-                                                <div class="mbp_pagination_comments">
-                                                    <div class="mbp_first media csv1">
-                                                        <img src="/images/resource/review1.png" class="mr-3"
-                                                            alt="review1.png">
-                                                        <div class="media-body">
-                                                            <h4 class="sub_title mt-0"> {{this.studentID.name}}
-                                                                <span class="sspd_review float-right">
-                                                                    <ul>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fa fa-star"></i></a>
-                                                                        </li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fa fa-star"></i></a>
-                                                                        </li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fa fa-star"></i></a>
-                                                                        </li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fa fa-star"></i></a>
-                                                                        </li>
-                                                                        <li class="list-inline-item"><a href="#"><i
-                                                                                    class="fa fa-star"></i></a>
-                                                                        </li>
-                                                                        <li class="list-inline-item"></li>
-                                                                    </ul>
-                                                                </span>
-                                                            </h4>
-                                                            <p class="fz15 mt20">{{this.feedback.content}}</p>
+                                                <div class="sfeedbacks" style="padding-top: 5px;">
+                                                    <div class="mbp_pagination_comments">
+                                                        <div class="mbp_first media csv1">
+                                                            <img src="/images/resource/review1.png" class="mr-3"
+                                                                alt="review1.png">
+                                                            <div class="media-body">
+                                                                <h4 class="sub_title mt-0"> {{this.studentID.name}}
+                                                                    <span class="sspd_review float-right">
+                                                                        <ul>
+                                                                            <li class="list-inline-item">
+                                                                                {{this.feedback.rate}}
+                                                                            </li>
+                                                                            <li class="list-inline-item"><i
+                                                                                    class="fa fa-star"></i>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </span>
+                                                                </h4>
+                                                                <p class="fz15 mt20">{{this.feedback.content}}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             {{/each}}
                                         </div>
                                         <div class="cs_row_seven csv2">
@@ -187,65 +168,91 @@
                         <h3 class="r_course_title">Related Courses</h3>
                     </div>
                     {{#each relatedCourse }}
-                    <div class="col-lg-6 col-xl-4">
-                        <div class="top_courses">
-                            <div class="thumb">
-                                <img class="img-whp" src="/images/courses/t1.jpg" alt="t1.jpg">
-                                <div class="overlay">
-                                    <div class="tag">Best Seller</div>
-                                    <div class="icon"><span class="flaticon-like"></span></div>
-                                    <a class="tc_preview_course" href="#">Preview Course</a>
+                        <div class="col-lg-6 col-xl-4">
+                            <div class="top_courses">
+                                <div class="thumb">
+                                    <img class="img-whp" src="/images/courses/t1.jpg" alt="t1.jpg">
+                                    <div class="overlay">
+                                        <div class="tag">Best Seller</div>
+                                        <div class="icon"><span class="flaticon-like"></span></div>
+                                        <a class="tc_preview_course" href="#">Preview Course</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="details">
-                                <div class="tc_content">
-                                    <p>{{this.instructorID.name}}</p>
-                                    <h5>{{this.name}}</h5>
-                                    <ul class="tc_review">
-                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#">({{this.averageRate}}) {{this.feedbackCount}} students</a></li>
-                                    </ul>
-                                </div>
-                                <div class="tc_footer">
-                                    <ul class="tc_meta float-left">
-                                        <li class="list-inline-item"><a href="#"><i class="flaticon-profile"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#">{{this.enrollCount}}</a></li>
-                                        <li class="list-inline-item"><a href="#"><i class="flaticon-comment"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#">{{this.feedbackCount}}</a></li>
-                                    </ul>
-                                    <div class="tc_price float-right">${{this.price}}</div>
+                                <div class="details">
+                                    <div class="tc_content">
+                                        <p>{{this.instructorID.name}}</p>
+                                        <h5>{{this.name}}</h5>
+                                        <ul class="tc_review">
+                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#">({{this.averageRate}})
+                                                    {{this.feedbackCount}} students</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tc_footer">
+                                        <ul class="tc_meta float-left">
+                                            <li class="list-inline-item"><a href="#"><i
+                                                        class="flaticon-profile"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#">{{this.enrollCount}}</a></li>
+                                            <li class="list-inline-item"><a href="#"><i
+                                                        class="flaticon-comment"></i></a>
+                                            </li>
+                                            <li class="list-inline-item"><a href="#">{{this.feedbackCount}}</a></li>
+                                        </ul>
+                                        <div class="tc_price float-right">${{this.price}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     {{/each}}
                 </div>
             </div>
             <div class="col-lg-4 col-xl-3">
                 <div class="instructor_pricing_widget csv2">
                     <div class="price">
-                        ${{specificCourse.price}}
+                        ${{calSaleOff specificCourse.price specificCourse.discount}}
                         <small style="text-decoration: line-through;">${{specificCourse.price}}</small>
                     </div>
-                    <a href="#" class="cart_btnss">
-                        <i class="fa fa-plus"></i>
-                        Enroll Now
-                    </a>
-                    <a href="#" class="cart_btnss_white">
-                        <i class="fa fa-heart"></i>
-                        Add to Watchlist
-                    </a>
+                    {{#if User}}
+                        {{#if (eq User.type 'student')}}
+                            <a href="#" class="cart_btnss">
+                                <i class="fa fa-plus"></i>
+                                Enroll Now
+                            </a>
+                            <a href="#" class="cart_btnss_white">
+                                <i class="fa fa-heart"></i>
+                                Add to Watchlist
+                            </a>
+                        {{else}}
+                            <a href="#" class="btn cart_btnss disabled" style="border-radius: 27px; line-height: 2.5em">
+                                <i class="fa fa-plus"></i>
+                                Enroll Now
+                            </a>
+                            <a href="#" class="btn cart_btnss_white disabled"
+                                style="border-radius: 27px; line-height: 2.5em">
+                                <i class="fa fa-heart"></i>
+                                Add to Watchlist
+                            </a>
+                        {{/if}}
+                    {{else}}
+                        <a href="#" class="btn cart_btnss disabled" style="border-radius: 27px; line-height: 2.5em">
+                            <i class="fa fa-plus"></i>
+                            Enroll Now
+                        </a>
+                        <a href="#" class="btn cart_btnss_white disabled"
+                            style="border-radius: 27px; line-height: 2.5em">
+                            <i class="fa fa-heart"></i>
+                            Add to Watchlist
+                        </a> {{/if}}
                 </div>
                 <div class="feature_course_widget csv1">
                     <ul class="list-group">
@@ -257,7 +264,7 @@
                             Completed <span class="float-right">{{specificCourse.isFinished}}</span>
                         </li>
                         <li class="d-flex justify-content-between align-items-center">
-                            Last updated <span class="float-right">{{specificCourse.lastUpdated}}</span>
+                            Last updated <span class="float-right">{{dateFormat specificCourse.lastUpdated}}</span>
                         </li>
                         <li class="d-flex justify-content-between align-items-center">
                             # of Enrollees <span class="float-right">{{specificCourse.enrollCount}}</span>
@@ -268,5 +275,4 @@
         </div>
     </div>
 </section>
-
 {{> footer}}

@@ -2,6 +2,7 @@ const express_handlebars = require('express-handlebars')
 const path = require('path')
 const express_handlebars_sections = require("express-handlebars-sections");
 const hbsHelper = require("../helpers/hbshelper");
+const { dateFormat } = require('../helpers/hbshelper');
 // https://github.com/ericf/express-handlebars
 // https://stackoverflow.com/a/40898191
 function configure(app) {
@@ -12,7 +13,9 @@ function configure(app) {
         partialsDir: path.join(__dirname, "../views/partials"),
         helpers: {
             section: express_handlebars_sections(),
-            eq: hbsHelper.eq
+            eq: hbsHelper.eq,
+            dateFormat: hbsHelper.dateFormat,
+            calSaleOff: hbsHelper.calSaleOff
         }
     };
     app.engine('hbs', express_handlebars(ExpressHandlebarsOptions))

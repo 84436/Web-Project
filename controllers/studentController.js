@@ -21,6 +21,7 @@ router.use(function (i, o, next) {
 })
 
 router.get("/enroll", async (i, o, next) => {
+
 })
 
 router.post("/enroll/:id", async (i, o, next) => {
@@ -63,11 +64,11 @@ router.post("/profile/edit", async (i, o, next) => {
     }
 })
 
-router.post("/profile/edit/pass",async (i, o, next) => {
+router.post("/profile/edit/pass", async (i, o, next) => {
     const resultSet = await accountModel.changePassword(i.session.User._id, i.body.oldPass, i.body.newPass);
-    if(resultSet){
+    if (resultSet) {
         o.json(null);
-    }else{
+    } else {
         o.json("Password is incorrect!");
     }
 })

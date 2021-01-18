@@ -12,11 +12,11 @@ router.use(function (i, o, next) {
             return next();
         }
         else {
-            o.redirect("/")
+            o.redirect("/");
         }
     }
     else {
-        o.redirect("/")
+        o.redirect("/");
     }
 })
 
@@ -30,11 +30,21 @@ router.get("/profile", async (i, o, next) => {
             instructorBio: resultSet.instructorBio === "" ? null : resultSet.instructorBio
         }
     }
-    o.render("instructor/myProfile")
+    o.render("instructor/myProfile");
 })
 
-router.get("/courses/all", async (i, o, next) => {
-
+router.get("/courses", async (i, o, next) => {
+    const courses = await courseModel.getCourseByLecturer(i.session.User._id);
+    o.locals.listCourses = [];
+    for (const item of courses) {
+        o.locals.listCourses.push({
+            id: item._id,
+            name: item.name,
+            desc: item.desc.short
+        })
+    }
+    console.log(o.locals.listCourses);
+    o.render("instructor/myCourses");
 })
 
 router.post("/courses/add", async (i, o, next) => {
@@ -50,7 +60,6 @@ router.post("/courses/add/:id", async (i, o, next) => {
 })
 
 router.post("/profile/edit",async (i, o, next) => {
-    console.log(i.body);
     let email = i.body.email
     let name = i.body.name
     let instructorBio = i.body.instructorBio
