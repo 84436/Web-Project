@@ -49,7 +49,7 @@ router.get("/courses", async (i, o, next) => {
 })
 
 router.get("/courses/:id", async (i, o, next) => {
-
+    
 })
 
 router.get("/courses/byQuery/:search", async (i, o, next) => {
