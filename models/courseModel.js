@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const activityModel = require("./activityModel");
 
 var courseSchema = new mongoose.Schema({
     // course + instructor
@@ -207,14 +208,6 @@ async function remove_chapter(chapterID) {
 /********************************************************************************/
 // Lessons
 
-async function get_lesson(lessonID) {
-    let projection = { __v: 0 };
-    return await courseLessonModel
-        .findById(lessonID, projection, (err) => {
-            return null;
-        })
-        .lean();
-}
 async function setUpdateTime(courseID) {
     let update = {
         "lastUpdated": new Date()
@@ -228,35 +221,7 @@ async function setUpdateTime(courseID) {
     )
 }
 
-async function add_lesson(chapterID, lessonInfo) {
-    let newLesson = new courseLessonModel({
-        chapterID: chapterID,
-        name: lessonInfo.name,
-        text: lessonInfo.text,
-        video: lessonInfo.video,
-    });
-    let r = await newLesson.save();
-    return r;
-}
 
-async function update_lesson(lessonID, lessonInfo) {
-    let update = {
-        name: lessonInfo.name,
-        text: lessonInfo.text,
-        video: lessonInfo.video,
-    };
-    let options = { upsert: false };
-    await courseLessonModel.findByIdAndUpdate(
-        lessonID,
-        update,
-        options,
-        (err) => { }
-    );
-}
-
-async function remove_lesson(lessonID) {
-    await courseLessonModel.findByIdAndDelete(lessonID, (err) => { });
-}
 
 /********************************************************************************/
 // Top enrolling categories
@@ -559,6 +524,36 @@ function getCourseByLecturer(lecturerID) {
         .lean()
     return r
 }
+
+// Return true if is course instructor, false otherwise
+async function isCourseInstructor(courseID, instructorID) {
+    let filter = {
+        _id: courseID
+    }
+
+    let projection = {
+        _id: 1,
+        instructorID: 1,
+    }
+
+    var specificCourse = await courseModel.findOne(filter, projection, (err) => {
+        return null
+    })
+
+    if(specificCourse.instructorID.equals(instructorID)) return true
+    else return false
+}
+
+async function lockCourse(courseID, state) {
+    let update = {
+        $set: {
+            isEnable: state,
+        },
+    };
+
+    await courseModel.findByIdAndUpdate(courseID, update, (err) => { });
+}
+
 /********************************************************************************/
 
 module.exports = {
@@ -570,11 +565,7 @@ module.exports = {
     add_chapter: add_chapter,
     update_chapter: update_chapter,
     remove_chapter: remove_chapter,
-    get_lesson: get_lesson,
-    add_lesson: add_lesson,
     setUpdateTime: setUpdateTime,
-    update_lesson: update_lesson,
-    remove_lesson: remove_lesson,
     viewCount_plus: viewCount_plus,
     viewCount_minus: viewCount_minus,
     enrollCount_plus: enrollCount_plus,
@@ -593,5 +584,7 @@ module.exports = {
     addLesson: addLesson,
     topEnrollCourse: topEnrollCourse,
     getCourseByLecturer: getCourseByLecturer,
-    getAll: getAll
+    getAll: getAll,
+    isCourseInstructor: isCourseInstructor,
+    lockCourse: lockCourse
 };

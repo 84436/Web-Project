@@ -382,6 +382,28 @@ async function enrollCourse(studentID, courseID) {
     else { r._error = "Course has been enrolled"; return r }
 }
 
+// Return true if enrolled, false otherwise
+async function isCourseEnrolled(studentID, courseID) {
+    let r = { _error: null }
+
+    let filter = {
+        studentID: studentID,
+        courseID: courseID
+    }
+
+    let projection = {
+        _id: 1,
+        isEnrolled: 1
+    }
+
+    var specificCourse = await activityModel.findOne(filter, projection, (err) => {
+        return null
+    })
+
+    if(specificCourse.isEnrolled === true) return true
+    else return false
+    
+}
 /********************************************************************************/
 
 module.exports = {
@@ -401,5 +423,6 @@ module.exports = {
     saveToWatchList: saveToWatchList,
     removeFromWatchList: removeFromWatchList,
     getAllEnrollList: getAllEnrollList,
-    enrollCourse: enrollCourse
+    enrollCourse: enrollCourse,
+    isCourseEnrolled: isCourseEnrolled,
 }
