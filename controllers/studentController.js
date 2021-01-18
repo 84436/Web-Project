@@ -21,7 +21,10 @@ router.use(function (i, o, next) {
 })
 
 router.get("/enroll", async (i, o, next) => {
-
+    o.locals.catList = await categoryModel.getAll()
+    o.locals.User = i.session.User
+    o.locals.courseList = await activityModel.getAllEnrollList(i.session.User._id)
+    o.render("student/myEnrolled")
 })
 
 router.post("/enroll", async (i, o, next) => {
@@ -75,7 +78,10 @@ router.post("/profile/edit/pass", async (i, o, next) => {
 })
 
 router.get("/watchlist", async (i, o, next) => {
-
+    o.locals.catList = await categoryModel.getAll()
+    o.locals.User = i.session.User
+    o.locals.courseList = await activityModel.getAllWatchList(i.session.User._id)
+    o.render("student/myWatchList")
 })
 
 router.post("/watchlist", async (i, o, next) => {
