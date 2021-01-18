@@ -239,7 +239,7 @@ async function setLockAccount(accountID, newState) {
         return null
     })
     if(specificAccount) {
-        specificAccount.isActive = newState
+        specificAccount.isLock = newState
         specificAccount.save()
     }
     return specificAccount
