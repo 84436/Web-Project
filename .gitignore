@@ -116,3 +116,6 @@ test.js
 
 # Personal VSCODE
 .vscode/settings.json
+
+# Local videos
+public/videos
