@@ -21,7 +21,16 @@ router.use(function (i, o, next) {
 })
 
 router.get("/profile", async (i, o, next) => {
-
+    const resultSet = await accountModel.getByID(i.session.User._id);
+    if(!resultSet.error){
+        o.locals.User = {
+            id: i.session.User._id,
+            name: resultSet.name,
+            email: resultSet.email,
+            instructorBio: resultSet.instructorBio === "" ? null : resultSet.instructorBio
+        }
+    }
+    o.render("instructor/myProfile")
 })
 
 router.get("/courses/all", async (i, o, next) => {
@@ -40,6 +49,38 @@ router.post("/courses/add/:id", async (i, o, next) => {
 
 })
 
+router.post("/profile/edit",async (i, o, next) => {
+    console.log(i.body);
+    let email = i.body.email
+    let name = i.body.name
+    let instructorBio = i.body.instructorBio
+    // Cookie
+    let r = await accountModel.edit(i.session.User._id, { email: email, name: name,instructorBio: instructorBio });
+    console.log(r);
+    if (!r._error) {
+        let account = await accountModel.getByID(i.session.User._id);
+        i.session.User = {
+            _id: account._id,
+            name: account.name,
+            email: account.email,
+            instructorBio: instructorBio,
+            type: account.type
+        }
+        o.locals.User = i.session.User
 
+        o.json(null)
+    }
+    else {
+        o.json(r)
+    }
+})
+router.post("/profile/edit/pass",async (i, o, next) => {
+    const resultSet = await accountModel.changePassword(i.session.User._id, i.body.oldPass, i.body.newPass);
+    if(resultSet){
+        o.json(null);
+    }else{
+        o.json("Password is incorrect!");
+    }
+})
 
 module.exports = router

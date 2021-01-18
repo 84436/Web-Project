@@ -107,17 +107,17 @@
                                                 <form>
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Old Password</label>
-                                                        <input id="old-pass" type="password" class="form-control"
+                                                        <input type="password" class="form-control"
                                                             id="exampleInputPassword1">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword2">New Password</label>
-                                                        <input id="new-pass" type="password" class="form-control"
+                                                        <input type="password" class="form-control"
                                                             id="exampleInputPassword2">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword3">Confirm Password</label>
-                                                        <input id="cf-pass" type="password" class="form-control mb0"
+                                                        <input type="password" class="form-control mb0"
                                                             id="exampleInputPassword3">
                                                     </div>
                                                 </form>
@@ -126,9 +126,9 @@
                                     </div>
                                     <div class="row my_setting_content_details">
                                         <div class="col-lg-12">
-                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm">Change
+                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm" onclick="SaveChangePassword()">Change
                                                 <span class="flaticon-right-arrow-1 ml15"></span></button>
-                                            <span id="change-error" style="margin-left: 20px;"
+                                            <span id="change-errorPass" style="margin-left: 20px;"
                                                 class="text-danger"></span>
                                         </div>
                                     </div>
@@ -179,6 +179,50 @@
                     location.replace("/student/profile");
                 }
             })
+        }
+
+
+        const errorPassElement = jQuery("#change-errorPass")
+        function DisplayError(message) {
+            errorPassElement[0].innerHTML = message;
+            return false;
+        }
+        function CheckValidInput(oldPass, newPass, confirmPass) {
+            if (oldPass.length === 0)
+                return DisplayError("Old password is empty!");
+            if (newPass.length === 0)
+                return DisplayError("New password is empty!");
+            if (newPass !== confirmPass)
+                return DisplayError("Confirm password is not match!");
+            return true;
+        }
+        function SaveChangePassword() {
+            const oldPass = jQuery("#exampleInputPassword1").val();
+            const newPass = jQuery("#exampleInputPassword2").val();
+            const confirmPass = jQuery("#exampleInputPassword3").val();
+            if (CheckValidInput(oldPass, newPass, confirmPass)) {
+                const newData = {
+                    oldPass: oldPass,
+                    newPass: newPass
+                }
+                $.post('/student/profile/edit/pass', newData, function (err, status) {
+                    if (err) {
+                        DisplayError(err);
+                    } else {
+                        errorPassElement[0].innerHTML = "Change password successfully!";
+                        errorPassElement.removeClass("text-danger");
+                        errorPassElement.addClass("text-success");
+                        jQuery("#exampleInputPassword1").val("");
+                        jQuery("#exampleInputPassword2").val("");
+                        jQuery("#exampleInputPassword3").val("");
+                        setTimeout(() => {
+                            errorPassElement[0].innerHTML = "";
+                            errorPassElement.removeClass("text-success");
+                            errorPassElement.addClass("text-danger");
+                        }, 2000);
+                    }
+                })
+            }
         }
     </script>
 {{/section}}

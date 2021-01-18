@@ -63,6 +63,15 @@ router.post("/profile/edit", async (i, o, next) => {
     }
 })
 
+router.post("/profile/edit/pass",async (i, o, next) => {
+    const resultSet = await accountModel.changePassword(i.session.User._id, i.body.oldPass, i.body.newPass);
+    if(resultSet){
+        o.json(null);
+    }else{
+        o.json("Password is incorrect!");
+    }
+})
+
 router.get("/watchlist", async (i, o, next) => {
 
 })
