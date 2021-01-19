@@ -119,13 +119,7 @@ async function get_course(courseID) {
 
 async function add_course(courseInfo) {
     let newCourse = new courseModel(courseInfo);
-
-    let r = newCourse.save();
-
-    let uploader = require("../config/file-upload");
-    let filename = uploader.uploadImage(courseInfo.banner, r._id);
-
-    await update_course(r._id, { banner: filename });
+    return newCourse.save();
 }
 
 async function remove_course(courseID) {
