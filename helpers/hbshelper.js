@@ -9,5 +9,8 @@ module.exports = {
     calSaleOff(price, discount){
         const saleOffPrice = price - price*discount;
         return saleOffPrice.toFixed(2);
+    },
+    completeness(state) {
+        return (state === true) ? "Completed" : "Ongoing"
     }
 };
