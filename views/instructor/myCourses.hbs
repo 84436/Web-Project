@@ -57,7 +57,10 @@
                                                                     data-toggle="tooltip" data-placement="top"
                                                                     title="Go to course"><i class="fa fa-arrow-right"
                                                                         style="color: white"></i></a></li>
-                                                            <li class="list-inline-item" style="display: none;"></li>
+                                                            <li class="list-inline-item"><a href="/courses/edit/{{id}}"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    title="Edit course"><i class="fa fa-pencil"
+                                                                        style="color: white"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -66,6 +69,13 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button id="save-btn" class="my_setting_savechange_btn btn btn-thm">
+                                <a href="/instructor/courses/add" style="color: white;">
+                                    <i class="fa fa-plus"></i> Add course
+                                </a>
+                            </button>
                         </div>
                     </div>
                 </div>
