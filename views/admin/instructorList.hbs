@@ -33,25 +33,64 @@
                         <div class="col-lg-12">
                             <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
                                 <h4 class="title float-left">Instructor List</h4>
-                                <div class="float-right">10 instructors total</div>
+                                <div class="float-right">{{listInstructors.length}} instructors total</div>
                             </nav>
                         </div>
                         <div class="col-lg-12">
                             <div class="my_course_content_container">
                                 <div class="my_course_content mb30" style="padding-top: 0">
                                     <div class="my_course_content_list">
+                                        <h3 style="padding-left: 10px">Add instructor</h3>
+                                        <div class="mc_content_list" style="padding: 8px; padding-top: 16px;">
+                                            <div class="details" style="width: 100%;">
+                                                <div class="mc_content"
+                                                    style="display: grid; grid-auto-columns: 1fr auto;">
+                                                    <div class="col-xl-12">
+                                                        <div class="row">
+                                                            <div class="col-xl-5">
+                                                                <div class="my_profile_setting_input form-group">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="Name" id="name">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-5">
+                                                                <div class="my_profile_setting_input form-group">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="Email" id="email">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2">
+                                                                <ul class="view_edit_delete_list float-right"
+                                                                    style="grid-row: 1">
+                                                                    <li class="list-inline-item" style="display: none;">
+                                                                    </li>
+                                                                    <li class="list-inline-item"><a
+                                                                            onclick="createInstructor()"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Add instructor"><i class="fa fa-plus"
+                                                                                style="color: white"></i></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <p id="error" class="text-danger" style="padding-left: 20px;">
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- TEMPLATEME! -->
                                         {{#each listInstructors}}
-                                            <!-- TEMPLATEME! -->
-                                            <div class="mc_content_list" style="padding: 8px;">
+                                            <div class="mc_content_list" style="padding: 8px; padding-top: 16px;">
                                                 <div class="details" style="width: 100%;">
                                                     <div class="mc_content"
                                                         style="display: grid; grid-auto-columns: 1fr auto;">
-                                                        <h5 class="title" style="grid-row: 1">{{this.name}}</h5>
+                                                        <h5 class="title" style="grid-row: 1">{{this.name}} at
+                                                            {{this.email}}
+                                                        </h5>
                                                         <ul class="view_edit_delete_list float-right"
                                                             style="grid-row: 1">
                                                             <li class="list-inline-item" style="display: none;"></li>
-                                                            {{!-- <li class="list-inline-item"><a href="#" data-toggle="tooltip" data-placement="top" title="Edit account"><i class="fa fa-pencil" style="color: white"></i></a></li>
-                                                         --}}
                                                             <li class="list-inline-item" style="display: none;"></li>
                                                             {{#if this.isLock}}
                                                                 <li class="list-inline-item"
@@ -150,6 +189,40 @@
                     callback();
                 }
             });
+        }
+
+        function createInstructor() {
+            var name = $("#name").val();
+            var email = $("#email").val();
+
+            var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            var is_email = re.test(email);
+
+            var is_name = name.length === 0 ? false : true;
+
+            if (!is_email) {
+                $("#error").text("Email must be a valid email")
+            }
+            else if (!is_name) {
+                $("#error").text("Name cannot be empty")
+            }
+            else {
+                AjaxPost();
+            }
+        }
+
+        function AjaxPost() {
+            $.post("/admin/instructors/add", {
+                email: $("#email").val(),
+                name: $("#name").val()
+            }, function (data, status) {
+                if (data) {
+                    $("#error").text(data)
+                }
+                else {
+                    location.replace("/admin/instructors");
+                }
+            })
         }
     </script>
 {{/section}}

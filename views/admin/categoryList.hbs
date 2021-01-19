@@ -1,0 +1,276 @@
+{{> navbar-admin-alt}}
+<!-- Our Dashboard -->
+<div class="dashboard_main_content" style="padding: 32px; padding-top: 64px;">
+    <div class="container-fluid">
+        <div class="main_content_container" style="padding-top: 60px;">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="dashboard_navigationbar dn db-1199">
+                                <div class="dropdown">
+                                    <button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i>
+                                        Dashboard Navigation</button>
+                                    <ul id="myDropdown" class="dropdown-content">
+                                        <li><a href="page-dashboard.html"><span class="flaticon-puzzle-1"></span>
+                                                Dashboard</a></li>
+                                        <li><a href="page-my-courses.html"><span
+                                                    class="flaticon-online-learning"></span> My Courses</a></li>
+                                        <li><a href="page-my-order.html"><span class="flaticon-shopping-bag-1"></span>
+                                                Order</a></li>
+                                        <li><a href="page-my-message.html"><span class="flaticon-speech-bubble"></span>
+                                                Messages</a></li>
+                                        <li><a href="page-my-review.html"><span class="flaticon-rating"></span>
+                                                Reviews</a></li>
+                                        <li class="active"><a href=""><span class="flaticon-like"></span> Bookmarks</a>
+                                        </li>
+                                        <li><a href="page-my-listing.html"><span class="flaticon-add-contact"></span>
+                                                Add listing</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                                <h4 class="title float-left">Category List</h4>
+                                <div class="float-right">{{catRaw.length}} categories total</div>
+                            </nav>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="my_course_content_container">
+                                <div class="my_course_content mb30" style="padding-top: 0">
+                                    <div class="my_course_content_list">
+                                        <h3 style="padding-left: 10px">Add category</h3>
+                                        <div class="mc_content_list" style="padding: 8px; padding-top: 16px;">
+                                            <div class="details" style="width: 100%;">
+                                                <div class="mc_content"
+                                                    style="display: grid; grid-auto-columns: 1fr auto;">
+                                                    <div class="col-xl-12">
+                                                        <div class="row">
+                                                            <div class="col-xl-5">
+                                                                <div class="my_profile_setting_input form-group">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="Major" id="major">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-5">
+                                                                <div class="my_profile_setting_input form-group">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="Minor" id="minor">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2">
+                                                                <ul class="view_edit_delete_list float-right"
+                                                                    style="grid-row: 1">
+                                                                    <li class="list-inline-item" style="display: none;">
+                                                                    </li>
+                                                                    <li class="list-inline-item"><a
+                                                                            onclick="createCategory()"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="Add category"><i class="fa fa-plus"
+                                                                                style="color: white"></i></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <p id="error" class="text-danger" style="padding-left: 20px;">
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- TEMPLATEME! -->
+                                        {{#each catRaw}}
+                                            <div class="mc_content_list" style="padding: 8px; padding-top: 16px;">
+                                                <div class="details" style="width: 100%;">
+                                                    <div class="mc_content"
+                                                        style="display: grid; grid-auto-columns: 1fr auto;">
+                                                        <div class="col-xl-12">
+                                                            <div class="row">
+                                                                <div class="col-xl-5">
+                                                                    <div class="my_profile_setting_input form-group">
+                                                                        <input type="text" class="form-control"
+                                                                            value="{{this.major}}" placeholder="Major" data-value="{{this.major}}"
+                                                                            disabled>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-5">
+                                                                    <div class="my_profile_setting_input form-group">
+                                                                        <input type="text" class="form-control"
+                                                                            value="{{this.minor}}" placeholder="Minor" data-value="{{this.minor}}"
+                                                                            disabled>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-2">
+                                                                    <ul class="view_edit_delete_list float-right"
+                                                                        style="grid-row: 1">
+                                                                        <li class="list-inline-item"
+                                                                            style="display: none;">
+                                                                        </li>
+                                                                        <li class="list-inline-item" style="background-color: firebrick; display:none"><a onclick="Cancel(this)"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Cancel category"><i
+                                                                                    class="fa fa-times"
+                                                                                    style="color: white"></i></a>
+                                                                        </li>
+                                                                        <li class="list-inline-item" style="background-color:forestgreen; display:none"><a onclick="Save(this)"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                data-id="{{this._id}}"
+                                                                                title="Save category"><i
+                                                                                    class="fa fa-save"
+                                                                                    style="color: white"></i></a>
+                                                                        </li>
+                                                                        <li class="list-inline-item" style="background-color:lightskyblue;"><a onclick="Edit(this)"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                title="Edit category"><i
+                                                                                    class="fa fa-edit"
+                                                                                    style="color: white"></i></a>
+                                                                        </li>
+                                                                        <li class="list-inline-item"><a onclick="Remove(this)"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="top"
+                                                                                data-id="{{this._id}}"
+                                                                                title="Remove category"><i
+                                                                                    class="fa fa-trash"
+                                                                                    style="color: white"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{> footer}}
+{{#section "js2"}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        var currentSaveEle = null;
+        var currentCancelEle = null;
+        var currentEditEle = null;
+        var currentMajor = null;
+        var currentMinor = null;
+        var isOnProgress = false;
+        function createCategory() {
+            if(isOnProgress)
+                return;
+            var major = $("#major").val();
+            var minor = $("#minor").val();
+            var is_major = major.length === 0 ? false : true;
+            var is_minor = minor.length === 0 ? false : true;
+
+            if (!is_major) {
+                $("#error").text("Major cannot be empty")
+            }
+            else if (!is_minor) {
+                $("#error").text("Minor cannot be empty")
+            }
+            else {
+                AjaxPost();
+            }
+        }
+
+        function AjaxPost() {
+            $.post("/admin/categories/add", {
+                major: $("#major").val(),
+                minor: $("#minor").val()
+            }, function (data, status) {
+                if (data) {
+                    $("#error").text(data)
+                }
+                else {
+                    location.replace("/admin/categories");
+                }
+            })
+        }
+        function Edit(element){
+            if(isOnProgress)
+                return;
+            isOnProgress = true;
+            currentCancelEle = jQuery(element.parentNode).prev();
+            currentSaveEle = jQuery(element.parentNode).prev().prev();
+            currentEditEle = jQuery(element.parentNode);
+            currentMajor  = jQuery(element.parentNode.parentNode.parentNode).prev().prev();
+            currentMinor = jQuery(element.parentNode.parentNode.parentNode).prev();
+            currentSaveEle.css("display","");
+            currentCancelEle.css("display","");
+            currentEditEle.css("display","none");
+            console.log(currentMajor);
+            console.log(currentMinor);
+            currentMinor.find("input").removeAttr("disabled");
+            currentMajor.find("input").removeAttr("disabled");           
+        }
+        function Remove(element){
+            const id = jQuery(element).data("id");
+            const newData = {
+                id: id
+            }
+            $.post("/admin/categories/delete",newData,function(err,data){
+                if(err){
+                    DisplayError(err);
+                }
+                else{
+                    swal("Delete categories successfully!", {
+                            icon: "success",
+                        }).then((value) => {
+                            location.reload();
+                    });
+                }
+            })
+        }
+        function Cancel(element){
+            currentSaveEle.css("display","none");
+            currentCancelEle.css("display","none");
+            currentEditEle.css("display","");
+            currentMinor.val(currentMinor.data("value"));
+            currentMajor.val(currentMajor.data("value"));
+            console.log(currentMinor.find("input")[0]);
+            currentMinor.find("input").attr("disabled","");
+            currentMajor.find("input").attr("disabled","");  
+            isOnProgress = false;
+        }
+
+        function Save(element){
+            const id = jQuery(element).data("id");
+            const newData = {
+                minor: currentMinor.find("input").val(),
+                major: currentMajor.find("input").val(),
+                id: id
+            }
+            $.post("/admin/categories/edit",newData,function(err,data){
+                if(err){
+                    DisplayError(err);
+                }
+                else{
+                    swal("Edit categories successfully!", {
+                            icon: "success",
+                        }).then((value) => {
+                            location.reload();
+                        });
+                }
+            })
+        }
+        function DisplayError(message) {
+            swal({
+                title: "Something is wrong",
+                text: message,
+                icon: "error",
+                button: "Ok",
+            });
+        }
+    </script>
+{{/section}}

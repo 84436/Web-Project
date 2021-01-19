@@ -142,21 +142,33 @@
                                                 </div>
                                             {{/each}}
                                         </div>
-                                        <div class="cs_row_seven csv2">
-                                            <div class="sfeedbacks">
-                                                <div class="mbp_comment_form style2 pb0">
-                                                    <h4>Add Reviews & Rate</h4>
-                                                    <form class="comments_form">
-                                                        <div class="form-group">
-                                                            <textarea class="form-control"
-                                                                id="exampleFormControlTextarea1" rows="6"></textarea>
+                                        {{#if User}}
+                                            {{#if (eq User.type 'student')}}
+                                                <div class="cs_row_seven csv2">
+                                                    <div class="sfeedbacks">
+                                                        <div class="mbp_comment_form style2 pb0">
+                                                            <h4>Add Reviews & Rate</h4>
+                                                            <form id="review-form" class="comments_form">
+                                                                <div class="form-group">
+                                                                    <input class="form-control" id="ratingFeedback"
+                                                                        rows="1"
+                                                                        onkeypress="return /[0-5]/i.test(event.key)"
+                                                                        maxlength="1"></input>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <textarea class="form-control" id="reviewsFeedback"
+                                                                        rows="6"></textarea>
+                                                                </div>
+                                                                <button onclick="Feedback()" class="btn btn-thm">Submit
+                                                                    Review
+                                                                    <span
+                                                                        class="flaticon-right-arrow-1"></span></button>
+                                                            </form>
                                                         </div>
-                                                        <button type="submit" class="btn btn-thm">Submit Review
-                                                            <span class="flaticon-right-arrow-1"></span></button>
-                                                    </form>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            {{/if}}
+                                        {{/if}}
                                     </div>
                                 </div>
                             </div>
@@ -321,11 +333,49 @@
                 icon: "error",
                 button: "Ok",
             });
-        }
-        function getCourse(element) {
-            var value = $(element).data("courseid")
-            location.replace("/courses/" + value)
+            return false;
         }
 
+        jQuery("#review-form").on("submit", function () {
+            event.preventDefault();
+            Feedback();
+        })
+
+        function Feedback() {
+            const courseId = "{{specificCourse._id}}";
+            const feedback = jQuery("#reviewsFeedback").val();
+            const rating = jQuery("#ratingFeedback").val();
+            if (CheckValidInput(feedback, rating)) {
+                const newData = {
+                    id: courseId,
+                    feedback: feedback,
+                    rating: rating
+                }
+                $.post("/student/feedback", newData, function (err, status) {
+                    if (err) {
+                        DisplayError(err);
+                    } else {
+                        swal("Review course successfully!", {
+                            icon: "success",
+                        }).then((value) => {
+                            location.reload();
+                        });
+                    }
+                })
+            }
+        }
+        function CheckValidInput(feedback, rating) {
+            if (feedback.length === 0) {
+                return DisplayError("Review is empty!");
+            }
+            if (rating.length === 0) {
+                return DisplayError("Rating is empty!");
+            }
+            return true
+        }
+        function getCourse(element) {
+            var value = $(element).data("courseid");
+            location.replace("/courses/" + value);
+        }
     </script>
 {{/section}}

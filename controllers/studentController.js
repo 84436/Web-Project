@@ -96,8 +96,15 @@ router.post("/watchlist", async (i, o, next) => {
     o.json(resultSet._error);
 })
 
-router.post("/feedback/:id", async (i, o, next) => {
-
+router.post("/feedback", async (i, o, next) => {
+    const check = await activityModel.isCourseEnrolled(i.session.User._id, i.body.id)
+    if (!check) {
+        o.json("You have not enrolled this course. Please enroll to leave feedback")
+    }
+    else {
+        await activityModel.setFeedback(i.session.User._id, i.body.id, parseInt(i.body.rating), i.body.feedback);
+        o.json(null);
+    }
 })
 
 
