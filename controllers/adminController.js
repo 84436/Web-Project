@@ -92,6 +92,7 @@ router.post("/categories/delete", async (i, o, next) => {
 
 router.get("/courses", async (i, o, next) => {
     o.locals.listInstructors = await accountModel.getAllLecturer()
+    o.locals.courseList = await courseModel.getAll()
     o.render("admin/courseList")
 })
 
