@@ -1,10 +1,12 @@
 const express = require('express')
+const multer = require('multer');
 const router = express.Router()
 
 const accountModel = require("../models/accountModel")
 const courseModel = require("../models/courseModel")
 const categoryModel = require("../models/categoryModel")
 const activityModel = require("../models/activityModel")
+
 
 router.use(function (i, o, next) {
     if (i.session.User) {
@@ -49,15 +51,46 @@ router.get("/courses", async (i, o, next) => {
 })
 
 router.post("/courses/add", async (i, o, next) => {
-
+    const resultSet = await courseModel.add_course(i.body);
+    o.json(resultSet);
 })
 
-router.post("/courses/edit/:id", async (i, o, next) => {
+router.post("/courses/edit", async (i, o, next) => {
 
 })
+router.post("/courses/add/uploadImage", (i, o, next) => {
+    const storage = multer.diskStorage({
+        destination: function (i, file, cb) {
+            var path = "./public/images/banner";
+            cb(null, path);
+        },
+        filename: function (i, file, cb) {
+            cb(null, file.originalname);
+        }
+    });
 
-router.post("/courses/add/:id", async (i, o, next) => {
+    const upload = multer({ storage: storage });
+    upload.any()(i, o, function (err) {
+        
+        if (err) {
+            console.log(err);
+        }
+    });
+})
 
+router.post("/courses/add", async (i, o, next) => {
+    
+})
+router.get("/courses/edit", async (i, o, next) => {
+    o.locals.catList = await categoryModel.getAll();
+    o.render("instructor/editCourse");
+})
+
+router.get("/courses/add", async (i, o, next) => {
+    o.locals.User = i.session.User;
+    o.locals.catList = await categoryModel.getAll();
+    o.locals.catRaw = await categoryModel.getRaw()
+    o.render("instructor/addCourse");
 })
 
 router.post("/profile/edit", async (i, o, next) => {
