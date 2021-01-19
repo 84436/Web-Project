@@ -55,8 +55,10 @@ router.post("/courses/add", async (i, o, next) => {
     o.json(resultSet);
 })
 
-router.post("/courses/edit", async (i, o, next) => {
-
+router.get("/courses/edit/:id", async (i, o, next) => {
+    o.catList = await categoryModel.getAll()
+    o.catRaw = await categoryModel.getRaw()
+    o.render("instructor/editCourse")
 })
 router.post("/courses/add/uploadImage", (i, o, next) => {
     const storage = multer.diskStorage({
@@ -71,7 +73,7 @@ router.post("/courses/add/uploadImage", (i, o, next) => {
 
     const upload = multer({ storage: storage });
     upload.any()(i, o, function (err) {
-        
+
         if (err) {
             console.log(err);
         }
@@ -79,7 +81,7 @@ router.post("/courses/add/uploadImage", (i, o, next) => {
 })
 
 router.post("/courses/add", async (i, o, next) => {
-    
+
 })
 router.get("/courses/edit", async (i, o, next) => {
     o.locals.catList = await categoryModel.getAll();

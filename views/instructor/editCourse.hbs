@@ -1,5 +1,4 @@
 {{> navbar-instructor-alt}}
-
 <!-- Our Dashboard -->
 <div class="dashboard_main_content" style="padding: 32px; padding-top: 64px;">
     <div class="container-fluid">
@@ -58,19 +57,25 @@
                         </div>
                         <div class="col-lg-12">
                             <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
-                                <h4 class="title float-left">Editing a course</h4>
+                                <h4 class="title float-left">Adding new course</h4>
                             </nav>
                         </div>
                         <div class="col-lg-12">
                             <div class="my_course_content_container">
                                 <div class="my_setting_content mb30">
-                                    <div class="my_setting_content_header">
-                                        <div class="my_sch_title">
-                                            <h4 class="m0" style="font-weight: bold;">Course overview</h4>
-                                        </div>
-                                    </div>
                                     <div class="row my_setting_content_details pb0">
                                         <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="container-fluid">
+                                                    <div id="main-information-input-group" class="form-group">
+                                                        <label id="main-label" for="main-information-cover-img">
+                                                            Course Image
+                                                        </label>
+                                                        <input name="coverImage" type="file"
+                                                            id="main-information-cover-img">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="my_profile_setting_input form-group">
@@ -84,21 +89,16 @@
                                         <!-- INSERT CATEGORY DROPDOWN -->
                                         <div class="col-lg-12">
                                             <div class="row">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-12">
                                                     <div class="my_profile_setting_input form-group">
-                                                        <label for="formGroupExampleInput1">Category/Major</label>
-                                                        <select class="selectpicker show-tick">
-                                                            <option>-- Choose a major --</option>
-                                                            <option>Major</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="my_profile_setting_input form-group">
-                                                        <label for="formGroupExampleInput1">Category/Minor</label>
-                                                        <select class="selectpicker show-tick">
-                                                            <option>-- Choose a minor --</option>
-                                                            <option>Minor</option>
+                                                        <label for="formGroupExampleInput1">Category </label>
+                                                        <select id="main-category" class="selectpicker show-tick">
+                                                            <option disabled>-- Choose a category --</option>
+                                                            {{#each catRaw}}
+                                                                <option value="{{this._id}}">
+                                                                    {{this.major}} > {{this.minor}}
+                                                                </option>
+                                                            {{/each}}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -117,8 +117,7 @@
                                             <div class="my_resume_textarea">
                                                 <div class="form-group">
                                                     <label for="exampleFormControlTextarea1">Description (long)</label>
-                                                    <textarea class="form-control" id="desc-long" rows="7"
-                                                        placeholder=""></textarea>
+                                                    <div id="editor" name="description"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,6 +127,19 @@
                                                     <div class="my_profile_setting_input form-group">
                                                         <label for="formGroupExampleInput1">Price</label>
                                                         <input type="text" class="form-control" id="price"
+                                                            onkeypress="return /[0-9.]/i.test(event.key)"
+                                                            placeholder="0.00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="my_profile_setting_input form-group">
+                                                        <label for="formGroupExampleInput1">Discount (0.x-1)</label>
+                                                        <input type="text" class="form-control" id="discount"
+                                                            onkeypress="return /[0-9.]/i.test(event.key)"
                                                             placeholder="0.00">
                                                     </div>
                                                 </div>
@@ -136,52 +148,59 @@
                                     </div>
                                     <div class="row my_setting_content_details">
                                         <div class="col-lg-12">
-                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm" onclick="saveChange()">Save
+                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm"
+                                                onclick="AddNewCourseSubmit()">Save
                                                 <span class="flaticon-right-arrow-1 ml15"></span></button>
-                                                <span id="save-error" class="text-danger"
-                                                style="margin-left: 20px;"></span>
+                                            <span id="save-error" class="text-danger" style="margin-left: 20px;"></span>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                                <h4 class="title float-left">Add chapter</h4>
+                            </nav>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="my_course_content_container">
                                 <div class="my_setting_content mb30">
-                                    <div class="my_setting_content_header">
-                                        <div class="my_sch_title">
-                                            <h4 class="m0" style="font-weight: bold;">Chapter list</h4>
-                                        </div>
-                                    </div>
-                                    <!-- CHAPTER LIST -->
                                     <div class="row my_setting_content_details pb0">
-                                        <div class="my_course_content_list" style="width: 100%">
-                                            <div class="mc_content_list" style="padding: 8px; padding-top: 16px;">
-                                                <div class="details" style="width: 100%;">
-                                                    <div class="mc_content"
-                                                        style="display: grid; grid-auto-columns: 1fr auto;">
-                                                        <h5 class="title" style="grid-row: 1">
-                                                            Chapter name
-                                                        </h5>
-                                                        <ul class="view_edit_delete_list float-right"
-                                                            style="grid-row: 1">
-                                                            <li class="list-inline-item" style="display: none;"></li>
-                                                            <li class="list-inline-item"
-                                                                style="background-color: crimson;"
-                                                                data-id="{{this._id}}">
-                                                                <a data-toggle="tooltip" data-placement="top"
-                                                                    title="Remove chapter"><i class="fa fa-trash"
-                                                                    style="color: white"></i></a>
-                                                            </li>
-                                                        </ul>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="container-fluid">
+                                                    <div id="main-information-input-group" class="form-group">
+                                                        <label id="main-label" for="main-information-cover-img">
+                                                            Course Image
+                                                        </label>
+                                                        <input name="coverImage" type="file"
+                                                            id="main-information-cover-img">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row my_setting_content_details">
-                                        <div class="col-lg-12">
-                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm" onclick="saveChange()">
-                                                <i class="fa fa-plus"></i>
-                                                Add
-                                            </button>
-                                            <span id="save-error" class="text-danger" style="margin-left: 20px;"></span>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="my_profile_setting_input form-group">
+                                                        <label for="formGroupExampleInput1">Course name</label>
+                                                        <input type="text" class="form-control" id="name"
+                                                            placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="row my_setting_content_details">
+                                                    <div class="col-lg-12">
+                                                        <button type="submit"
+                                                            class="my_setting_savechange_btn btn btn-thm"
+                                                            onclick="saveChange()">
+                                                            <i class="fa fa-plus"></i>
+                                                            Add
+                                                        </button>
+                                                        <span id="save-error" class="text-danger"
+                                                            style="margin-left: 20px;"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -192,99 +211,96 @@
             </div>
         </div>
     </div>
-</div>
+    {{> footer}}
+    {{#section "js2"}}
+        <script>
 
-{{> footer}}
-
-{{#section "js2"}}
-<script>
-
-    function saveChange() {
-        let email = $("#email").val()
-        let name = $("#name").val()
-        let instructorBio = jQuery("#bio").val()
-        let is_email = true
-        if (email === "") {
-            email = $("#email").attr('placeholder');
-        } else {
-            var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            is_email = re.test(email);
-        }
-        if (name.length === 0) {
-            name = $("#name").attr('placeholder');
-        }
-        if (instructorBio.length === 0) {
-            instructorBio = $("#bio").attr('placeholder');
-        }
-
-        if (is_email) {
-            postEdit(email, name, instructorBio)
-        }
-        else {
-            $("#save-error").text("Invalid email. Please check your input again.")
-        }
-
-    }
-    function postEdit(email, name, instructorBio) {
-        $.post("/instructor/profile/edit", {
-            email: email,
-            name: name, 
-            instructorBio: instructorBio
-        }, function (data, status) {
-            if (data) {
-                $("#save-error").text(data)
-            }
-            else {
-                location.replace("/instructor/profile");
-            }
-        })
-    }
-
-
-
-
-
-    const errorPassElement = jQuery("#change-errorPass")
-    function DisplayError(message) {
-        errorPassElement[0].innerHTML = message;
-        return false;
-    }
-    function CheckValidInput(oldPass, newPass, confirmPass) {
-        if (oldPass.length === 0)
-            return DisplayError("Old password is empty!");
-        if (newPass.length === 0)
-            return DisplayError("New password is empty!");
-        if (newPass !== confirmPass)
-            return DisplayError("Confirm password is not match!");
-        return true;
-    }
-    function SaveChangePassword() {
-        const oldPass = jQuery("#exampleInputPassword1").val();
-        const newPass = jQuery("#exampleInputPassword2").val();
-        const confirmPass = jQuery("#exampleInputPassword3").val();
-        if (CheckValidInput(oldPass, newPass, confirmPass)) {
-            const newData = {
-                oldPass: oldPass,
-                newPass: newPass
-            }
-            $.post('/instructor/profile/edit/pass', newData, function (err, status) {
-                if (err) {
-                    DisplayError(err);
+            function saveChange() {
+                let email = $("#email").val()
+                let name = $("#name").val()
+                let instructorBio = jQuery("#bio").val()
+                let is_email = true
+                if (email === "") {
+                    email = $("#email").attr('placeholder');
                 } else {
-                    errorPassElement[0].innerHTML = "Change password successfully!";
-                    errorPassElement.removeClass("text-danger");
-                    errorPassElement.addClass("text-success");
-                    jQuery("#exampleInputPassword1").val("");
-                    jQuery("#exampleInputPassword2").val("");
-                    jQuery("#exampleInputPassword3").val("");
-                    setTimeout(() => {
-                        errorPassElement[0].innerHTML = "";
-                        errorPassElement.removeClass("text-success");
-                        errorPassElement.addClass("text-danger");
-                    }, 2000);
+                    var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                    is_email = re.test(email);
                 }
-            })
-        }
-    }
-</script>
-{{/section}}
+                if (name.length === 0) {
+                    name = $("#name").attr('placeholder');
+                }
+                if (instructorBio.length === 0) {
+                    instructorBio = $("#bio").attr('placeholder');
+                }
+
+                if (is_email) {
+                    postEdit(email, name, instructorBio)
+                }
+                else {
+                    $("#save-error").text("Invalid email. Please check your input again.")
+                }
+
+            }
+            function postEdit(email, name, instructorBio) {
+                $.post("/instructor/profile/edit", {
+                    email: email,
+                    name: name,
+                    instructorBio: instructorBio
+                }, function (data, status) {
+                    if (data) {
+                        $("#save-error").text(data)
+                    }
+                    else {
+                        location.replace("/instructor/profile");
+                    }
+                })
+            }
+
+
+
+
+
+            const errorPassElement = jQuery("#change-errorPass")
+            function DisplayError(message) {
+                errorPassElement[0].innerHTML = message;
+                return false;
+            }
+            function CheckValidInput(oldPass, newPass, confirmPass) {
+                if (oldPass.length === 0)
+                    return DisplayError("Old password is empty!");
+                if (newPass.length === 0)
+                    return DisplayError("New password is empty!");
+                if (newPass !== confirmPass)
+                    return DisplayError("Confirm password is not match!");
+                return true;
+            }
+            function SaveChangePassword() {
+                const oldPass = jQuery("#exampleInputPassword1").val();
+                const newPass = jQuery("#exampleInputPassword2").val();
+                const confirmPass = jQuery("#exampleInputPassword3").val();
+                if (CheckValidInput(oldPass, newPass, confirmPass)) {
+                    const newData = {
+                        oldPass: oldPass,
+                        newPass: newPass
+                    }
+                    $.post('/instructor/profile/edit/pass', newData, function (err, status) {
+                        if (err) {
+                            DisplayError(err);
+                        } else {
+                            errorPassElement[0].innerHTML = "Change password successfully!";
+                            errorPassElement.removeClass("text-danger");
+                            errorPassElement.addClass("text-success");
+                            jQuery("#exampleInputPassword1").val("");
+                            jQuery("#exampleInputPassword2").val("");
+                            jQuery("#exampleInputPassword3").val("");
+                            setTimeout(() => {
+                                errorPassElement[0].innerHTML = "";
+                                errorPassElement.removeClass("text-success");
+                                errorPassElement.addClass("text-danger");
+                            }, 2000);
+                        }
+                    })
+                }
+            }
+        </script>
+    {{/section}}
