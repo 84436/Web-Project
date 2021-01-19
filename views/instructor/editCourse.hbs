@@ -149,8 +149,38 @@
                                             <h4 class="m0" style="font-weight: bold;">Lesson list</h4>
                                         </div>
                                     </div>
+                                    <!-- LESSON LIST -->
                                     <div class="row my_setting_content_details pb0">
-                                        
+                                        <div class="my_course_content_list" style="width: 100%">
+                                            <div class="mc_content_list" style="padding: 8px; padding-top: 16px;">
+                                                <div class="details" style="width: 100%;">
+                                                    <div class="mc_content"
+                                                        style="display: grid; grid-auto-columns: 1fr auto;">
+                                                        <h5 class="title" style="grid-row: 1">
+                                                            Lesson name
+                                                        </h5>
+                                                        <ul class="view_edit_delete_list float-right"
+                                                            style="grid-row: 1">
+                                                            <li class="list-inline-item" style="display: none;"></li>
+                                                            <li class="list-inline-item"
+                                                                style="background-color: dodgerblue;"
+                                                                data-id="{{this._id}}">
+                                                                <a data-toggle="tooltip" data-placement="top"
+                                                                    title="Edit lesson"><i class="fa fa-pencil"
+                                                                    style="color: white"></i></a>
+                                                            </li>
+                                                            <li class="list-inline-item"
+                                                                style="background-color: crimson;"
+                                                                data-id="{{this._id}}">
+                                                                <a data-toggle="tooltip" data-placement="top"
+                                                                    title="Remove lesson"><i class="fa fa-trash"
+                                                                    style="color: white"></i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row my_setting_content_details">
                                         <div class="col-lg-12">
