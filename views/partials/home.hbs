@@ -58,9 +58,11 @@
                                     <div class="top_courses">
                                         <div class="thumb">
                                             <img class="img-whp" src="images/banner/{{this._id}}.jpg">
-                                            <div class="overlay">
-                                                <div class="tag">Best Seller</div>
-                                            </div>
+                                            {{#unless (eq this.badgeName '')}}
+                                                <div class="overlay">
+                                                    <div class="tag">{{this.badgeName}}</div>
+                                                </div>
+                                            {{/unless}}
                                         </div>
                                         <div class="details">
                                             <div class="tc_content">

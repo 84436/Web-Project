@@ -60,10 +60,12 @@
                                     <div class="thumb"
                                         style="min-width: 240px; max-width: 240px; min-height: 135px; max-height: 135px;">
                                         <img class="img-whp" src="/images/banner/{{this._id}}.jpg" alt="t1.jpg">
-                                        <div class="overlay">
-                                            <span class="tag">Best Seller</span>
-                                            <a class="tc_preview_course" href="#"></a>
-                                        </div>
+                                        {{#unless (eq this.badgeName '')}}
+                                            <div class="overlay">
+                                                <span class="tag">{{this.badgeName}}</span>
+                                                <a class="tc_preview_course" href="#"></a>
+                                            </div>
+                                        {{/unless}}
                                     </div>
                                     <div class="details" style="width: 100%">
                                         <div class="tc_content">
@@ -86,7 +88,10 @@
                                                 <li class="list-inline-item"><a href="#">{{this.averageRate}}</a>
                                                 </li>
                                             </ul>
-                                            <div class="tc_price float-right fn-414">${{this.price}}</div>
+                                            <div class="tc_price float-right fn-414">
+                                                ${{calSaleOff this.price this.discount}}
+                                                <small style="text-decoration: line-through;">${{this.price}}</small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

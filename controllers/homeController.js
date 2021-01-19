@@ -10,7 +10,7 @@ router.get('/', async (i, o, next) => {
     o.locals.catList = await categoryModel.getAll()
     o.locals.hotCourses = await badgeName.setBadge(await courseModel.topEnrollCourse())
     o.locals.mostViewCourses = await badgeName.setBadge(await courseModel.topViewCourses())
-    o.locals.newestCourses = await  badgeName.setBadge(await courseModel.newestCourses())
+    o.locals.newestCourses = await badgeName.setBadge(await courseModel.newestCourses())
     o.locals.topCategories = await courseModel.topEnrollCategories()
 
     o.locals.User = i.session.User
@@ -37,9 +37,12 @@ router.get('/', async (i, o, next) => {
 
 router.get("/courses/:id", async (i, o, next) => {
     o.locals.User = i.session.User
+    if (o.locals.User) {
+        o.locals.videoVisible = await activityModel.isCourseEnrolled(i.session.User._id, i.params.id) || await courseModel.isCourseInstructor(i.params.id, i.session.User._id);
+    }
     o.locals.catList = await categoryModel.getAll()
     o.locals.specificCourse = await courseModel.get_course(i.params.id)
-    o.locals.relatedCourse = await badgeName.setBadge(courseModel.topEnrollByCategory(o.locals.specificCourse.categoryID, o.locals.specificCourse._id))
+    o.locals.relatedCourse = await badgeName.setBadge(await courseModel.topEnrollByCategory(o.locals.specificCourse.categoryID, o.locals.specificCourse._id))
     o.locals.feedbackList = await activityModel.getFeedbackByCourse(i.params.id)
     o.render('course/courseDetails')
 })
@@ -49,18 +52,18 @@ router.get("/courses/byQuery/:search", async (i, o, next) => {
     o.locals.catList = await categoryModel.getAll()
     if (i.params.search === "all") {
         if (i.query.sort === "price") {
-            o.locals.courseList = await courseModel.getAll(true, false)
+            o.locals.courseList = await badgeName.setBadge(await courseModel.getAll(true, false))
         }
         else if (i.query.sort === "rate") {
-            o.locals.courseList = await courseModel.getAll(false, true)
+            o.locals.courseList = await badgeName.setBadge(await courseModel.getAll(false, true))
         }
     }
     else {
         if (i.query.sort === "price") {
-            o.locals.courseList = badgeName.setBadge(await courseModel.search_course(i.params.search, true, false, o.locals.catList))
+            o.locals.courseList = await badgeName.setBadge(await courseModel.search_course(i.params.search, true, false, o.locals.catList))
         }
         else if (i.query.sort === "rate") {
-            o.locals.courseList = badgeName.setBadge(await courseModel.search_course(i.params.search, false, true, o.locals.catList))
+            o.locals.courseList = await badgeName.setBadge(await courseModel.search_course(i.params.search, false, true, o.locals.catList))
         }
     }
     o.locals.query = i.params.search
