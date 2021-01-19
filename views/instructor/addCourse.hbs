@@ -1,5 +1,14 @@
-{{> navbar-instructor-alt}}
+{{#section "css"}}
+{{!-- ----------- --}}
+{{!-- Import ZONE --}}
+{{!-- ----------- --}}
+<!-- Filepond stylesheet -->
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+{{/section}}
 
+{{> navbar-instructor-alt}}
 <!-- Our Dashboard -->
 <div class="dashboard_main_content" style="padding: 32px; padding-top: 64px;">
     <div class="container-fluid">
@@ -67,6 +76,17 @@
                                     <div class="row my_setting_content_details pb0">
                                         <div class="col-lg-12">
                                             <div class="row">
+                                                <div class="container-fluid">
+                                                    <div id="main-information-input-group" class="form-group">
+                                                        <label id="main-label" for="main-information-cover-img">
+                                                            Course Image
+                                                        </label>
+                                                        <input name="coverImage" type="file"
+                                                            id="main-information-cover-img">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="my_profile_setting_input form-group">
                                                         <label for="formGroupExampleInput1">Course name</label>
@@ -79,21 +99,15 @@
                                         <!-- INSERT CATEGORY DROPDOWN -->
                                         <div class="col-lg-12">
                                             <div class="row">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-12">
                                                     <div class="my_profile_setting_input form-group">
-                                                        <label for="formGroupExampleInput1">Category/Major</label>
-                                                        <select class="selectpicker show-tick">
-                                                            <option>-- Choose a major --</option>
-                                                            <option>Major</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="my_profile_setting_input form-group">
-                                                        <label for="formGroupExampleInput1">Category/Minor</label>
-                                                        <select class="selectpicker show-tick">
-                                                            <option>-- Choose a minor --</option>
-                                                            <option>Minor</option>
+                                                        <label for="formGroupExampleInput1">Category </label>
+                                                        <select id="main-category" class="selectpicker show-tick">
+                                                            <option disabled>-- Choose a category --</option>
+                                                            {{#each catRaw}}
+                                                            <option value="{{this._id}}">
+                                                                {{this.major}} > {{this.minor}}</option>
+                                                            {{/each}}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -112,8 +126,7 @@
                                             <div class="my_resume_textarea">
                                                 <div class="form-group">
                                                     <label for="exampleFormControlTextarea1">Description (long)</label>
-                                                    <textarea class="form-control" id="desc-long" rows="7"
-                                                        placeholder=""></textarea>
+                                                    <div id="editor" name="description"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,6 +136,19 @@
                                                     <div class="my_profile_setting_input form-group">
                                                         <label for="formGroupExampleInput1">Price</label>
                                                         <input type="text" class="form-control" id="price"
+                                                            onkeypress="return /[0-9.]/i.test(event.key)"
+                                                            placeholder="0.00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="my_profile_setting_input form-group">
+                                                        <label for="formGroupExampleInput1">Discount (0.x-1)</label>
+                                                        <input type="text" class="form-control" id="discount"
+                                                            onkeypress="return /[0-9.]/i.test(event.key)"
                                                             placeholder="0.00">
                                                     </div>
                                                 </div>
@@ -131,10 +157,10 @@
                                     </div>
                                     <div class="row my_setting_content_details">
                                         <div class="col-lg-12">
-                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm" onclick="saveChange()">Save
+                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm"
+                                                onclick="AddNewCourseSubmit()">Save
                                                 <span class="flaticon-right-arrow-1 ml15"></span></button>
-                                                <span id="save-error" class="text-danger"
-                                                style="margin-left: 20px;"></span>
+                                            <span id="save-error" class="text-danger" style="margin-left: 20px;"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -149,95 +175,240 @@
 
 {{> footer}}
 
+
+
 {{#section "js2"}}
+
+{{!-- ----------- --}}
+{{!-- Import ZONE --}}
+{{!-- ----------- --}}
+<!-- Load FilePond library -->
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js">
+</script>
+<script src="https://unpkg.com/filepond-plugin-file-rename/dist/filepond-plugin-file-rename.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<!-- Load sweet alert and jQuery ajax-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- Turn all file input elements into ponds -->
 <script>
+    // Register the plugin with FilePond
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview,
+        FilePondPluginFileValidateSize,
+        FilePondPluginFileValidateType,
+        FilePondPluginImageValidateSize,
+        FilePondPluginFileRename
+    );
 
-    function saveChange() {
-        let email = $("#email").val()
-        let name = $("#name").val()
-        let instructorBio = jQuery("#bio").val()
-        let is_email = true
-        if (email === "") {
-            email = $("#email").attr('placeholder');
-        } else {
-            var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            is_email = re.test(email);
-        }
-        if (name.length === 0) {
-            name = $("#name").attr('placeholder');
-        }
-        if (instructorBio.length === 0) {
-            instructorBio = $("#bio").attr('placeholder');
-        }
 
-        if (is_email) {
-            postEdit(email, name, instructorBio)
-        }
-        else {
-            $("#save-error").text("Invalid email. Please check your input again.")
-        }
+    FilePond.setOptions({
+        server: {
+            process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
 
-    }
-    function postEdit(email, name, instructorBio) {
-        $.post("/instructor/profile/edit", {
-            email: email,
-            name: name, 
-            instructorBio: instructorBio
-        }, function (data, status) {
-            if (data) {
-                $("#save-error").text(data)
+                console.log(file);
+                console.log(file.name);
+
+                // fieldName is the name of the input field
+                // file is the actual file object to send
+                var func = (fieldName, file, callback) => {
+                    console.log("Send Data");
+                    const formData = new FormData();
+                    const request = new XMLHttpRequest();
+                    formData.append(fieldName, file, file.name);
+                    request.open('POST', '/instructor/courses/add/uploadImage');
+                    request.upload.onprogress = (e) => {
+                        console.log("On Progress");
+                        progress(e.lengthComputable, e.loaded, e.total);
+                    };
+                    request.upload.onloadend = (e) => {
+                        console.log("On Load End");
+                        callback();
+                    };
+                    request.onload = function () {
+                        console.log("On load");
+                        if (request.status >= 200 && request.status < 300) {
+                            // the load method accepts either a string (id) or an object
+                            load(request.responseText);
+                        }
+                        else {
+                            error('oh no');
+                        }
+                    };
+                    request.send(formData);
+
+                };
+                const data = {
+                    callbackSubmit: func,
+                    fieldName: fieldName,
+                    file: file
+                }
+                pondImageCover = data;
+                return {
+                    abort: () => {
+                        console.log("Cancel");
+                        abort();
+                        return pondImageCover = null;
+                    }
+                };
             }
-            else {
-                location.replace("/instructor/profile");
-            }
-        })
-    }
 
+        }
+    });
 
+    // Get a reference to the file input element
+    const inputElementPondCoverImage = document.querySelector('input[type="file"]#main-information-cover-img');
 
+    // Create the FilePond instance
+    const pondCoverImage = FilePond.create(inputElementPondCoverImage, {
+        maxFileSize: '10MB',
+        imagePreviewHeight: 500,
+        acceptedFileTypes: ['image/*'],
+        fileRenameFunction: (file) => {
+            return `cover${file.extension}`;
+        },
+        imageValidateSizeMinWidth: 600,
+        imageValidateSizeMinHeight: 400
+    });
 
-
-    const errorPassElement = jQuery("#change-errorPass")
+    // Initialize Quill editor
+    var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        ['blockquote', 'code-block'],
+        [{
+            'header': 1
+        }, {
+            'header': 2
+        }], // custom button values
+        [{
+            'list': 'ordered'
+        }, {
+            'list': 'bullet'
+        }],
+        [{
+            'script': 'sub'
+        }, {
+            'script': 'super'
+        }], // superscript/subscript
+        [{
+            'indent': '-1'
+        }, {
+            'indent': '+1'
+        }], // outdent/indent
+        [{
+            'direction': 'rtl'
+        }], // text direction
+        [{
+            'size': ['small', false, 'large', 'huge']
+        }], // custom dropdown
+        [{
+            'header': [1, 2, 3, 4, 5, 6, false]
+        }],
+        [{
+            'color': []
+        }, {
+            'background': []
+        }], // dropdown with defaults from theme
+        [{
+            'font': []
+        }],
+        [{
+            'align': []
+        }],
+        ['clean'] // remove formatting button
+    ];
+    var quill = new Quill('#editor', {
+        modules: {
+            toolbar: toolbarOptions
+        },
+        theme: 'snow'
+    });
+</script>
+<script>
     function DisplayError(message) {
-        errorPassElement[0].innerHTML = message;
-        return false;
+        swal(message, {
+            icon: "error",
+            buttons: "OK",
+        });
     }
-    function CheckValidInput(oldPass, newPass, confirmPass) {
-        if (oldPass.length === 0)
-            return DisplayError("Old password is empty!");
-        if (newPass.length === 0)
-            return DisplayError("New password is empty!");
-        if (newPass !== confirmPass)
-            return DisplayError("Confirm password is not match!");
+    var pondImageCover = null;
+    var infoCourse = null;
+    function CheckValidInput(cName, shortDesc, desc, price) {
+        if (cName.length === 0) {
+            DisplayError("Course name is empty!");
+            return false;
+        }
+        if (shortDesc.length === 0) {
+            DisplayError("Short description is empty!");
+            return false;
+        }
+        if (desc.length === 0) {
+            DisplayError("Description is empty!");
+            return false;
+        }
+        if (price.length === 0) {
+            DisplayError("Price is empty!");
+            return false;
+        }
+        if (!pondImageCover) {
+            DisplayError("Course image is empty!");
+            return false;
+        }
         return true;
     }
-    function SaveChangePassword() {
-        const oldPass = jQuery("#exampleInputPassword1").val();
-        const newPass = jQuery("#exampleInputPassword2").val();
-        const confirmPass = jQuery("#exampleInputPassword3").val();
-        if (CheckValidInput(oldPass, newPass, confirmPass)) {
-            const newData = {
-                oldPass: oldPass,
-                newPass: newPass
+    function AddNewCourseSubmit() {
+        const courseName = jQuery('#name').val();
+        const category = jQuery('#main-category').val();
+        const shortDescription = jQuery('#desc-short').val();
+        const description = jQuery('#editor').children(".ql-editor")[0].innerHTML;
+        const price = jQuery('#price').val();
+        const discount = jQuery('#discount').val();
+        if (CheckValidInput(courseName, shortDescription, description, price)) {
+            infoCourse = {
+                name: courseName,
+                categoryID: category,
+                desc: {
+                    short: shortDescription,
+                    long: description
+                },
+                price: price,
+                discount: discount.length === 0 ? 0 : discount,
+                isFinished: false,
+                instructorID: "{{User._id}}",
+                averageRate: 0,
+                enrollCount: 0,
+                feedbackCount: 0,
+                viewCount: 0,
+                isEnable: true,
+                publishDate: new Date(),
+                lastUpdated: new Date()
             }
-            $.post('/instructor/profile/edit/pass', newData, function (err, status) {
-                if (err) {
-                    DisplayError(err);
-                } else {
-                    errorPassElement[0].innerHTML = "Change password successfully!";
-                    errorPassElement.removeClass("text-danger");
-                    errorPassElement.addClass("text-success");
-                    jQuery("#exampleInputPassword1").val("");
-                    jQuery("#exampleInputPassword2").val("");
-                    jQuery("#exampleInputPassword3").val("");
-                    setTimeout(() => {
-                        errorPassElement[0].innerHTML = "";
-                        errorPassElement.removeClass("text-success");
-                        errorPassElement.addClass("text-danger");
-                    }, 2000);
+            $.post("/instructor/courses/add", infoCourse, function (data, status) {
+                if(!data) {
+                    DisplayError("Something wrong");
+                }
+                else{
+                    const file = `${data._id}.jpg`;
+                    pondImageCover.file.name = file;
+                    console.log(file);
+                    pondImageCover.callbackSubmit(pondImageCover.fieldName, pondImageCover.file, OnTaskDone);
                 }
             })
         }
+    }
+    function OnTaskDone() {
+        swal("Add to watch list successfully!", {
+            icon: "success",
+            text: "Add course successfully",
+            buttons: true,
+        }).then((value) => {
+            location.reload();
+        })
     }
 </script>
 {{/section}}
