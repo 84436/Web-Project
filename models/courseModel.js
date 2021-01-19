@@ -265,7 +265,7 @@ async function topEnrollCategories() {
 // Top view courses
 async function topViewCourses() {
     let r = await courseModel
-        .find({}, (err) => {
+        .find({isEnable: true}, (err) => {
             if (err) return null;
         })
         .sort({ viewCount: -1 })
@@ -277,7 +277,7 @@ async function topViewCourses() {
 // Top new courses
 async function newestCourses() {
     let r = await courseModel
-        .find({}, (err) => {
+        .find({isEnable: true}, (err) => {
             if (err) return null;
         })
         .sort({ publishDate: -1 })
@@ -290,6 +290,7 @@ async function topEnrollByCategory(categoryID, courseID) {
     let filter = {
         categoryID: categoryID,
         _id: { $ne: courseID },
+        isEnable: true
     };
 
     return await courseModel
@@ -307,7 +308,7 @@ async function topEnrollByCategory(categoryID, courseID) {
 
 async function topEnrollCourse() {
     return await courseModel
-        .find({}, (err) => {
+        .find({isEnable: true}, (err) => {
             if (err) return null;
         })
         .populate({
@@ -324,9 +325,13 @@ async function topEnrollCourse() {
 
 async function getAll(sortPrice, sortRate) {
     let r;
+    let filter = {
+        isEnable: true
+    }
+
     if (sortPrice) {
         r = await courseModel
-            .find({}, (err) => {
+            .find(filter, (err) => {
                 return null;
             })
             .lean()
@@ -336,7 +341,7 @@ async function getAll(sortPrice, sortRate) {
     }
     else if (sortRate) {
         r = await courseModel
-            .find({}, (err) => {
+            .find(filter, (err) => {
                 return null;
             })
             .lean()
@@ -346,7 +351,7 @@ async function getAll(sortPrice, sortRate) {
     }
     else {
         r = await courseModel
-            .find({}, (err) => {
+            .find(filter, (err) => {
                 return null;
             })
             .lean()
@@ -361,6 +366,7 @@ async function getAll(sortPrice, sortRate) {
 async function getByCategory(categoryID) {
     let filter = {
         categoryID: categoryID,
+        isEnable: true
     };
 
     let r = await courseModel
@@ -423,14 +429,14 @@ async function search_course(query, sortPrice, sortRate, categoryObj) {
     }
     else {
         if (sortRate) {
-            listCourse = courseModel.find({ $text: { $search: query } })
+            listCourse = courseModel.find({ $text: { $search: query }, isEnable: true })
                 .populate({ path: "instructorID", select: "name" })
                 .populate({ path: "categoryID", select: "major minor" })
                 .sort({ averageRate: -1 })
                 .lean()
         }
         else if (sortPrice) {
-            listCourse = courseModel.find({ $text: { $search: query } })
+            listCourse = courseModel.find({ $text: { $search: query }, isEnable: true })
                 .populate({ path: "instructorID", select: "name" })
                 .populate({ path: "categoryID", select: "major minor" })
                 .sort({ price: 1 })
@@ -520,7 +526,8 @@ function setNew(publishDate) {
 
 function getCourseByLecturer(lecturerID) {
     let filter = {
-        instructorID: lecturerID
+        instructorID: lecturerID,
+        isEnable: true
     }
     let projection = { __v: 0 }
     let r = courseModel.find(filter, projection, (err) => {
