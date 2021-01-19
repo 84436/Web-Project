@@ -1,15 +1,47 @@
+{{#section "css"}}
+<style>
+    .trailer{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 10000;
+        background: rgba(0, 0, 0, 0.95);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+    }
+    .trailer video{
+        position: relative;
+        max-width: 900px;
+        outline: none;
+    }
+    .close {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        cursor: pointer;
+        filter: invert(1);
+        max-width: 32px;
+    }
+</style>
+{{/section}}
+
 {{#if User}}
-    {{#if (eq User.type 'student')}}
-        {{> navbar-student}}
-    {{/if}}
-    {{#if (eq User.type 'instructor')}}
-        {{> navbar-instructor}}
-    {{/if}}
-    {{#if (eq User.type 'admin')}}
-        {{> navbar-admin}}
-    {{/if}}
+{{#if (eq User.type 'student')}}
+{{> navbar-student}}
+{{/if}}
+{{#if (eq User.type 'instructor')}}
+{{> navbar-instructor}}
+{{/if}}
+{{#if (eq User.type 'admin')}}
+{{> navbar-admin}}
+{{/if}}
 {{else}}
-    {{> navbar}}
+{{> navbar}}
 {{/if}}
 <!-- Inner Page Breadcrumb -->
 <section class="inner_page_breadcrumb csv2">
@@ -60,6 +92,10 @@
                                             <img alt="Course banner" style="background-size: cover;"
                                                 src="/images/background/3.jpg" />
                                         </div>
+                                        <div id="content-video" style="display:flex; justify-content: center; margin: 50px 0px">
+                                            <video src="/videos/preview/{{specificCourse._id}}.mp4" type="video/mp4"
+                                                controls="true" width="800" height="450" controls></video>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -89,15 +125,15 @@
                                                 <br>
                                                 <div class="details">
                                                     {{#each specificCourse.content }}
-                                                        <div id="accordion" class="panel-group cc_tab">
-                                                            <div class="panel">
-                                                                <div class="panel-heading">
-                                                                    <h4 class="panel-title">
-                                                                        <a href="#">{{this.name}}</a>
-                                                                    </h4>
-                                                                </div>
+                                                    <div id="accordion" class="panel-group cc_tab">
+                                                        <div class="panel">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a onclick="togglePopupVideo(this);" data-videoid="{{_id}}">{{this.name}}</a>
+                                                                </h4>
                                                             </div>
                                                         </div>
+                                                    </div>
                                                     {{/each}}
                                                 </div>
                                             </div>
@@ -117,57 +153,55 @@
                                     <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                                         <div class="cs_row_six csv2">
                                             {{#each feedbackList}}
-                                                <div class="sfeedbacks" style="padding-top: 5px;">
-                                                    <div class="mbp_pagination_comments">
-                                                        <div class="mbp_first media csv1">
-                                                            <img src="/images/resource/review1.png" class="mr-3"
-                                                                alt="review1.png">
-                                                            <div class="media-body">
-                                                                <h4 class="sub_title mt-0"> {{this.studentID.name}}
-                                                                    <span class="sspd_review float-right">
-                                                                        <ul>
-                                                                            <li class="list-inline-item">
-                                                                                {{this.feedback.rate}}
-                                                                            </li>
-                                                                            <li class="list-inline-item"><i
-                                                                                    class="fa fa-star"></i>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </span>
-                                                                </h4>
-                                                                <p class="fz15 mt20">{{this.feedback.content}}</p>
-                                                            </div>
+                                            <div class="sfeedbacks" style="padding-top: 5px;">
+                                                <div class="mbp_pagination_comments">
+                                                    <div class="mbp_first media csv1">
+                                                        <img src="/images/resource/review1.png" class="mr-3"
+                                                            alt="review1.png">
+                                                        <div class="media-body">
+                                                            <h4 class="sub_title mt-0"> {{this.studentID.name}}
+                                                                <span class="sspd_review float-right">
+                                                                    <ul>
+                                                                        <li class="list-inline-item">
+                                                                            {{this.feedback.rate}}
+                                                                        </li>
+                                                                        <li class="list-inline-item"><i
+                                                                                class="fa fa-star"></i>
+                                                                        </li>
+                                                                    </ul>
+                                                                </span>
+                                                            </h4>
+                                                            <p class="fz15 mt20">{{this.feedback.content}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                             {{/each}}
                                         </div>
                                         {{#if User}}
-                                            {{#if (eq User.type 'student')}}
-                                                <div class="cs_row_seven csv2">
-                                                    <div class="sfeedbacks">
-                                                        <div class="mbp_comment_form style2 pb0">
-                                                            <h4>Add Reviews & Rate</h4>
-                                                            <form id="review-form" class="comments_form">
-                                                                <div class="form-group">
-                                                                    <input class="form-control" id="ratingFeedback"
-                                                                        rows="1"
-                                                                        onkeypress="return /[0-5]/i.test(event.key)"
-                                                                        maxlength="1"></input>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <textarea class="form-control" id="reviewsFeedback"
-                                                                        rows="6"></textarea>
-                                                                </div>
-                                                                <button onclick="Feedback()" class="btn btn-thm">Submit
-                                                                    Review
-                                                                    <span
-                                                                        class="flaticon-right-arrow-1"></span></button>
-                                                            </form>
+                                        {{#if (eq User.type 'student')}}
+                                        <div class="cs_row_seven csv2">
+                                            <div class="sfeedbacks">
+                                                <div class="mbp_comment_form style2 pb0">
+                                                    <h4>Add Reviews & Rate</h4>
+                                                    <form id="review-form" class="comments_form">
+                                                        <div class="form-group">
+                                                            <input class="form-control" id="ratingFeedback" rows="1"
+                                                                onkeypress="return /[0-5]/i.test(event.key)"
+                                                                maxlength="1"></input>
                                                         </div>
-                                                    </div>
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" id="reviewsFeedback"
+                                                                rows="6"></textarea>
+                                                        </div>
+                                                        <button onclick="Feedback()" class="btn btn-thm">Submit
+                                                            Review
+                                                            <span class="flaticon-right-arrow-1"></span></button>
+                                                    </form>
                                                 </div>
-                                            {{/if}}
+                                            </div>
+                                        </div>
+                                        {{/if}}
                                         {{/if}}
                                     </div>
                                 </div>
@@ -180,51 +214,49 @@
                         <h3 class="r_course_title">Related Courses</h3>
                     </div>
                     {{#each relatedCourse }}
-                        <div class="col-lg-6 col-xl-4">
-                            <div class="top_courses" onclick="getCourse(this)" data-courseid="{{this._id}}">
-                                <div class="thumb">
-                                    <img class="img-whp" src="/images/courses/t1.jpg" alt="t1.jpg">
-                                    <div class="overlay">
-                                        <div class="tag">Best Seller</div>
-                                        <div class="icon"><span class="flaticon-like"></span></div>
-                                        <a class="tc_preview_course" href="#">Preview Course</a>
-                                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="top_courses" onclick="getCourse(this)" data-courseid="{{this._id}}">
+                            <div class="thumb">
+                                <img class="img-whp" src="/images/courses/t1.jpg" alt="t1.jpg">
+                                <div class="overlay">
+                                    <div class="tag">Best Seller</div>
+                                    <div class="icon"><span class="flaticon-like"></span></div>
+                                    <a class="tc_preview_course" href="#">Preview Course</a>
                                 </div>
-                                <div class="details">
-                                    <div class="tc_content">
-                                        <p>{{this.instructorID.name}}</p>
-                                        <h5>{{this.name}}</h5>
-                                        <ul class="tc_review">
-                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                            </li>
-                                            <li class=""><a href="#">({{this.averageRate}})
-                                                    {{this.feedbackCount}} students</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="tc_footer">
-                                        <ul class="tc_meta float-left">
-                                            <li class="list-inline-item"><a href="#"><i
-                                                        class="flaticon-profile"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#">{{this.enrollCount}}</a></li>
-                                            <li class="list-inline-item"><a href="#"><i
-                                                        class="flaticon-comment"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#">{{this.feedbackCount}}</a></li>
-                                        </ul>
-                                        <div class="tc_price float-right">${{this.price}}</div>
-                                    </div>
+                            </div>
+                            <div class="details">
+                                <div class="tc_content">
+                                    <p>{{this.instructorID.name}}</p>
+                                    <h5>{{this.name}}</h5>
+                                    <ul class="tc_review">
+                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                        </li>
+                                        <li class=""><a href="#">({{this.averageRate}})
+                                                {{this.feedbackCount}} students</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tc_footer">
+                                    <ul class="tc_meta float-left">
+                                        <li class="list-inline-item"><a href="#"><i class="flaticon-profile"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#">{{this.enrollCount}}</a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="flaticon-comment"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="#">{{this.feedbackCount}}</a></li>
+                                    </ul>
+                                    <div class="tc_price float-right">${{this.price}}</div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     {{/each}}
                 </div>
             </div>
@@ -235,36 +267,34 @@
                         <small style="text-decoration: line-through;">${{specificCourse.price}}</small>
                     </div>
                     {{#if User}}
-                        {{#if (eq User.type 'student')}}
-                            <a onclick="Enroll(this)" class="cart_btnss" style="cursor: pointer;">
-                                <i class="fa fa-plus"></i>
-                                Enroll Now
-                            </a>
-                            <a onclick="AddToWatchList(this)" class="cart_btnss_white" style="cursor: pointer;">
-                                <i class="fa fa-heart"></i>
-                                Add to Watchlist
-                            </a>
-                        {{else}}
-                            <a href="#" class="btn cart_btnss disabled" style="border-radius: 27px; line-height: 2.5em">
-                                <i class="fa fa-plus"></i>
-                                Enroll Now
-                            </a>
-                            <a href="#" class="btn cart_btnss_white disabled"
-                                style="border-radius: 27px; line-height: 2.5em">
-                                <i class="fa fa-heart"></i>
-                                Add to Watchlist
-                            </a>
-                        {{/if}}
+                    {{#if (eq User.type 'student')}}
+                    <a onclick="Enroll(this)" class="cart_btnss" style="cursor: pointer;">
+                        <i class="fa fa-plus"></i>
+                        Enroll Now
+                    </a>
+                    <a onclick="AddToWatchList(this)" class="cart_btnss_white" style="cursor: pointer;">
+                        <i class="fa fa-heart"></i>
+                        Add to Watchlist
+                    </a>
                     {{else}}
-                        <a href="#" class="btn cart_btnss disabled" style="border-radius: 27px; line-height: 2.5em">
-                            <i class="fa fa-plus"></i>
-                            Enroll Now
-                        </a>
-                        <a href="#" class="btn cart_btnss_white disabled"
-                            style="border-radius: 27px; line-height: 2.5em">
-                            <i class="fa fa-heart"></i>
-                            Add to Watchlist
-                        </a> {{/if}}
+                    <a href="#" class="btn cart_btnss disabled" style="border-radius: 27px; line-height: 2.5em">
+                        <i class="fa fa-plus"></i>
+                        Enroll Now
+                    </a>
+                    <a href="#" class="btn cart_btnss_white disabled" style="border-radius: 27px; line-height: 2.5em">
+                        <i class="fa fa-heart"></i>
+                        Add to Watchlist
+                    </a>
+                    {{/if}}
+                    {{else}}
+                    <a href="#" class="btn cart_btnss disabled" style="border-radius: 27px; line-height: 2.5em">
+                        <i class="fa fa-plus"></i>
+                        Enroll Now
+                    </a>
+                    <a href="#" class="btn cart_btnss_white disabled" style="border-radius: 27px; line-height: 2.5em">
+                        <i class="fa fa-heart"></i>
+                        Add to Watchlist
+                    </a> {{/if}}
                 </div>
                 <div class="feature_course_widget csv1">
                     <ul class="list-group">
@@ -288,94 +318,107 @@
     </div>
 </section>
 {{> footer}}
+
+
+
 {{#section "js2"}}
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        function Enroll(element) {
-            const courseId = "{{specificCourse._id}}";
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function Enroll(element) {
+        const courseId = "{{specificCourse._id}}";
 
-            const newData = {
-                id: courseId
+        const newData = {
+            id: courseId
+        }
+        $.post("/student/enroll", newData, function (err, status) {
+            if (err) {
+                DisplayError(err);
+            } else {
+                swal("Enroll successfully!", {
+                    icon: "success",
+                }).then((value) => {
+                    location.reload();
+                });
             }
-            $.post("/student/enroll", newData, function (err, status) {
-                if (err) {
-                    DisplayError(err);
-                } else {
-                    swal("Enroll successfully!", {
-                        icon: "success",
-                    }).then((value) => {
-                        location.reload();
-                    });
-                }
-            })
-        }
-        function AddToWatchList(element) {
-            const courseId = "{{specificCourse._id}}";
-            const newData = {
-                id: courseId
-            }
-            $.post("/student/watchlist", newData, function (err, status) {
-                if (err) {
-                    DisplayError(err);
-                } else {
-                    swal("Add to watch list successfully!", {
-                        icon: "success",
-                    }).then((value) => {
-                        location.reload();
-                    });
-                }
-            })
-        }
-        function DisplayError(message) {
-            swal({
-                title: "Something is wrong",
-                text: message,
-                icon: "error",
-                button: "Ok",
-            });
-            return false;
-        }
-
-        jQuery("#review-form").on("submit", function () {
-            event.preventDefault();
-            Feedback();
         })
+    }
+    function AddToWatchList(element) {
+        const courseId = "{{specificCourse._id}}";
+        const newData = {
+            id: courseId
+        }
+        $.post("/student/watchlist", newData, function (err, status) {
+            if (err) {
+                DisplayError(err);
+            } else {
+                swal("Add to watch list successfully!", {
+                    icon: "success",
+                }).then((value) => {
+                    location.reload();
+                });
+            }
+        })
+    }
+    function DisplayError(message) {
+        swal({
+            title: "Something is wrong",
+            text: message,
+            icon: "error",
+            button: "Ok",
+        });
+        return false;
+    }
 
-        function Feedback() {
-            const courseId = "{{specificCourse._id}}";
-            const feedback = jQuery("#reviewsFeedback").val();
-            const rating = jQuery("#ratingFeedback").val();
-            if (CheckValidInput(feedback, rating)) {
-                const newData = {
-                    id: courseId,
-                    feedback: feedback,
-                    rating: rating
+    jQuery("#review-form").on("submit", function () {
+        event.preventDefault();
+        Feedback();
+    })
+
+    function Feedback() {
+        const courseId = "{{specificCourse._id}}";
+        const feedback = jQuery("#reviewsFeedback").val();
+        const rating = jQuery("#ratingFeedback").val();
+        if (CheckValidInput(feedback, rating)) {
+            const newData = {
+                id: courseId,
+                feedback: feedback,
+                rating: rating
+            }
+            $.post("/student/feedback", newData, function (err, status) {
+                if (err) {
+                    DisplayError(err);
+                } else {
+                    swal("Review course successfully!", {
+                        icon: "success",
+                    }).then((value) => {
+                        location.reload();
+                    });
                 }
-                $.post("/student/feedback", newData, function (err, status) {
-                    if (err) {
-                        DisplayError(err);
-                    } else {
-                        swal("Review course successfully!", {
-                            icon: "success",
-                        }).then((value) => {
-                            location.reload();
-                        });
-                    }
-                })
-            }
+            })
         }
-        function CheckValidInput(feedback, rating) {
-            if (feedback.length === 0) {
-                return DisplayError("Review is empty!");
-            }
-            if (rating.length === 0) {
-                return DisplayError("Rating is empty!");
-            }
-            return true
+    }
+    function CheckValidInput(feedback, rating) {
+        if (feedback.length === 0) {
+            return DisplayError("Review is empty!");
         }
-        function getCourse(element) {
-            var value = $(element).data("courseid");
-            location.replace("/courses/" + value);
+        if (rating.length === 0) {
+            return DisplayError("Rating is empty!");
         }
-    </script>
+        return true
+    }
+    function getCourse(element) {
+        var value = $(element).data("courseid");
+        location.replace("/courses/" + value);
+    }
+    function togglePopupVideo(element) {
+        const isVideoVisible = "{{videoVisible}}";
+        console.log(isVideoVisible);
+        if(isVideoVisible === "" || isVideoVisible === "false"){
+            return;
+        }
+        const videoId = jQuery(element).data("videoid");
+        video = jQuery("#content-video").children("video");
+        video.attr("src",`/videos/content/${videoId}.mp4`);
+    }
+</script>
 {{/section}}

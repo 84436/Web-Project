@@ -36,6 +36,9 @@ router.get('/', async (i, o, next) => {
 
 router.get("/courses/:id", async (i, o, next) => {
     o.locals.User = i.session.User
+    if(o.locals.User){
+        o.locals.videoVisible = await activityModel.isCourseEnrolled(i.session.User._id,i.params.id) || await courseModel.isCourseInstructor(i.params.id, i.session.User._id);
+    }
     o.locals.catList = await categoryModel.getAll()
     o.locals.specificCourse = await courseModel.get_course(i.params.id)
     o.locals.relatedCourse = await courseModel.topEnrollByCategory(o.locals.specificCourse.categoryID, o.locals.specificCourse._id)
