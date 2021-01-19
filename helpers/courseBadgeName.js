@@ -24,8 +24,8 @@ async function setBadge(courses) {
         else {
             Object.assign(c, { badgeName: "" });
         }
-        return courses
     }
+    return courses
 }
 
 module.exports = {
