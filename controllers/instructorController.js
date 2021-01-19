@@ -21,6 +21,7 @@ router.use(function (i, o, next) {
 })
 
 router.get("/profile", async (i, o, next) => {
+    o.locals.catList = await categoryModel.getAll()
     const resultSet = await accountModel.getByID(i.session.User._id);
     if (!resultSet.error) {
         o.locals.User = {
