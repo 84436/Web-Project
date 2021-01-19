@@ -363,6 +363,19 @@ async function getAll(sortPrice, sortRate) {
     return r;
 }
 
+async function getAllAdmin(sortPrice, sortRate) {
+    let r = await courseModel
+        .find(filter, (err) => {
+            return null;
+        })
+        .lean()
+        .populate({
+            path: "instructorID",
+        })
+
+    return r;
+}
+
 async function getByCategory(categoryID) {
     let filter = {
         categoryID: categoryID,
@@ -526,8 +539,7 @@ function setNew(publishDate) {
 
 function getCourseByLecturer(lecturerID) {
     let filter = {
-        instructorID: lecturerID,
-        isEnable: true
+        instructorID: lecturerID
     }
     let projection = { __v: 0 }
     let r = courseModel.find(filter, projection, (err) => {
@@ -617,6 +629,7 @@ module.exports = {
     topEnrollCourse: topEnrollCourse,
     getCourseByLecturer: getCourseByLecturer,
     getAll: getAll,
+    getAllAdmin: getAllAdmin,
     isCourseInstructor: isCourseInstructor,
     setLockCourse: setLockCourse
 };

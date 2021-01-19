@@ -94,7 +94,7 @@ router.get("/courses", async (i, o, next) => {
     o.locals.catList = await categoryModel.getAll()
     o.locals.listInstructors = await accountModel.getAllLecturer()
     if (i.query.filter === "all") {
-        o.locals.courseList = await courseModel.getAll()
+        o.locals.courseList = await courseModel.getAllAdmin()
     }
     else {
         o.locals.courseList = await courseModel.getCourseByLecturer(i.query.filter)
