@@ -14,7 +14,7 @@
                         <div class="candidate_revew_select style2 text-right">
                             <ul class="mb0">
                                 <li class="list-inline-item">
-                                    <select class="selectpicker show-tick" onchange="filter(this)">
+                                    <select id="drop-instructor" class="selectpicker show-tick" onchange="filter(this)">
                                         <option data-id="none" selected>All courses</option>
                                         {{#each listInstructors}}
                                             <option data-id="{{this._id}}">{{this.name}}</option>
@@ -33,10 +33,6 @@
                                     <div class="thumb"
                                         style="min-width: 240px; max-width: 240px; min-height: 135px; max-height: 135px;">
                                         <img class="img-whp" src="/images/banner/{{this._id}}.jpg">
-                                        <div class="overlay">
-                                            <span class="tag">Best Seller</span>
-                                            <a class="tc_preview_course" href="#"></a>
-                                        </div>
                                     </div>
                                     <div class="details" style="width: 100%">
                                         <div class="tc_content">
@@ -59,7 +55,6 @@
                                                 <li class="list-inline-item"><a href="#">{{this.averageRate}}</a>
                                                 </li>
                                             </ul>
-                                            <div class="tc_price float-right fn-414">${{this.price}}</div>
                                         </div>
                                         <ul class="view_edit_delete_list float-right"
                                             style="opacity: 100%; padding-top: 16px;">
@@ -85,12 +80,17 @@
     </div>
 </section>
 {{> footer}}
-
 {{#section "js2"}}
     <script>
         function filter(optionElement) {
-            var value = $(optionElement).data("id")
-            location.replace(`?filter=${value}`);
+            var val = $(optionElement).val()
+            if (val === "All courses") {
+                location.replace("?filter=all")
+            }
+            else {
+                var value = $("#drop-instructor").find(":selected").data("id")
+                location.replace(`?filter=${value}`)
+            }
         }
     </script>
 {{/section}}

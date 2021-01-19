@@ -91,14 +91,16 @@ router.post("/categories/delete", async (i, o, next) => {
 })
 
 router.get("/courses", async (i, o, next) => {
+    o.locals.catList = await categoryModel.getAll()
     o.locals.listInstructors = await accountModel.getAllLecturer()
-    if (i.params.filter === "none" || i.params.filter === "undefined") {
+    if (i.query.filter === "all") {
         o.locals.courseList = await courseModel.getAll()
     }
     else {
-        o.locals.courseList = await courseModel.getCourseByLecturer(i.params.filter)
+        o.locals.courseList = await courseModel.getCourseByLecturer(i.query.filter)
     }
     o.render("admin/courseList")
 })
+
 
 module.exports = router
