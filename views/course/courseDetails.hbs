@@ -214,47 +214,46 @@
                         <h3 class="r_course_title">Related Courses</h3>
                     </div>
                     {{#each relatedCourse }}
-                        <div class="col-lg-6 col-xl-4">
-                            <div class="top_courses" onclick="getCourse(this)" data-courseid="{{this._id}}">
-                                <div class="thumb">
-                                    <img class="img-whp" src="/images/banner/{{this._id}}.jpg" alt="t1.jpg">
-                                    <div class="overlay">
-                                        <div class="tag">Best Seller</div>
-                                        <div class="icon"><span class="flaticon-like"></span></div>
-                                        <a class="tc_preview_course" href="#">Preview Course</a>
-                                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="top_courses" onclick="getCourse(this)" data-courseid="{{this._id}}">
+                            <div class="thumb">
+                                <img class="img-whp" src="/images/banner/{{this._id}}.jpg" alt="t1.jpg">
+                                <div class="overlay">
+                                    <div class="tag">Best Seller</div>
+                                    <div class="icon"><span class="flaticon-like"></span></div>
+                                    <a class="tc_preview_course" href="#">Preview Course</a>
                                 </div>
                             </div>
-                            <div class="details">
-                                <div class="tc_content">
-                                    <p>{{this.instructorID.name}}</p>
-                                    <h5>{{this.name}}</h5>
-                                    <ul class="tc_review">
-                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
-                                        </li>
-                                        <li class=""><a href="#">({{this.averageRate}})
-                                                {{this.feedbackCount}} students</a></li>
-                                    </ul>
-                                </div>
-                                <div class="tc_footer">
-                                    <ul class="tc_meta float-left">
-                                        <li class="list-inline-item"><a href="#"><i class="flaticon-profile"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#">{{this.enrollCount}}</a></li>
-                                        <li class="list-inline-item"><a href="#"><i class="flaticon-comment"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#">{{this.feedbackCount}}</a></li>
-                                    </ul>
-                                    <div class="tc_price float-right">${{this.price}}</div>
-                                </div>
+                        </div>
+                        <div class="details">
+                            <div class="tc_content">
+                                <p>{{this.instructorID.name}}</p>
+                                <h5>{{this.name}}</h5>
+                                <ul class="tc_review">
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                    </li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                    </li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                    </li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                    </li>
+                                    <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a>
+                                    </li>
+                                    <li class=""><a href="#">({{this.averageRate}})
+                                            {{this.feedbackCount}} students</a></li>
+                                </ul>
+                            </div>
+                            <div class="tc_footer">
+                                <ul class="tc_meta float-left">
+                                    <li class="list-inline-item"><a href="#"><i class="flaticon-profile"></i></a>
+                                    </li>
+                                    <li class="list-inline-item"><a href="#">{{this.enrollCount}}</a></li>
+                                    <li class="list-inline-item"><a href="#"><i class="flaticon-comment"></i></a>
+                                    </li>
+                                    <li class="list-inline-item"><a href="#">{{this.feedbackCount}}</a></li>
+                                </ul>
+                                <div class="tc_price float-right">${{this.price}}</div>
                             </div>
                         </div>
                     </div>
