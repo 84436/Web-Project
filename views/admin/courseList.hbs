@@ -1,5 +1,4 @@
 {{> navbar-admin-alt}}
-
 <section class="courses-list2 pb40" style="padding-top: 120px;">
     <div class="container">
         <div class="row">
@@ -16,8 +15,10 @@
                             <ul class="mb0">
                                 <li class="list-inline-item">
                                     <select class="selectpicker show-tick" onchange="filter(this)">
-                                        <option>-- Filter by instructor --</option>
-                                        <option>Instructor name</option>
+                                        <option selected>All courses</option>
+                                        {{#each listInstructors}}
+                                            <option>{{this.name}}</option>
+                                        {{/each}}
                                     </select>
                                 </li>
                             </ul>
@@ -60,18 +61,16 @@
                                             </ul>
                                             <div class="tc_price float-right fn-414">${{this.price}}</div>
                                         </div>
-                                        <ul class="view_edit_delete_list float-right" style="opacity: 100%; padding-top: 16px;">
+                                        <ul class="view_edit_delete_list float-right"
+                                            style="opacity: 100%; padding-top: 16px;">
                                             {{!-- <li class="list-inline-item" style="background-color:lightskyblue;"><a onclick=""
                                                     data-toggle="tooltip"
                                                     data-placement="top"
                                                     title="Edit course">
                                                     <i class="fa fa-pencil" style="color: white"></i></a>
                                             </li> --}}
-                                            <li class="list-inline-item"><a onclick=""
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    data-id="{{this._id}}"
-                                                    title="Disable course">
+                                            <li class="list-inline-item"><a onclick="" data-toggle="tooltip"
+                                                    data-placement="top" data-id="{{this._id}}" title="Disable course">
                                                     <i class="fa fa-lock" style="color: white"></i></a>
                                             </li>
                                         </ul>
@@ -81,30 +80,8 @@
                         </div>
                     {{/each}}
                 </div>
-                <div class="row">
-                    <div class="col-lg-12 mt50">
-                        <div class="mbp_pagination">
-                            <ul class="page_navigation">
-                                <li class="page-item" style="padding-right: 4px;">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true"> <span
-                                            class="flaticon-left-arrow"></span> Prev</a>
-                                </li>
-                                <li class="page-item active" style="padding-left: 4px; padding-right: 4px;">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item" style="padding-left: 4px; padding-right: 4px;">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item" style="padding-left: 4px;">
-                                    <a class="page-link" href="#">Next <span class="flaticon-right-arrow-1"></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </section>
-
 {{> footer}}
