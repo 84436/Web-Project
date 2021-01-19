@@ -106,6 +106,10 @@
                                             role="tab" aria-controls="course" aria-selected="false">Content</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" id="course-tab" data-toggle="tab" href="#overview"
+                                            role="tab" aria-controls="course" aria-selected="false">Overview</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" id="instructor-tab" data-toggle="tab" href="#instructor"
                                             role="tab" aria-controls="instructor" aria-selected="false">Instructor</a>
                                     </li>
@@ -136,6 +140,18 @@
                                                     </div>
                                                     {{/each}}
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="overview" role="tabpanel"
+                                        aria-labelledby="Overview-tab">
+                                        <div class="cs_row_two csv2">
+                                            <div class="cs_overview">
+                                                <h4 class="title">Overview</h4>
+                                                <h4 class="subtitle">{{specificCourse.desc.short}}</h4>
+                                                <br><hr><br>
+                                                <h4 class="title">Detailed description</h4>
+                                                <h4 class="subtitle">{{specificCourse.desc.long}}</h4>
                                             </div>
                                         </div>
                                     </div>
