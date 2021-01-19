@@ -11,7 +11,7 @@ router.get('/', async (i, o, next) => {
     o.locals.hotCourses = await badgeName.setBadge(await courseModel.topEnrollCourse())
     o.locals.mostViewCourses = await badgeName.setBadge(await courseModel.topViewCourses())
     o.locals.newestCourses = await  badgeName.setBadge(await courseModel.newestCourses())
-    o.locals.topCategories = await badgeName.setBadge(await courseModel.topEnrollCategories())
+    o.locals.topCategories = await courseModel.topEnrollCategories()
 
     o.locals.User = i.session.User
 
