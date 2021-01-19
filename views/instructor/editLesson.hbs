@@ -58,7 +58,7 @@
                         </div>
                         <div class="col-lg-12">
                             <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
-                                <h4 class="title float-left">Editing a course</h4>
+                                <h4 class="title float-left">Editing a course > Adding a chapter</h4>
                             </nav>
                         </div>
                         <div class="col-lg-12">
@@ -81,54 +81,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- INSERT CATEGORY DROPDOWN -->
-                                        <div class="col-lg-12">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="my_profile_setting_input form-group">
-                                                        <label for="formGroupExampleInput1">Category/Major</label>
-                                                        <select class="selectpicker show-tick">
-                                                            <option>-- Choose a major --</option>
-                                                            <option>Major</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="my_profile_setting_input form-group">
-                                                        <label for="formGroupExampleInput1">Category/Minor</label>
-                                                        <select class="selectpicker show-tick">
-                                                            <option>-- Choose a minor --</option>
-                                                            <option>Minor</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="my_resume_textarea">
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlTextarea1">Description (short)</label>
-                                                    <textarea class="form-control" id="desc-short" rows="3"
-                                                        placeholder=""></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="my_resume_textarea">
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlTextarea1">Description (long)</label>
-                                                    <textarea class="form-control" id="desc-long" rows="7"
-                                                        placeholder=""></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-12">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="my_profile_setting_input form-group">
-                                                        <label for="formGroupExampleInput1">Price</label>
-                                                        <input type="text" class="form-control" id="price"
-                                                            placeholder="0.00">
+                                                        <label for="formGroupExampleInput1">UPLOAD VIDEO PLACEHOLDER</label>
+                                                        <input type="text" class="form-control" id="name"
+                                                            placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,52 +95,14 @@
                                     </div>
                                     <div class="row my_setting_content_details">
                                         <div class="col-lg-12">
-                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm" onclick="saveChange()">Save
-                                                <span class="flaticon-right-arrow-1 ml15"></span></button>
+                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm" onclick="window.history.back()">
+                                                <i class="fa fa-arrow-left"></i> Go back
+                                            </button>
+                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm" onclick="saveChange()">
+                                                Save <span class="flaticon-right-arrow-1 ml15"></span>
+                                            </button>
                                                 <span id="save-error" class="text-danger"
                                                 style="margin-left: 20px;"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="my_setting_content mb30">
-                                    <div class="my_setting_content_header">
-                                        <div class="my_sch_title">
-                                            <h4 class="m0" style="font-weight: bold;">Chapter list</h4>
-                                        </div>
-                                    </div>
-                                    <!-- CHAPTER LIST -->
-                                    <div class="row my_setting_content_details pb0">
-                                        <div class="my_course_content_list" style="width: 100%">
-                                            <div class="mc_content_list" style="padding: 8px; padding-top: 16px;">
-                                                <div class="details" style="width: 100%;">
-                                                    <div class="mc_content"
-                                                        style="display: grid; grid-auto-columns: 1fr auto;">
-                                                        <h5 class="title" style="grid-row: 1">
-                                                            Chapter name
-                                                        </h5>
-                                                        <ul class="view_edit_delete_list float-right"
-                                                            style="grid-row: 1">
-                                                            <li class="list-inline-item" style="display: none;"></li>
-                                                            <li class="list-inline-item"
-                                                                style="background-color: crimson;"
-                                                                data-id="{{this._id}}">
-                                                                <a data-toggle="tooltip" data-placement="top"
-                                                                    title="Remove chapter"><i class="fa fa-trash"
-                                                                    style="color: white"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row my_setting_content_details">
-                                        <div class="col-lg-12">
-                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm" onclick="saveChange()">
-                                                <i class="fa fa-plus"></i>
-                                                Add
-                                            </button>
-                                            <span id="save-error" class="text-danger" style="margin-left: 20px;"></span>
                                         </div>
                                     </div>
                                 </div>
