@@ -15,9 +15,9 @@
                             <ul class="mb0">
                                 <li class="list-inline-item">
                                     <select class="selectpicker show-tick" onchange="filter(this)">
-                                        <option selected>All courses</option>
+                                        <option data-id="none" selected>All courses</option>
                                         {{#each listInstructors}}
-                                            <option>{{this.name}}</option>
+                                            <option data-id="{{this._id}}">{{this.name}}</option>
                                         {{/each}}
                                     </select>
                                 </li>
@@ -85,3 +85,12 @@
     </div>
 </section>
 {{> footer}}
+
+{{#section "js2"}}
+    <script>
+        function filter(optionElement) {
+            var value = $(optionElement).data("id")
+            location.replace(`?filter=${value}`);
+        }
+    </script>
+{{/section}}
