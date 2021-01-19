@@ -321,6 +321,7 @@ async function topEnrollCourse() {
 
 /********************************************************************************/
 //PAGINATION NEEDDING
+
 async function getAll(sortPrice, sortRate) {
     let r;
     if (sortPrice) {
@@ -343,9 +344,20 @@ async function getAll(sortPrice, sortRate) {
                 path: "instructorID",
             }).sort({ price: 1 })
     }
+    else {
+        r = await courseModel
+            .find({}, (err) => {
+                return null;
+            })
+            .lean()
+            .populate({
+                path: "instructorID",
+            })
+    }
 
     return r;
 }
+
 async function getByCategory(categoryID) {
     let filter = {
         categoryID: categoryID,

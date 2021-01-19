@@ -1,0 +1,243 @@
+{{> navbar-instructor-alt}}
+
+<!-- Our Dashboard -->
+<div class="dashboard_main_content" style="padding: 32px; padding-top: 64px;">
+    <div class="container-fluid">
+        <div class="main_content_container" style="padding-top: 60px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="dashboard_navigationbar dn db-1199">
+                        <div class="dropdown">
+                            <button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard
+                                Navigation</button>
+                            <ul id="myDropdown" class="dropdown-content">
+                                <li><a href="page-dashboard.html"><span class="flaticon-puzzle-1"></span> Dashboard</a>
+                                </li>
+                                <li><a href="page-my-courses.html"><span class="flaticon-online-learning"></span> My
+                                        Courses</a></li>
+                                <li class="active"><a href="page-my-order.html"><span
+                                            class="flaticon-shopping-bag-1"></span> Order</a></li>
+                                <li><a href="page-my-message.html"><span class="flaticon-speech-bubble"></span>
+                                        Messages</a></li>
+                                <li><a href="page-my-review.html"><span class="flaticon-rating"></span> Reviews</a></li>
+                                <li><a href="page-my-bookmarks.html"><span class="flaticon-like"></span> Bookmarks</a>
+                                </li>
+                                <li><a href="page-my-listing.html"><span class="flaticon-add-contact"></span> Add
+                                        listing</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-8 col-xl-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="dashboard_navigationbar dn db-1199">
+                                <div class="dropdown">
+                                    <button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i>
+                                        Dashboard Navigation</button>
+                                    <ul id="myDropdown" class="dropdown-content">
+                                        <li><a href="page-dashboard.html"><span class="flaticon-puzzle-1"></span>
+                                                Dashboard</a></li>
+                                        <li><a href="page-my-courses.html"><span
+                                                    class="flaticon-online-learning"></span> My Courses</a></li>
+                                        <li><a href="page-my-order.html"><span class="flaticon-shopping-bag-1"></span>
+                                                Order</a></li>
+                                        <li><a href="page-my-message.html"><span class="flaticon-speech-bubble"></span>
+                                                Messages</a></li>
+                                        <li><a href="page-my-review.html"><span class="flaticon-rating"></span>
+                                                Reviews</a></li>
+                                        <li><a href="page-my-bookmarks.html"><span class="flaticon-like"></span>
+                                                Bookmarks</a></li>
+                                        <li><a href="page-my-listing.html"><span class="flaticon-add-contact"></span>
+                                                Add listing</a></li>
+                                        <li class="active"><a href="page-my-setting.html"><span
+                                                    class="flaticon-settings"></span> Settings</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                                <h4 class="title float-left">Adding new course</h4>
+                            </nav>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="my_course_content_container">
+                                <div class="my_setting_content mb30">
+                                    <div class="row my_setting_content_details pb0">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="my_profile_setting_input form-group">
+                                                        <label for="formGroupExampleInput1">Course name</label>
+                                                        <input type="text" class="form-control" id="name"
+                                                            placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- INSERT CATEGORY DROPDOWN -->
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="my_profile_setting_input form-group">
+                                                        <label for="formGroupExampleInput1">Category/Major</label>
+                                                        <select class="selectpicker show-tick">
+                                                            <option>-- Choose a major --</option>
+                                                            <option>Major</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="my_profile_setting_input form-group">
+                                                        <label for="formGroupExampleInput1">Category/Minor</label>
+                                                        <select class="selectpicker show-tick">
+                                                            <option>-- Choose a minor --</option>
+                                                            <option>Minor</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="my_resume_textarea">
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea1">Description (short)</label>
+                                                    <textarea class="form-control" id="desc-short" rows="3"
+                                                        placeholder=""></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="my_resume_textarea">
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea1">Description (long)</label>
+                                                    <textarea class="form-control" id="desc-long" rows="7"
+                                                        placeholder=""></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="my_profile_setting_input form-group">
+                                                        <label for="formGroupExampleInput1">Price</label>
+                                                        <input type="text" class="form-control" id="price"
+                                                            placeholder="0.00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my_setting_content_details">
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm" onclick="saveChange()">Save
+                                                <span class="flaticon-right-arrow-1 ml15"></span></button>
+                                                <span id="save-error" class="text-danger"
+                                                style="margin-left: 20px;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> footer}}
+
+{{#section "js2"}}
+<script>
+
+    function saveChange() {
+        let email = $("#email").val()
+        let name = $("#name").val()
+        let instructorBio = jQuery("#bio").val()
+        let is_email = true
+        if (email === "") {
+            email = $("#email").attr('placeholder');
+        } else {
+            var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            is_email = re.test(email);
+        }
+        if (name.length === 0) {
+            name = $("#name").attr('placeholder');
+        }
+        if (instructorBio.length === 0) {
+            instructorBio = $("#bio").attr('placeholder');
+        }
+
+        if (is_email) {
+            postEdit(email, name, instructorBio)
+        }
+        else {
+            $("#save-error").text("Invalid email. Please check your input again.")
+        }
+
+    }
+    function postEdit(email, name, instructorBio) {
+        $.post("/instructor/profile/edit", {
+            email: email,
+            name: name, 
+            instructorBio: instructorBio
+        }, function (data, status) {
+            if (data) {
+                $("#save-error").text(data)
+            }
+            else {
+                location.replace("/instructor/profile");
+            }
+        })
+    }
+
+
+
+
+
+    const errorPassElement = jQuery("#change-errorPass")
+    function DisplayError(message) {
+        errorPassElement[0].innerHTML = message;
+        return false;
+    }
+    function CheckValidInput(oldPass, newPass, confirmPass) {
+        if (oldPass.length === 0)
+            return DisplayError("Old password is empty!");
+        if (newPass.length === 0)
+            return DisplayError("New password is empty!");
+        if (newPass !== confirmPass)
+            return DisplayError("Confirm password is not match!");
+        return true;
+    }
+    function SaveChangePassword() {
+        const oldPass = jQuery("#exampleInputPassword1").val();
+        const newPass = jQuery("#exampleInputPassword2").val();
+        const confirmPass = jQuery("#exampleInputPassword3").val();
+        if (CheckValidInput(oldPass, newPass, confirmPass)) {
+            const newData = {
+                oldPass: oldPass,
+                newPass: newPass
+            }
+            $.post('/instructor/profile/edit/pass', newData, function (err, status) {
+                if (err) {
+                    DisplayError(err);
+                } else {
+                    errorPassElement[0].innerHTML = "Change password successfully!";
+                    errorPassElement.removeClass("text-danger");
+                    errorPassElement.addClass("text-success");
+                    jQuery("#exampleInputPassword1").val("");
+                    jQuery("#exampleInputPassword2").val("");
+                    jQuery("#exampleInputPassword3").val("");
+                    setTimeout(() => {
+                        errorPassElement[0].innerHTML = "";
+                        errorPassElement.removeClass("text-success");
+                        errorPassElement.addClass("text-danger");
+                    }, 2000);
+                }
+            })
+        }
+    }
+</script>
+{{/section}}

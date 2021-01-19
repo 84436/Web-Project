@@ -34,7 +34,7 @@ router.get("/profile", async (i, o, next) => {
 })
 
 router.get("/courses", async (i, o, next) => {
-    const courses = await courseModel.getCourseByLecturer(i.session.User._id);
+    const courses = badgeName.setBadge(await courseModel.getCourseByLecturer(i.session.User._id));
     o.locals.listCourses = [];
     for (const item of courses) {
         o.locals.listCourses.push({

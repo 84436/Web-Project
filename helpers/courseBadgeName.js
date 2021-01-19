@@ -1,6 +1,6 @@
 var courseModel = require("../models/courseModel")
 
-function setBadge(courses) {
+async function setBadge(courses) {
     let maxEnroll = await courseModel.getMaxEnroll();
     
     for (let c of courses) {
@@ -9,7 +9,7 @@ function setBadge(courses) {
         if (c.enrollCount >= 0.8 * maxEnroll) {
             isBestSeller = true;
         }
-        if (Math.round((today - c.publishDate) / (1000 * 60 * 60 * 24) < 14)) {
+        if (Math.round((new Date() - c.publishDate) / (1000 * 60 * 60 * 24) < 14)) {
             isNew = true;
         }
         if (isBestSeller && isNew) {
@@ -24,8 +24,8 @@ function setBadge(courses) {
         else {
             Object.assign(c, { badgeName: "" });
         }
-        return courses
     }
+    return courses
 }
 
 module.exports = {
