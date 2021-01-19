@@ -83,7 +83,7 @@ router.post("/courses/add/uploadImage", (i, o, next) => {
 router.post("/courses/add", async (i, o, next) => {
 
 })
-router.get("/courses/edit", async (i, o, next) => {
+router.get("/courses/edit/:id", async (i, o, next) => {
     o.locals.catList = await categoryModel.getAll();
     o.render("instructor/editCourse");
 })

@@ -1,3 +1,13 @@
+{{#section "css"}}
+{{!-- ----------- --}}
+{{!-- Import ZONE --}}
+{{!-- ----------- --}}
+<!-- Filepond stylesheet -->
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+{{/section}}
+
 {{> navbar-instructor-alt}}
 <!-- Our Dashboard -->
 <div class="dashboard_main_content" style="padding: 32px; padding-top: 64px;">
@@ -83,6 +93,7 @@
                                                         <input type="text" class="form-control" id="name"
                                                             placeholder="">
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -95,9 +106,9 @@
                                                         <select id="main-category" class="selectpicker show-tick">
                                                             <option disabled>-- Choose a category --</option>
                                                             {{#each catRaw}}
-                                                                <option value="{{this._id}}">
-                                                                    {{this.major}} > {{this.minor}}
-                                                                </option>
+                                                            <option value="{{this._id}}">
+                                                                {{this.major}} > {{this.minor}}
+                                                            </option>
                                                             {{/each}}
                                                         </select>
                                                     </div>
@@ -148,8 +159,7 @@
                                     </div>
                                     <div class="row my_setting_content_details">
                                         <div class="col-lg-12">
-                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm"
-                                                onclick="AddNewCourseSubmit()">Save
+                                            <button type="submit" class="my_setting_savechange_btn btn btn-thm" onclick="AddNewCourseSubmit()">Save
                                                 <span class="flaticon-right-arrow-1 ml15"></span></button>
                                             <span id="save-error" class="text-danger" style="margin-left: 20px;"></span>
                                         </div>
@@ -211,96 +221,160 @@
             </div>
         </div>
     </div>
-    {{> footer}}
-    {{#section "js2"}}
-        <script>
+</div>
+{{> footer}}
+{{#section "js2"}}
+{{!-- ----------- --}}
+{{!-- Import ZONE --}}
+{{!-- ----------- --}}
+<!-- Load FilePond library -->
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js">
+</script>
+<script src="https://unpkg.com/filepond-plugin-file-rename/dist/filepond-plugin-file-rename.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<!-- Load sweet alert and jQuery ajax-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-            function saveChange() {
-                let email = $("#email").val()
-                let name = $("#name").val()
-                let instructorBio = jQuery("#bio").val()
-                let is_email = true
-                if (email === "") {
-                    email = $("#email").attr('placeholder');
-                } else {
-                    var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-                    is_email = re.test(email);
-                }
-                if (name.length === 0) {
-                    name = $("#name").attr('placeholder');
-                }
-                if (instructorBio.length === 0) {
-                    instructorBio = $("#bio").attr('placeholder');
-                }
-
-                if (is_email) {
-                    postEdit(email, name, instructorBio)
-                }
-                else {
-                    $("#save-error").text("Invalid email. Please check your input again.")
-                }
-
-            }
-            function postEdit(email, name, instructorBio) {
-                $.post("/instructor/profile/edit", {
-                    email: email,
-                    name: name,
-                    instructorBio: instructorBio
-                }, function (data, status) {
-                    if (data) {
-                        $("#save-error").text(data)
-                    }
-                    else {
-                        location.replace("/instructor/profile");
-                    }
-                })
-            }
+<!-- Turn all file input elements into ponds -->
+<script>
+    // Register the plugin with FilePond
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview,
+        FilePondPluginFileValidateSize,
+        FilePondPluginFileValidateType,
+        FilePondPluginImageValidateSize,
+        FilePondPluginFileRename
+    );
 
 
+    FilePond.setOptions({
+        server: {
+            process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
 
+                console.log(file);
+                console.log(file.name);
 
-
-            const errorPassElement = jQuery("#change-errorPass")
-            function DisplayError(message) {
-                errorPassElement[0].innerHTML = message;
-                return false;
-            }
-            function CheckValidInput(oldPass, newPass, confirmPass) {
-                if (oldPass.length === 0)
-                    return DisplayError("Old password is empty!");
-                if (newPass.length === 0)
-                    return DisplayError("New password is empty!");
-                if (newPass !== confirmPass)
-                    return DisplayError("Confirm password is not match!");
-                return true;
-            }
-            function SaveChangePassword() {
-                const oldPass = jQuery("#exampleInputPassword1").val();
-                const newPass = jQuery("#exampleInputPassword2").val();
-                const confirmPass = jQuery("#exampleInputPassword3").val();
-                if (CheckValidInput(oldPass, newPass, confirmPass)) {
-                    const newData = {
-                        oldPass: oldPass,
-                        newPass: newPass
-                    }
-                    $.post('/instructor/profile/edit/pass', newData, function (err, status) {
-                        if (err) {
-                            DisplayError(err);
-                        } else {
-                            errorPassElement[0].innerHTML = "Change password successfully!";
-                            errorPassElement.removeClass("text-danger");
-                            errorPassElement.addClass("text-success");
-                            jQuery("#exampleInputPassword1").val("");
-                            jQuery("#exampleInputPassword2").val("");
-                            jQuery("#exampleInputPassword3").val("");
-                            setTimeout(() => {
-                                errorPassElement[0].innerHTML = "";
-                                errorPassElement.removeClass("text-success");
-                                errorPassElement.addClass("text-danger");
-                            }, 2000);
+                // fieldName is the name of the input field
+                // file is the actual file object to send
+                var func = (fieldName, file, callback) => {
+                    console.log("Send Data");
+                    const formData = new FormData();
+                    const request = new XMLHttpRequest();
+                    formData.append(fieldName, file, file.name);
+                    request.open('POST', '/instructor/courses/add/uploadImage');
+                    request.upload.onprogress = (e) => {
+                        console.log("On Progress");
+                        progress(e.lengthComputable, e.loaded, e.total);
+                    };
+                    request.upload.onloadend = (e) => {
+                        console.log("On Load End");
+                        callback();
+                    };
+                    request.onload = function () {
+                        console.log("On load");
+                        if (request.status >= 200 && request.status < 300) {
+                            // the load method accepts either a string (id) or an object
+                            load(request.responseText);
                         }
-                    })
+                        else {
+                            error('oh no');
+                        }
+                    };
+                    request.send(formData);
+
+                };
+                const data = {
+                    callbackSubmit: func,
+                    fieldName: fieldName,
+                    file: file
                 }
+                pondImageCover = data;
+                return {
+                    abort: () => {
+                        console.log("Cancel");
+                        abort();
+                        return pondImageCover = null;
+                    }
+                };
             }
-        </script>
-    {{/section}}
+
+        }
+    });
+
+    // Get a reference to the file input element
+    const inputElementPondCoverImage = document.querySelector('input[type="file"]#main-information-cover-img');
+
+    // Create the FilePond instance
+    const pondCoverImage = FilePond.create(inputElementPondCoverImage, {
+        maxFileSize: '10MB',
+        imagePreviewHeight: 500,
+        acceptedFileTypes: ['image/*'],
+        fileRenameFunction: (file) => {
+            return `cover${file.extension}`;
+        },
+        imageValidateSizeMinWidth: 600,
+        imageValidateSizeMinHeight: 400
+    });
+
+    // Initialize Quill editor
+    var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        ['blockquote', 'code-block'],
+        [{
+            'header': 1
+        }, {
+            'header': 2
+        }], // custom button values
+        [{
+            'list': 'ordered'
+        }, {
+            'list': 'bullet'
+        }],
+        [{
+            'script': 'sub'
+        }, {
+            'script': 'super'
+        }], // superscript/subscript
+        [{
+            'indent': '-1'
+        }, {
+            'indent': '+1'
+        }], // outdent/indent
+        [{
+            'direction': 'rtl'
+        }], // text direction
+        [{
+            'size': ['small', false, 'large', 'huge']
+        }], // custom dropdown
+        [{
+            'header': [1, 2, 3, 4, 5, 6, false]
+        }],
+        [{
+            'color': []
+        }, {
+            'background': []
+        }], // dropdown with defaults from theme
+        [{
+            'font': []
+        }],
+        [{
+            'align': []
+        }],
+        ['clean'] // remove formatting button
+    ];
+    var quill = new Quill('#editor', {
+        modules: {
+            toolbar: toolbarOptions
+        },
+        theme: 'snow'
+    });
+</script>
+<script>
+
+</script>
+{{/section}}

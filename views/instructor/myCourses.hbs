@@ -40,32 +40,32 @@
                                 <div class="my_course_content mb30" style="padding-top: 0">
                                     <div class="my_course_content_list">
                                         {{#each listCourses}}
-                                            <!-- TEMPLATEME! -->
-                                            <div class="mc_content_list">
-                                                <div class="thumb">
-                                                    <img class="img-whp" src="/images/banner/{{this.id}}.jpg">
+                                        <!-- TEMPLATEME! -->
+                                        <div class="mc_content_list">
+                                            <div class="thumb">
+                                                <img class="img-whp" src="/images/banner/{{this.id}}.jpg">
+                                            </div>
+                                            <div class="details">
+                                                <div class="mc_content">
+                                                    <h5 class="title">{{name}}</h5>
+                                                    <p>{{desc}}</p>
                                                 </div>
-                                                <div class="details">
-                                                    <div class="mc_content">
-                                                        <h5 class="title">{{name}}</h5>
-                                                        <p>{{desc}}</p>
-                                                    </div>
-                                                    <div class="mc_footer">
-                                                        <ul class="view_edit_delete_list float-right">
-                                                            <li class="list-inline-item" style="display: none;"></li>
-                                                            <li class="list-inline-item"><a href="/courses/{{id}}"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Go to course"><i class="fa fa-arrow-right"
-                                                                        style="color: white"></i></a></li>
-                                                            <li class="list-inline-item"><a
-                                                                    href="/instructor/courses/edit/{{id}}"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Edit course"><i class="fa fa-pencil"
-                                                                        style="color: white"></i></a></li>
-                                                        </ul>
-                                                    </div>
+                                                <div class="mc_footer">
+                                                    <ul class="view_edit_delete_list float-right">
+                                                        <li class="list-inline-item" style="display: none;"></li>
+                                                        <li class="list-inline-item"><a href="/courses/{{id}}"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Go to course"><i class="fa fa-arrow-right"
+                                                                    style="color: white"></i></a></li>
+                                                        <li class="list-inline-item"><a
+                                                                href="/instructor/courses/edit/{{id}}"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Edit course"><i class="fa fa-pencil"
+                                                                    style="color: white"></i></a></li>
+                                                    </ul>
                                                 </div>
                                             </div>
+                                        </div>
                                         {{/each}}
                                     </div>
                                 </div>
