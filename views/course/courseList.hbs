@@ -44,8 +44,13 @@
                             <ul class="mb0">
                                 <li class="list-inline-item">
                                     <select class="selectpicker show-tick" onchange="sort(this)">
-                                        <option>Average rating</option>
-                                        <option>Price</option>
+                                        {{#if (eq sort 'price')}}
+                                            <option>Average rating</option>
+                                            <option selected>Price</option>
+                                        {{else}}
+                                            <option selected>Average rating</option>
+                                            <option>Price</option>
+                                        {{/if}}
                                     </select>
                                 </li>
                             </ul>
@@ -129,10 +134,12 @@
     <script>
         function sort(optionElement) {
             var value = $(optionElement).val()
-            if (value === "Average rating")
+            if (value === "Average rating") {
                 location.replace(`?sort=rate`);
-            else if (value === "Price")
+            }
+            else if (value === "Price") {
                 location.replace(`?sort=price`);
+            }
         }
 
         function getCourse(element) {
