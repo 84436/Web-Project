@@ -53,17 +53,24 @@ router.get("/courses/byQuery/:search", async (i, o, next) => {
     if (i.params.search === "all") {
         if (i.query.sort === "price") {
             o.locals.courseList = await badgeName.setBadge(await courseModel.getAll(true, false))
+            o.locals.sort = "price"
         }
         else if (i.query.sort === "rate") {
             o.locals.courseList = await badgeName.setBadge(await courseModel.getAll(false, true))
+            o.locals.sort = "rate"
+
         }
     }
     else {
         if (i.query.sort === "price") {
             o.locals.courseList = await badgeName.setBadge(await courseModel.search_course(i.params.search, true, false, o.locals.catList))
+            o.locals.sort = "price"
+
         }
         else if (i.query.sort === "rate") {
             o.locals.courseList = await badgeName.setBadge(await courseModel.search_course(i.params.search, false, true, o.locals.catList))
+            o.locals.sort = "rate"
+
         }
     }
     o.locals.query = i.params.search
