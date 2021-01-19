@@ -215,13 +215,11 @@
                     </div>
                     {{#each relatedCourse }}
                     <div class="col-lg-6 col-xl-4">
-                        <div class="top_courses" onclick="getCourse(this)" data-courseid="{{this._id}}">
+                        <div class="top_courses" onclick="getCourse(this)" data-courseid="{{this._id}}" style="width: 240px; height: 135px">
                             <div class="thumb">
                                 <img class="img-whp" src="/images/banner/{{this._id}}.jpg" alt="t1.jpg">
                                 <div class="overlay">
                                     <div class="tag">Best Seller</div>
-                                    <div class="icon"><span class="flaticon-like"></span></div>
-                                    <a class="tc_preview_course" href="#">Preview Course</a>
                                 </div>
                             </div>
                         </div>
