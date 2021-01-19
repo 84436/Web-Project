@@ -8,7 +8,7 @@
                         <!-- TEMPLATEME! -->
                         {{#each hotCourses}}
                             <div class="slide slide-one"
-                                style="background-image: url(images/courses/8.jpg); height: 75vh;">
+                                style="background-image: url(images/banner/{{this._id}}.jpg); height: 75vh;">
                                 <div class="container">
                                     <div class="row home-content">
                                         <div class="col-lg-12 text-center p0">
@@ -57,7 +57,7 @@
                                 <div class="col">
                                     <div class="top_courses">
                                         <div class="thumb">
-                                            <img class="img-whp" src="images/courses/8.jpg">
+                                            <img class="img-whp" src="images/banner/{{this._id}}.jpg">
                                             <div class="overlay">
                                                 <div class="tag">Best Seller</div>
                                             </div>
@@ -72,7 +72,11 @@
                                                 </ul>
                                             </div>
                                             <div class="tc_footer">
-                                                <div class="tc_price float-right">${{this.price}}</div>
+                                                <div class="tc_price float-right">
+                                                    ${{calSaleOff this.price this.discount}}
+                                                    <small
+                                                        style="text-decoration: line-through;">${{this.price}}</small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -106,7 +110,7 @@
                                 <div class="col">
                                     <div class="top_courses">
                                         <div class="thumb">
-                                            <img class="img-whp" src="images/courses/8.jpg">
+                                            <img class="img-whp" src="images/banner/{{this._id}}.jpg">
                                             <div class="overlay">
                                                 <div class="tag">Best Seller</div>
                                             </div>
@@ -121,7 +125,11 @@
                                                 </ul>
                                             </div>
                                             <div class="tc_footer">
-                                                <div class="tc_price float-right">${{this.price}}</div>
+                                                <div class="tc_price float-right">
+                                                    ${{calSaleOff this.price this.discount}}
+                                                    <small
+                                                        style="text-decoration: line-through;">${{this.price}}</small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -148,7 +156,7 @@
         <div class="row row-cols-5">
             <!-- TEMPLATEME! -->
             {{#each topCategories}}
-                <a href="">
+                <a href="/courses/byQuery/{{this.categoryName.minor}}/?sort=rate">
                     <div class="col">
                         <div class="img_hvr_box" style="background-image: url(images/courses/8.jpg);">
                             <div class="overlay">

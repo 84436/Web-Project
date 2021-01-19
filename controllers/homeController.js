@@ -4,14 +4,14 @@ const router = express.Router()
 
 const categoryModel = require("../models/categoryModel");
 const courseModel = require("../models/courseModel");
-const badgeName = require("../helpers/courseBadgeName")
+const badgeName = require("../helpers/courseBadgeName");
 
 router.get('/', async (i, o, next) => {
     o.locals.catList = await categoryModel.getAll()
-    o.locals.hotCourses = badgeName.setBadge(await courseModel.topEnrollCourse())
-    o.locals.mostViewCourses = badgeName.setBadge(await courseModel.topViewCourses())
-    o.locals.newestCourses = badgeName.setBadge(await courseModel.newestCourses())
-    o.locals.topCategories = badgeName.setBadge(await courseModel.topEnrollCategories())
+    o.locals.hotCourses = await badgeName.setBadge(await courseModel.topEnrollCourse())
+    o.locals.mostViewCourses = await badgeName.setBadge(await courseModel.topViewCourses())
+    o.locals.newestCourses = await  badgeName.setBadge(await courseModel.newestCourses())
+    o.locals.topCategories = await badgeName.setBadge(await courseModel.topEnrollCategories())
 
     o.locals.User = i.session.User
 
