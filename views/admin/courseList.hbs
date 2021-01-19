@@ -64,10 +64,20 @@
                                                     title="Edit course">
                                                     <i class="fa fa-pencil" style="color: white"></i></a>
                                             </li> --}}
-                                            <li class="list-inline-item"><a onclick="" data-toggle="tooltip"
-                                                    data-placement="top" data-id="{{this._id}}" title="Disable course">
-                                                    <i class="fa fa-lock" style="color: white"></i></a>
-                                            </li>
+                                            {{#if (eqBool this.isEnable false)}}
+                                                <li class="list-inline-item" style="background-color:dodgerblue;"
+                                                    data-id="{{this._id}}" onclick="UnlockCourse(this)">
+                                                    <a data-toggle="tooltip" data-placement="top"
+                                                        title="Unlock course"><i class="fa fa-unlock"
+                                                            style="color: white"></i></a>
+                                                </li>
+                                            {{else}}
+                                                <li class="list-inline-item" style="background-color: crimson;"
+                                                    data-id="{{this._id}}" onclick="LockCourse(this)">
+                                                    <a data-toggle="tooltip" data-placement="top" title="Lock course"><i
+                                                            class="fa fa-lock" style="color: white"></i></a>
+                                                </li>
+                                            {{/if}}
                                         </ul>
                                     </div>
                                 </div>
@@ -81,7 +91,70 @@
 </section>
 {{> footer}}
 {{#section "js2"}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+        function LockCourse(element) {
+            Warning("Lock this course?", () => {
+                const id = jQuery(element).data("id");
+                const newData = {
+                    id: id,
+                    active: false
+                }
+                $.post("/admin/courses/setActive", newData, function (err, status) {
+                    if (err) {
+                        DisplayError(err);
+                    } else {
+                        swal("Lock course successfully!", {
+                            icon: "success",
+                        }).then((value) => {
+                            location.reload();
+                        });
+                    }
+                })
+            })
+        }
+        function UnlockCourse(element) {
+            Warning("Unlock this course?", () => {
+                const id = jQuery(element).data("id");
+                const newData = {
+                    id: id,
+                    active: true
+                }
+                $.post("/admin/courses/setActive", newData, function (err, status) {
+                    if (err) {
+                        DisplayError(err);
+                    } else {
+                        swal("Unlock course successfully!", {
+                            icon: "success",
+                        }).then((value) => {
+                            location.reload();
+                        });
+                    }
+                })
+            })
+        }
+        function DisplayError(message) {
+            swal({
+                title: "Something is wrong",
+                text: message,
+                icon: "error",
+                button: "Ok",
+            });
+        }
+        function Warning(message, callback) {
+            swal({
+                title: "Are you sure?",
+                text: message,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    callback();
+                }
+            });
+        }
+
         function filter(optionElement) {
             var val = $(optionElement).val()
             if (val === "All courses") {

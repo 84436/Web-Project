@@ -16,7 +16,8 @@ function configure(app) {
             eq: hbsHelper.eq,
             dateFormat: hbsHelper.dateFormat,
             calSaleOff: hbsHelper.calSaleOff,
-            completeness: hbsHelper.completeness
+            completeness: hbsHelper.completeness,
+            eqBool: hbsHelper.eqBool
         }
     };
     app.engine('hbs', express_handlebars(ExpressHandlebarsOptions))

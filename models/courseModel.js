@@ -265,7 +265,7 @@ async function topEnrollCategories() {
 // Top view courses
 async function topViewCourses() {
     let r = await courseModel
-        .find({isEnable: true}, (err) => {
+        .find({ isEnable: true }, (err) => {
             if (err) return null;
         })
         .sort({ viewCount: -1 })
@@ -277,7 +277,7 @@ async function topViewCourses() {
 // Top new courses
 async function newestCourses() {
     let r = await courseModel
-        .find({isEnable: true}, (err) => {
+        .find({ isEnable: true }, (err) => {
             if (err) return null;
         })
         .sort({ publishDate: -1 })
@@ -308,7 +308,7 @@ async function topEnrollByCategory(categoryID, courseID) {
 
 async function topEnrollCourse() {
     return await courseModel
-        .find({isEnable: true}, (err) => {
+        .find({ isEnable: true }, (err) => {
             if (err) return null;
         })
         .populate({
@@ -363,9 +363,9 @@ async function getAll(sortPrice, sortRate) {
     return r;
 }
 
-async function getAllAdmin(sortPrice, sortRate) {
+async function getAllAdmin() {
     let r = await courseModel
-        .find(filter, (err) => {
+        .find({}, (err) => {
             return null;
         })
         .lean()
@@ -537,12 +537,12 @@ function setNew(publishDate) {
     return false;
 }
 
-function getCourseByLecturer(lecturerID) {
+async function getCourseByLecturer(lecturerID) {
     let filter = {
         instructorID: lecturerID
     }
     let projection = { __v: 0 }
-    let r = courseModel.find(filter, projection, (err) => {
+    let r = await courseModel.find(filter, projection, (err) => {
         return null
     })
         .populate({
@@ -572,7 +572,7 @@ async function isCourseInstructor(courseID, instructorID) {
         return null
     })
 
-    if(specificCourse.instructorID.equals(instructorID)) return true
+    if (specificCourse.instructorID.equals(instructorID)) return true
     else return false
 }
 
@@ -588,7 +588,7 @@ async function setLockCourse(courseID, newState) {
     let specificCourse = await courseModel.findOne(filter, projection, (err) => {
         return null
     })
-    if(specificCourse) {
+    if (specificCourse) {
         specificCourse.isEnable = newState
         await specificCourse.save()
         console.log(specificCourse.isEnable)

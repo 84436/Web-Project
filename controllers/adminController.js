@@ -86,7 +86,6 @@ router.post("/categories/edit", async (i, o, next) => {
 
 router.post("/categories/delete", async (i, o, next) => {
     let resultSet = await categoryModel.remove(i.body.id);
-    console.log(resultSet);
     o.json(resultSet._err);
 })
 
@@ -100,6 +99,11 @@ router.get("/courses", async (i, o, next) => {
         o.locals.courseList = await courseModel.getCourseByLecturer(i.query.filter)
     }
     o.render("admin/courseList")
+})
+
+router.post("/courses/setActive", async (i, o, next) => {
+    const resultSet = await courseModel.setLockCourse(i.body.id, i.body.active === 'true');
+    o.json(resultSet !== null ? null : "Something wrong!");
 })
 
 
